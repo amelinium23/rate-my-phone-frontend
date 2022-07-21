@@ -1,0 +1,10 @@
+{
+  "configurations": [
+    {
+      "name": "Run dev server",
+      "command": "yarn dev",
+      "request": "launch",
+      "type": "node-terminal"
+    }
+  ]
+}
