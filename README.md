@@ -4,7 +4,7 @@ Clone the repo and run `yarn install`
 
 or Run command
 
-```
+```bash
 npx degit TheSwordBreaker/vite-reactts-eslint-prettier project-name
 ```
 
