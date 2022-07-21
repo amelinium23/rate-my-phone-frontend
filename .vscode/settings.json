@@ -3,5 +3,8 @@
   "editor.formatOnSave": true,
   "editor.formatOnSaveMode": "modifications",
   "files.eol": "\n",
-  "files.insertFinalNewline": true
+  "files.insertFinalNewline": true,
+  "cSpell.words": [
+    "Mantine"
+  ]
 }
