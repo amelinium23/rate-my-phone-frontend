@@ -3,9 +3,7 @@ import { useState, useEffect } from 'react'
 import { Container } from 'react-bootstrap'
 
 const getRecommendedDevices = async () => {
-  const response = await axios.get(
-    'https://rate-my-phone.herokuapp.com/device/recommended'
-  )
+  const response = await axios.get('device/recommended')
   return response.data
 }
 
