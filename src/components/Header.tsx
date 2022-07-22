@@ -1,10 +1,10 @@
-import { Container, Image, Navbar, Nav } from 'react-bootstrap'
+import { Container, Image, Navbar, Nav, NavDropdown } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import { User } from 'tabler-icons-react'
+import { Login, User } from 'tabler-icons-react'
 
 export const Header = () => {
   return (
-    <Navbar bg="dark" variant="dark" expand="lg">
+    <Navbar variant="dark" bg="dark" expand="lg" fixed="top">
       <Container>
         <Navbar.Brand>
           <Link to="/">
@@ -26,9 +26,18 @@ export const Header = () => {
               Phones
             </Link>
           </Nav.Link>
+          <Nav.Link>
+            <Link to="/forum" className="me-auto nav-link">
+              Forum
+            </Link>
+          </Nav.Link>
         </Nav>
         <Navbar.Collapse className="justify-content-end">
-          <User width={30} height={30} color="#fff" />
+          <NavDropdown title={<User size={30} color="#fff" />}>
+            <NavDropdown.Item>
+              <Login size={30} strokeWidth={1} color={'#4d1939'} /> Log in
+            </NavDropdown.Item>
+          </NavDropdown>
         </Navbar.Collapse>
       </Container>
     </Navbar>

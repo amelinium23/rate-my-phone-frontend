@@ -1,1 +1,3 @@
-export const BrandPage = () => {}
+export const BrandPage = () => {
+  return <></>
+}
