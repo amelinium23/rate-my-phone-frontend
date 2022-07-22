@@ -4,7 +4,7 @@ import { Login, User } from 'tabler-icons-react'
 
 export const Header = () => {
   return (
-    <Navbar variant="dark" bg="dark" expand="lg" fixed="top">
+    <Navbar variant="dark" bg="dark" expand="lg">
       <Container>
         <Navbar.Brand>
           <Link to="/">
@@ -32,7 +32,7 @@ export const Header = () => {
             </Link>
           </Nav.Link>
         </Nav>
-        <Navbar.Collapse className="justify-content-end">
+        <Navbar.Collapse className="float-start justify-content-end">
           <NavDropdown title={<User size={30} color="#fff" />}>
             <NavDropdown.Item>
               <Login size={30} strokeWidth={1} color={'#4d1939'} /> Log in
