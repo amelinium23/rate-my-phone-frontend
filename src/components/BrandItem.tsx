@@ -8,8 +8,8 @@ interface IProps {
 
 export const BrandItem: FunctionComponent<IProps> = ({ brand }) => {
   return (
-    <Card className="my-2 text-center">
-      <p>{brand.brand_name}</p>
+    <Card className="d-flex justify-content-center my-2 text-center">
+      <p className="pt-3">{brand.brand_name}</p>
     </Card>
   )
 }
