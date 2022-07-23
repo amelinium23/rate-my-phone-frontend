@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react'
 import { Col } from 'react-bootstrap'
-import { RecommendedDevice, Device } from '../types/types'
+import { RecommendedDevice } from '../types/RecommendedDevice'
+import { Device } from '../types/Device'
 import { DeviceItem } from './DeviceItem'
 
 interface IProps {

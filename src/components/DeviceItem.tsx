@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react'
 import { Container, Image } from 'react-bootstrap'
-import { Device } from '../types/types'
+import { Device } from '../types/Device'
 
 interface IProps {
   device: Device
