@@ -1,15 +1,15 @@
 import axios from 'axios'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, FunctionComponent } from 'react'
 import { Container, Row } from 'react-bootstrap'
 import { RecommendedList } from '../components/RecommendedList'
-import { RecommendedDevice } from '../types/types'
+import { RecommendedDevice } from '../types/RecommendedDevice'
 
 const getRecommendedDevices = async () => {
   const response = await axios.get('device/recommended')
   return response.data
 }
 
-export const HomePage = () => {
+export const HomePage: FunctionComponent = () => {
   const [recommendedDevices, setRecommendedDevices] = useState([])
 
   useEffect(() => {
