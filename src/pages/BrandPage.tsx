@@ -3,6 +3,7 @@ import { FunctionComponent, useState, useEffect } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import { BrandItem } from '../components/BrandItem'
 import { Brand } from '../types/Brand'
+import { toast } from 'react-toastify'
 
 const getBrands = async () => {
   const response = await axios.get('/brands')
@@ -11,9 +12,18 @@ const getBrands = async () => {
 
 export const BrandPage: FunctionComponent = () => {
   const [brands, setBrands] = useState([])
+  const [errorMessage, setErrorMessage] = useState('')
 
   useEffect(() => {
-    getBrands().then(setBrands)
+    getBrands()
+      .then(setBrands)
+      .catch((err) => setErrorMessage(err.message))
+    toast
+      .promise(getBrands(), {
+        error: errorMessage !== '' ? errorMessage : 'Unable to fetch!',
+      })
+      .then(setBrands)
+      .catch((err) => setErrorMessage(err.message))
   }, [])
 
   return (

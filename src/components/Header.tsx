@@ -16,21 +16,15 @@ export const Header = () => {
           </Link>
         </Navbar.Brand>
         <Nav className="me-auto">
-          <Nav.Link>
-            <Link to="/brands" className="me-auto nav-link">
-              Brands
-            </Link>
-          </Nav.Link>
-          <Nav.Link>
-            <Link to="/phones" className="me-auto nav-link">
-              Phones
-            </Link>
-          </Nav.Link>
-          <Nav.Link>
-            <Link to="/forum" className="me-auto nav-link">
-              Forum
-            </Link>
-          </Nav.Link>
+          <Link to="/brands" className="me-auto nav-link">
+            Brands
+          </Link>
+          <Link to="/phones" className="me-auto nav-link">
+            Phones
+          </Link>
+          <Link to="/forum" className="me-auto nav-link">
+            Forum
+          </Link>
         </Nav>
         <Navbar.Collapse className="float-start justify-content-end">
           <NavDropdown title={<User size={30} color="#fff" />}>
