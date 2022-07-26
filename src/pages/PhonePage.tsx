@@ -4,7 +4,7 @@ import { Container, Row, Col } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { PhoneItem } from '../components/PhoneItem'
-import { Phone } from '../types/Device'
+import { Phone, PhoneResponse } from '../types/Device'
 
 const getPhones = async (key?: string) => {
   const res = await axios.get(
@@ -25,13 +25,14 @@ export const PhonePage: FunctionComponent = () => {
       .promise(getPhones(key), {
         error: errorMessage !== '' ? errorMessage : 'Unable to fetch!',
       })
-      .then(setPhones)
+      .then(() => {})
       .catch((err) => setErrorMessage(err.message))
   }, [])
 
   return (
     <Container className="mt-2">
       <h4 className="text-center">Phones page</h4>
+      <Row className="justify-content-center"></Row>
       {key !== '' && key !== undefined ? (
         <>
           <h5 className="text-left">
@@ -50,7 +51,22 @@ export const PhonePage: FunctionComponent = () => {
           )}
         </>
       ) : (
-        <></>
+        <>
+          <Row>
+            {phones.map((phone: PhoneResponse) =>
+              phone.device_list.length === 0 ? null : (
+                <>
+                  <h5>{phone.brand_name}</h5>
+                  {phone.device_list.map((device: Phone) => (
+                    <Col key={device.id} md={3}>
+                      <PhoneItem phone={device} />
+                    </Col>
+                  ))}
+                </>
+              )
+            )}
+          </Row>
+        </>
       )}
     </Container>
   )

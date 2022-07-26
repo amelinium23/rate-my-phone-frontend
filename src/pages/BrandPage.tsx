@@ -22,7 +22,7 @@ export const BrandPage: FunctionComponent = () => {
       .promise(getBrands(), {
         error: errorMessage !== '' ? errorMessage : 'Unable to fetch!',
       })
-      .then(setBrands)
+      .then(() => {})
       .catch((err) => setErrorMessage(err.message))
   }, [])
 
