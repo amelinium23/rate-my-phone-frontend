@@ -7,6 +7,7 @@ import { PhonePage } from './pages/PhonePage'
 import { AppProvider } from './contexts/AppContext'
 import 'react-toastify/dist/ReactToastify.min.css'
 import { ToastContainer } from 'react-toastify'
+import { DetailsPage } from './pages/DetailsPage'
 
 export const App = () => {
   return (
@@ -18,6 +19,7 @@ export const App = () => {
           <Route path="/brands" element={<BrandPage />} />
           <Route path="/phones" element={<PhonePage />}>
             <Route path=":key" element={<PhonePage />} />
+            <Route path=":device_name" element={<DetailsPage />} />
           </Route>
           <Route path="/forum" element={<ForumPage />} />
         </Routes>

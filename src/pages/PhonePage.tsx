@@ -31,8 +31,9 @@ export const PhonePage: FunctionComponent = () => {
 
   return (
     <Container className="mt-2">
-      <h4 className="text-center">Phones page</h4>
-      <Row className="justify-content-center"></Row>
+      <h4 key="header-page-phone" className="text-center">
+        Phones page
+      </h4>
       {key !== '' && key !== undefined ? (
         <>
           <h5 className="text-left">
@@ -59,7 +60,7 @@ export const PhonePage: FunctionComponent = () => {
                   <h5>{phone.brand_name}</h5>
                   {phone.device_list.map((device: Phone) => (
                     <Col key={device.id} md={3}>
-                      <PhoneItem phone={device} />
+                      <PhoneItem phone={device} key={device.device_name} />
                     </Col>
                   ))}
                 </>
