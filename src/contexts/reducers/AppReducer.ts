@@ -15,6 +15,11 @@ export const appReducer = (
         ...state,
         pageSize: action.payload,
       }
+    case AppActionType.SET_IS_LOADING:
+      return {
+        ...state,
+        isLoading: action.payload,
+      }
     default:
       return state
   }

@@ -2,6 +2,7 @@
 export type AppStateType = {
   pageNumber: number
   pageSize: number
+  isLoading: boolean
 }
 
 export type ActionType = {
@@ -12,4 +13,5 @@ export type ActionType = {
 export enum AppActionType {
   SET_PAGE_NUMBER = 'SET_PAGE_NUMBER',
   SET_PAGE_SIZE = 'SET_PAGE_SIZE',
+  SET_IS_LOADING = 'SET_IS_LOADING',
 }

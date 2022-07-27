@@ -4,12 +4,15 @@ import { BrandPage } from './pages/BrandPage'
 import { ForumPage } from './pages/ForumPage'
 import { HomePage } from './pages/HomePage'
 import { PhonePage } from './pages/PhonePage'
-import { AppProvider } from './contexts/AppContext'
-import 'react-toastify/dist/ReactToastify.min.css'
+import { AppProvider, useStore } from './contexts/AppContext'
 import { ToastContainer } from 'react-toastify'
 import { DetailsPage } from './pages/DetailsPage'
+import { Loader } from './components/Loader'
+import 'react-toastify/dist/ReactToastify.min.css'
 
 export const App = () => {
+  const { state } = useStore()
+
   return (
     <>
       <AppProvider>
@@ -31,6 +34,7 @@ export const App = () => {
           draggable
           pauseOnHover
         />
+        <Loader isLoading={state.isLoading} />
       </AppProvider>
     </>
   )
