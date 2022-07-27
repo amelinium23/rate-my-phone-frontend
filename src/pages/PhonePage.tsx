@@ -31,9 +31,9 @@ export const PhonePage: FunctionComponent = () => {
 
   return (
     <Container className="mt-2">
-      <h4 key="header-page-phone" className="text-center">
-        Phones page
-      </h4>
+      <h5 key="header-page-phone" className="text-center">
+        Phones
+      </h5>
       {key !== '' && key !== undefined ? (
         <>
           <h5 className="text-left">

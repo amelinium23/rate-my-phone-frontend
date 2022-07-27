@@ -22,8 +22,8 @@ export const App = () => {
           <Route path="/brands" element={<BrandPage />} />
           <Route path="/phones" element={<PhonePage />}>
             <Route path=":key" element={<PhonePage />} />
-            <Route path=":device_name" element={<DetailsPage />} />
           </Route>
+          <Route path="/details" element={<DetailsPage />} />
           <Route path="/forum" element={<ForumPage />} />
         </Routes>
         <ToastContainer

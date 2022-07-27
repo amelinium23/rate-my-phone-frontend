@@ -18,7 +18,7 @@ export const Loader: FunctionComponent<IProps> = ({
 
   return (
     <div style={loaderStyle} className="loadingWrapper">
-      <Spinner animation="grow" variant="primary">
+      <Spinner animation="grow" variant="secondary">
         <span>{loadingText}</span>
       </Spinner>
     </div>

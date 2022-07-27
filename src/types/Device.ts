@@ -15,3 +15,21 @@ export interface PhoneResponse {
   device_list: Phone[]
   key: string
 }
+
+export interface DeviceDetails extends Device {
+  battery: string
+  batteryType: string
+  body: string
+  camera: string
+  comment: string
+  display_res: string
+  display_size: string
+  more_information: object[]
+  more_specification: object[]
+  os_type: string
+  prices: object
+  pictures: string[]
+  release_date: string
+  storage: string
+  video: string
+}
