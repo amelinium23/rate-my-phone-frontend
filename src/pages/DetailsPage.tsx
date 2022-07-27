@@ -38,6 +38,8 @@ export const DetailsPage: FunctionComponent = () => {
     getDetails(deviceKey).then(setDetails).catch(console.error)
   }, [])
 
+  console.log(details)
+
   return (
     <Container className="mt-2">
       <h5>
@@ -63,7 +65,9 @@ export const DetailsPage: FunctionComponent = () => {
 
                   return (
                     <tr key={key}>
-                      <td>{upperFirstLetter(realKey)}</td>
+                      <td>
+                        <strong>{upperFirstLetter(realKey)}</strong>
+                      </td>
                       <td>{value !== '' ? value : '-'}</td>
                     </tr>
                   )
@@ -71,8 +75,53 @@ export const DetailsPage: FunctionComponent = () => {
             </tbody>
           </Table>
         </Col>
-        <Col md={4} className="flex justify-content-center">
-          <Image src={details.device_image} width={200} />
+        <Col md={4}>
+          <Image src={details.device_image} />
+          <Row className="mt-2">
+            {details.pictures !== undefined
+              ? details.pictures.map((picture) => (
+                  <Col md={3} key={picture} className="mt-2">
+                    <Image src={picture} width={100} />
+                  </Col>
+                ))
+              : null}
+          </Row>
+        </Col>
+      </Row>
+      <Row className="mt-2">
+        <h5>More specification</h5>
+        <Col md={8}>
+          <Table hover bordered>
+            <thead>
+              <tr>
+                <th>Specification</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              {details.more_specification !== undefined &&
+                details.more_specification.map((spec: any) => (
+                  <tr key={spec.title}>
+                    <td>
+                      <strong>{spec.title}:</strong>
+                    </td>
+                    <td>
+                      {spec.data.length > 0
+                        ? spec.data.map((data: any) => (
+                            <p key={data.title} className="p-0">
+                              <strong>{data.title}: </strong>
+                              {data.data.length > 0 ? data.data : '-'}
+                            </p>
+                          ))
+                        : '-'}
+                    </td>
+                  </tr>
+                ))}
+            </tbody>
+          </Table>
+        </Col>
+        <Col md={4} className="mt-2">
+          <h5>Prices</h5>
         </Col>
       </Row>
     </Container>
