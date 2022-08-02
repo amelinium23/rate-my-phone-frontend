@@ -57,7 +57,10 @@ export const Header = () => {
           </Form>
           <NavDropdown title={<User size={30} color="#fff" strokeWidth={1} />}>
             <NavDropdown.Item>
-              <Login size={30} strokeWidth={1} color="#4d1939" /> Log in
+              <Link className="nav-link p-0" to="/login">
+                <Login size={28} strokeWidth={1} color="#4d1939" />
+                Log in
+              </Link>
             </NavDropdown.Item>
           </NavDropdown>
         </Navbar.Collapse>

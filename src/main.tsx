@@ -1,10 +1,10 @@
 import axios from 'axios'
-import { StrictMode } from 'react'
 import ReactDOM from 'react-dom'
-import { BrowserRouter } from 'react-router-dom'
-
+import { StrictMode } from 'react'
 import { App } from './App'
 import { URL } from './utils/defaults'
+import { BrowserRouter } from 'react-router-dom'
+import 'react-toastify/dist/ReactToastify.min.css'
 
 axios.defaults.baseURL = URL
 

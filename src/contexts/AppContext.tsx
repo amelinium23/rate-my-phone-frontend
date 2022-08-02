@@ -5,6 +5,7 @@ import { appReducer } from './reducers/AppReducer'
 const initialState: AppStateType = {
   pageNumber: 1,
   pageSize: 10,
+  isLoading: false,
 }
 
 const AppContext = createContext<{
