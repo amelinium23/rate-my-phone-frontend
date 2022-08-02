@@ -38,8 +38,6 @@ export const DetailsPage: FunctionComponent = () => {
     width: '16rem',
   }
 
-  console.log(details)
-
   useEffect(() => {
     getDetails(deviceKey).then(setDetails).catch(console.error)
   }, [])
@@ -138,7 +136,9 @@ export const DetailsPage: FunctionComponent = () => {
                   value.map((price: any) => (
                     <Card
                       className="my-1"
-                      key={price.price}
+                      key={`${key}-${price.price}-${Math.round(
+                        Math.random() * 1000
+                      )}`}
                       style={containerStyle}
                     >
                       <a href={price.buy_url} target="blank">
@@ -148,7 +148,7 @@ export const DetailsPage: FunctionComponent = () => {
                           src={price.shop_image}
                         />
                       </a>
-                      <p className="p-0">{price.price}</p>
+                      <p className="p-0">{price.price.replace(' ', '')}</p>
                     </Card>
                   ))}
               </Row>

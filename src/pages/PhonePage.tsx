@@ -15,7 +15,7 @@ const getPhones = async (key?: string) => {
 }
 
 export const PhonePage: FunctionComponent = () => {
-  const [phones, setPhones] = useState([])
+  const [phoneResponses, setPhones] = useState([])
   const [errorMessage, setErrorMessage] = useState('')
   const { key } = useParams()
 
@@ -35,39 +35,37 @@ export const PhonePage: FunctionComponent = () => {
         Phones
       </h5>
       {key !== '' && key !== undefined ? (
-        <>
+        <div>
           <h5 className="text-left">
             {key.charAt(0).toLocaleUpperCase() + key.slice(1)}
           </h5>
-          {phones.length === 0 ? (
+          {phoneResponses.length === 0 ? (
             <h5 className="text-center">No phones found</h5>
           ) : (
             <Row>
-              {phones.map((phone: Phone) => (
-                <Col md={3} key={phone.id}>
+              {phoneResponses.map((phone: Phone) => (
+                <Col md={3} key={phone.key}>
                   <PhoneItem phone={phone} />
                 </Col>
               ))}
             </Row>
           )}
-        </>
+        </div>
       ) : (
-        <>
-          <Row>
-            {phones.map((phone: PhoneResponse) =>
-              phone.device_list.length === 0 ? null : (
-                <>
-                  <h5>{phone.brand_name}</h5>
-                  {phone.device_list.map((device: Phone) => (
-                    <Col key={device.id} md={3}>
-                      <PhoneItem phone={device} key={device.device_name} />
-                    </Col>
-                  ))}
-                </>
-              )
-            )}
-          </Row>
-        </>
+        <Row>
+          {phoneResponses.map((phoneResponse: PhoneResponse) =>
+            phoneResponse.device_list.length === 0 ? null : (
+              <>
+                <h5>{phoneResponse.brand_name}</h5>
+                {phoneResponse.device_list.map((phone: Phone) => (
+                  <Col key={phone.id} md={3}>
+                    <PhoneItem phone={phone} key={phone.device_name} />
+                  </Col>
+                ))}
+              </>
+            )
+          )}
+        </Row>
       )}
     </Container>
   )

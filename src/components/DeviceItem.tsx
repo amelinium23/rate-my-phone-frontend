@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react'
 import { Container, Image } from 'react-bootstrap'
 import { Device } from '../types/Device'
+import { Link } from 'react-router-dom'
 
 interface IProps {
   device: Device
@@ -23,7 +24,12 @@ export const DeviceItem: FunctionComponent<IProps> = ({ device, index }) => {
       <p className="float-start text-start mt-2 ">
         {index + 1}. {device.device_name}
       </p>
-      <Image src={device.device_image} width={55} height={55} />
+      <Link
+        to="/details"
+        state={{ deviceName: device.device_name, deviceKey: device.key }}
+      >
+        <Image src={device.device_image} width={55} height={55} />
+      </Link>
     </Container>
   )
 }
