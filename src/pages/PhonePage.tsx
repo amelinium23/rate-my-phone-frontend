@@ -1,10 +1,11 @@
 import axios from 'axios'
-import { FunctionComponent, useEffect, useState } from 'react'
+import { FunctionComponent, useEffect, useState, useRef } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { PhoneItem } from '../components/PhoneItem'
 import { Phone, PhoneResponse } from '../types/Device'
+import autoAnimate from '@formkit/auto-animate'
 
 const getPhones = async (key?: string) => {
   const res = await axios.get(
@@ -17,6 +18,7 @@ const getPhones = async (key?: string) => {
 export const PhonePage: FunctionComponent = () => {
   const [phoneResponses, setPhones] = useState([])
   const [errorMessage, setErrorMessage] = useState('')
+  const parent = useRef(null)
   const { key } = useParams()
 
   useEffect(() => {
@@ -29,8 +31,12 @@ export const PhonePage: FunctionComponent = () => {
       .catch((err) => setErrorMessage(err.message))
   }, [])
 
+  useEffect(() => {
+    parent.current && autoAnimate(parent.current)
+  }, [parent])
+
   return (
-    <Container className="mt-2">
+    <Container ref={parent} className="mt-2">
       <h5 key="header-page-phone" className="text-center">
         Phones
       </h5>

@@ -1,8 +1,9 @@
 import axios from 'axios'
-import { FunctionComponent, useState, useEffect } from 'react'
+import { FunctionComponent, useState, useEffect, useRef } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import { BrandItem } from '../components/BrandItem'
 import { Brand } from '../types/Brand'
+import autoAnimate from '@formkit/auto-animate'
 import { toast } from 'react-toastify'
 
 const getBrands = async () => {
@@ -13,6 +14,7 @@ const getBrands = async () => {
 export const BrandPage: FunctionComponent = () => {
   const [brands, setBrands] = useState([])
   const [errorMessage, setErrorMessage] = useState('')
+  const parent = useRef(null)
 
   useEffect(() => {
     getBrands()
@@ -26,10 +28,14 @@ export const BrandPage: FunctionComponent = () => {
       .catch((err) => setErrorMessage(err.message))
   }, [])
 
+  useEffect(() => {
+    parent.current && autoAnimate(parent.current)
+  }, [parent])
+
   return (
     <Container className="my-2">
       <h5 className="text-center">Brands</h5>
-      <Row>
+      <Row ref={parent}>
         {brands.map((brand: Brand) =>
           brand.brand_name === '' ? null : (
             <Col key={brand.key} md={3}>
