@@ -19,12 +19,12 @@ const auth = getAuth(app)
 
 const FirebaseContext = createContext<User | null>(null)
 
-export const useFirebaseAuth = () => useContext(FirebaseContext)
+const useFirebaseAuth = () => useContext(FirebaseContext)
 interface IProps {
   children: ReactNode
 }
 
-export const FirebaseProvider: FunctionComponent<IProps> = ({ children }) => {
+const FirebaseProvider: FunctionComponent<IProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null)
 
   useEffect(() => {
@@ -39,3 +39,5 @@ export const FirebaseProvider: FunctionComponent<IProps> = ({ children }) => {
     <FirebaseContext.Provider value={user}>{children}</FirebaseContext.Provider>
   )
 }
+
+export { useFirebaseAuth, FirebaseProvider }

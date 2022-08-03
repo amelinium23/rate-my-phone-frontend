@@ -1,6 +1,14 @@
-import { createContext, Dispatch, FC, useContext, useReducer } from 'react'
+import {
+  createContext,
+  Dispatch,
+  FunctionComponent,
+  ReactNode,
+  useContext,
+  useReducer,
+} from 'react'
 import { AppStateType } from './types/StoreTypes'
 import { appReducer } from './reducers/AppReducer'
+import { FirebaseProvider } from './FirebaseContext'
 
 const initialState: AppStateType = {
   pageNumber: 1,
@@ -15,14 +23,20 @@ const AppContext = createContext<{
 
 const useStore = () => useContext(AppContext)
 
-const AppProvider: FC = ({ children }) => {
+interface IProps {
+  children: ReactNode
+}
+
+const Store: FunctionComponent<IProps> = ({ children }) => {
   const [state, dispatch] = useReducer(appReducer, initialState)
 
   return (
-    <AppContext.Provider value={{ state, dispatch }}>
-      {children}
-    </AppContext.Provider>
+    <FirebaseProvider>
+      <AppContext.Provider value={{ state, dispatch }}>
+        {children}
+      </AppContext.Provider>
+    </FirebaseProvider>
   )
 }
 
-export { useStore, AppProvider }
+export { useStore, Store }

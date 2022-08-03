@@ -8,10 +8,11 @@ import {
   Form,
   Button,
 } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Login, User, Search } from 'tabler-icons-react'
 
 export const Header = () => {
+  const navigate = useNavigate()
   const [searchString, setSearchString] = useState<string>('')
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
@@ -55,12 +56,16 @@ export const Header = () => {
               <Search size={30} color="#fff" strokeWidth={1} />
             </Button>
           </Form>
-          <NavDropdown title={<User size={30} color="#fff" strokeWidth={1} />}>
-            <NavDropdown.Item>
-              <Link className="nav-link p-0" to="/login">
-                <Login size={28} strokeWidth={1} color="#4d1939" />
-                Log in
-              </Link>
+          <NavDropdown
+            menuVariant="dark"
+            align="end"
+            title={<User size={30} color="#fff" strokeWidth={1} />}
+          >
+            <NavDropdown.Item
+              onClick={() => navigate('/login', { replace: true })}
+            >
+              <Login size={28} strokeWidth={1} color="white" />
+              Log in
             </NavDropdown.Item>
           </NavDropdown>
         </Navbar.Collapse>
