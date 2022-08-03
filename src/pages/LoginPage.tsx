@@ -45,6 +45,7 @@ export const LoginPage: FunctionComponent = () => {
             <Form.Group className="my-2" controlId="formBasicEmail">
               <Form.Label>Email address</Form.Label>
               <Form.Control
+                required
                 type="email"
                 placeholder="Enter your email"
                 value={login}
@@ -56,6 +57,7 @@ export const LoginPage: FunctionComponent = () => {
             <Form.Group className="my-2" controlId="formPassword">
               <Form.Label>Password</Form.Label>
               <Form.Control
+                required
                 type="password"
                 placeholder="Enter your password"
                 value={password}
@@ -102,6 +104,12 @@ export const LoginPage: FunctionComponent = () => {
             </Form.Group>
           </Form>
           <Button
+            disabled={
+              !(
+                validateLogin(registerLogin) &&
+                validatePassword(registerPassword)
+              )
+            }
             variant="success"
             onClick={() =>
               navigate('/register', {
