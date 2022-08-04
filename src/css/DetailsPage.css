@@ -1,0 +1,8 @@
+.photoContainer {
+  max-height: 650px;
+  overflow-y: auto;
+}
+
+.cardContainer {
+  width: 16rem;
+}

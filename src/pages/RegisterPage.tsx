@@ -13,6 +13,10 @@ export const RegisterPage: FunctionComponent = () => {
   const [email, setEmail] = useState<string>(login)
   const [registerPassword, setRegisterPassword] = useState<string>(password)
 
+  const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
+    e.preventDefault()
+  }
+
   const onEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value)
   }
@@ -24,7 +28,7 @@ export const RegisterPage: FunctionComponent = () => {
   return (
     <Container className="mt-2">
       <h5 className="text-center">Register</h5>
-      <Form onSubmit={() => {}}>
+      <Form onSubmit={handleSubmit}>
         <Form.Group className="my-2" controlId="email">
           <Form.Label>Email</Form.Label>
           <Form.Control

@@ -1,17 +1,11 @@
 import axios from 'axios'
-import { FunctionComponent, useState, useEffect } from 'react'
+import { FunctionComponent, useState, useEffect, useRef } from 'react'
 import { Container, Table, Row, Col, Image, Card } from 'react-bootstrap'
 import { useLocation } from 'react-router-dom'
 import { DeviceDetails } from '../types/Device'
-
-const notUsedKeys = [
-  'pictures',
-  'more_specification',
-  'key',
-  'prices',
-  'more_information',
-  'device_image',
-]
+import { notUsedKeysDetailsPage } from '../utils/constants'
+import '../css/DetailsPage.css'
+import autoAnimate from '@formkit/auto-animate'
 
 interface LocationState {
   deviceName: string
@@ -33,17 +27,18 @@ export const DetailsPage: FunctionComponent = () => {
   const { state } = useLocation()
   const { deviceName, deviceKey } = state as LocationState
   const brandName = upperFirstLetter(deviceKey.split('_')[0])
-
-  const containerStyle = {
-    width: '16rem',
-  }
+  const parent = useRef(null)
 
   useEffect(() => {
     getDetails(deviceKey).then(setDetails).catch(console.error)
   }, [])
 
+  useEffect(() => {
+    parent.current && autoAnimate(parent.current)
+  }, [parent])
+
   return (
-    <Container className="mt-2">
+    <Container ref={parent} className="mt-2">
       <h5>
         {brandName} {deviceName}
       </h5>
@@ -57,36 +52,38 @@ export const DetailsPage: FunctionComponent = () => {
               </tr>
             </thead>
             <tbody>
-              {Object.entries(details)
-                .filter(
-                  ([key, value]) =>
-                    !notUsedKeys.includes(key) && value !== '' && value !== null
-                )
-                .map(([key, value]) => (
-                  <tr key={key}>
-                    <td>
-                      <strong>
-                        {upperFirstLetter(key.replace(/_/g, ' '))}
-                      </strong>
-                    </td>
-                    <td>{value !== '' ? value : '-'}</td>
-                  </tr>
-                ))}
+              {details &&
+                Object.entries(details)
+                  .filter(
+                    ([key, value]) =>
+                      !notUsedKeysDetailsPage.includes(key) &&
+                      value !== '' &&
+                      value !== null
+                  )
+                  .map(([key, value]) => (
+                    <tr key={key}>
+                      <td>
+                        <strong>
+                          {upperFirstLetter(key.replace(/_/g, ' '))}
+                        </strong>
+                      </td>
+                      <td>{value !== '' ? value : '-'}</td>
+                    </tr>
+                  ))}
             </tbody>
           </Table>
         </Col>
-        <Col md={3} className="mh-50">
+        <Col md={4} className="photoContainer">
           <Container className="d-flex justify-content-center">
-            <Image src={details.device_image} />
+            <Image src={details?.device_image} />
           </Container>
           <Row className="mt-2">
-            {details.pictures !== undefined
-              ? details.pictures.map((picture) => (
-                  <Col md={2} key={picture} className="m-3">
-                    <Image src={picture} width={75} />
-                  </Col>
-                ))
-              : null}
+            {details?.pictures &&
+              details?.pictures.map((picture) => (
+                <Col md={2} key={picture} className="m-3">
+                  <Image src={picture} width={75} />
+                </Col>
+              ))}
           </Row>
         </Col>
       </Row>
@@ -102,6 +99,7 @@ export const DetailsPage: FunctionComponent = () => {
             </thead>
             <tbody>
               {details.more_specification !== undefined &&
+                details.more_specification !== null &&
                 details.more_specification.map((spec: any) => (
                   <tr key={spec.title}>
                     <td>
@@ -124,7 +122,7 @@ export const DetailsPage: FunctionComponent = () => {
         </Col>
         <Col md={4}>
           <h5 className="text-center">Prices</h5>
-          {details.prices !== undefined || details.prices === null ? (
+          {details.prices !== undefined && details.prices !== null ? (
             Object.entries(details.prices).map(([key, value]) => (
               <Row
                 className="d-flex justify-content-center text-center"
@@ -135,11 +133,10 @@ export const DetailsPage: FunctionComponent = () => {
                   value !== null &&
                   value.map((price: any) => (
                     <Card
-                      className="my-1"
+                      className="cardContainer my-1"
                       key={`${key}-${price.price}-${Math.round(
                         Math.random() * 1000
                       )}`}
-                      style={containerStyle}
                     >
                       <a href={price.buy_url} target="blank">
                         <Card.Img
