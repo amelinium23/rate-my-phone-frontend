@@ -4,7 +4,7 @@
   border-radius: 50px;
   background-color: #aad2ff;
   scrollbar-width: thin;
-  border: 1px solid rgb(184, 184, 184, .4);
+  border: 1px solid rgb(184, 184, 184, 0.4);
 }
 
 *::-webkit-scrollbar {
