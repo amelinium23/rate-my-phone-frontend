@@ -23,7 +23,7 @@ export const ForumPage: FunctionComponent = () => {
   }, [parent])
 
   return (
-    <Container ref={parent} className="mt-2">
+    <Container ref={parent} className="my-2">
       <h5 className="text-center">Latest posts</h5>
       {posts &&
         posts.map((post: Post) => <PostItem key={post.id} post={post} />)}

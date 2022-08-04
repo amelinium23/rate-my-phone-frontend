@@ -3,11 +3,11 @@ import { Card, Container, Image } from 'react-bootstrap'
 import { Phone } from '../types/Device'
 import { Link } from 'react-router-dom'
 
-interface IProps {
+interface PhoneItemProps {
   phone: Phone
 }
 
-export const PhoneItem: FunctionComponent<IProps> = ({ phone }) => {
+export const PhoneItem: FunctionComponent<PhoneItemProps> = ({ phone }) => {
   return (
     <Card className="d-flex container justify-content-center my-2 text-center p-1">
       <p className="pt-3">{phone.device_name}</p>

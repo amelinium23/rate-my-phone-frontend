@@ -1,8 +1,8 @@
 import axios from 'axios'
 import { useState, useEffect, FunctionComponent } from 'react'
 import { Container, Row } from 'react-bootstrap'
-import { RecommendedList } from '../components/RecommendedList'
-import { RecommendedDevice } from '../types/RecommendedDevice'
+import { RecommendedDeviceList } from '../components/RecommendedDeviceList'
+import { RecommendedDevices } from '../types/RecommendedDevice'
 
 const getRecommendedDevices = async () => {
   const response = await axios.get('device/recommended')
@@ -21,8 +21,8 @@ export const HomePage: FunctionComponent = () => {
       <h3 className="text-center">Hello, there! 👋</h3>
       <h5 className="text-center">Our recommendation for today!</h5>
       <Row>
-        {recommendedDevices.map((device: RecommendedDevice) => (
-          <RecommendedList key={device.title} recommended={device} />
+        {recommendedDevices.map((device: RecommendedDevices) => (
+          <RecommendedDeviceList key={device.title} recommended={device} />
         ))}
       </Row>
     </Container>

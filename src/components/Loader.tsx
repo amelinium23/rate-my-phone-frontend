@@ -3,12 +3,12 @@ import { Spinner } from 'react-bootstrap'
 
 import '../css/Loader.css'
 
-interface IProps {
+interface LoaderProps {
   isLoading: boolean
   loadingText?: string
 }
 
-export const Loader: FunctionComponent<IProps> = ({
+export const Loader: FunctionComponent<LoaderProps> = ({
   isLoading,
   loadingText,
 }) => {

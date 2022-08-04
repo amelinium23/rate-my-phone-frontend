@@ -12,11 +12,15 @@ import { Link, useNavigate } from 'react-router-dom'
 import { Login, User, Search } from 'tabler-icons-react'
 
 export const Header = () => {
-  const navigate = useNavigate()
   const [searchString, setSearchString] = useState<string>('')
+  const navigate = useNavigate()
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchString(e.target.value)
+  }
+
+  const handleLoginNavigation = () => {
+    navigate('/login', { replace: true })
   }
 
   return (
@@ -46,13 +50,12 @@ export const Header = () => {
           <Form className="d-flex">
             <Form.Control
               type="search"
+              placeholder="Search"
               className="pt-0 pb-0"
               value={searchString}
               onChange={handleSearch}
-              placeholder="Search"
-              aria-label="Search"
             />
-            <Button variant="outline-default">
+            <Button variant="outline-default" onClick={() => {}}>
               <Search size={30} color="#fff" strokeWidth={1} />
             </Button>
           </Form>
@@ -61,9 +64,7 @@ export const Header = () => {
             align="end"
             title={<User size={30} color="#fff" strokeWidth={1} />}
           >
-            <NavDropdown.Item
-              onClick={() => navigate('/login', { replace: true })}
-            >
+            <NavDropdown.Item onClick={handleLoginNavigation}>
               <Login size={28} strokeWidth={1} color="white" />
               Log in
             </NavDropdown.Item>

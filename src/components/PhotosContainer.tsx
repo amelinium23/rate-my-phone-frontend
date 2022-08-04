@@ -1,0 +1,44 @@
+import autoAnimate from '@formkit/auto-animate'
+import { FunctionComponent, useEffect, useRef } from 'react'
+import { Col, Container, Row, Image } from 'react-bootstrap'
+
+interface PhotosContainerProps {
+  device_image: string
+  pictures: string[]
+  deviceName: string
+}
+
+export const PhotosContainer: FunctionComponent<PhotosContainerProps> = ({
+  device_image,
+  pictures,
+  deviceName,
+}) => {
+  if (!pictures || !device_image) {
+    return (
+      <Col md={4} className="photoContainer">
+        <p>No photos of {deviceName}</p>
+      </Col>
+    )
+  }
+  const parent = useRef(null)
+
+  useEffect(() => {
+    parent.current && autoAnimate(parent.current)
+  }, [parent])
+
+  return (
+    <Col md={4} className="photoContainer">
+      <Container className="d-flex justify-content-center">
+        <Image src={device_image} />
+      </Container>
+      <Row ref={parent} className="mt-2">
+        {pictures &&
+          pictures.map((picture) => (
+            <Col md={2} key={picture} className="m-3">
+              <Image src={picture} width={75} />
+            </Col>
+          ))}
+      </Row>
+    </Col>
+  )
+}

@@ -25,11 +25,27 @@ export interface DeviceDetails extends Device {
   display_res: string
   display_size: string
   more_information: object[]
-  more_specification: object[]
+  more_specification: MoreSpecification[]
   os_type: string
   prices: object
   pictures: string[]
   release_date: string
   storage: string
   video: string
+}
+
+export interface SpecificationDetails {
+  data: string[]
+  title: string
+}
+
+export interface MoreSpecification {
+  title: string
+  data: SpecificationDetails[]
+}
+
+export interface PriceDetails {
+  price: string
+  buy_url: string
+  shop_image: string
 }

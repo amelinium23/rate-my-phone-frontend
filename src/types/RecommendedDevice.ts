@@ -1,6 +1,6 @@
 import { Device } from './Device'
 
-export interface RecommendedDevice {
+export interface RecommendedDevices {
   title: string
   data: Device[]
 }
