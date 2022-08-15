@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { FunctionComponent, useState, useEffect, useRef } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
-import { BrandItem } from '../components/BrandItem'
+import { BrandItem } from '../components/Items/BrandItem'
 import { Brand } from '../types/Brand'
 import autoAnimate from '@formkit/auto-animate'
 import { toast } from 'react-toastify'
@@ -20,12 +20,9 @@ export const BrandPage: FunctionComponent = () => {
     getBrands()
       .then(setBrands)
       .catch((err) => setErrorMessage(err.message))
-    toast
-      .promise(getBrands(), {
-        error: errorMessage !== '' ? errorMessage : 'Unable to fetch!',
-      })
-      .then(() => {})
-      .catch((err) => setErrorMessage(err.message))
+    toast.promise(getBrands(), {
+      error: errorMessage !== '' ? errorMessage : 'Unable to fetch!',
+    })
   }, [])
 
   useEffect(() => {

@@ -3,7 +3,7 @@ import { FunctionComponent, useEffect, useState, useRef } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { PhoneItem } from '../components/PhoneItem'
+import { PhoneItem } from '../components/Items/PhoneItem'
 import { Phone, PhoneResponse } from '../types/Device'
 import autoAnimate from '@formkit/auto-animate'
 

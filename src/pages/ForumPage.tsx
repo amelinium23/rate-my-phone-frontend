@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { FunctionComponent, useState, useEffect, useRef } from 'react'
 import { Container } from 'react-bootstrap'
-import { PostItem } from '../components/PostItem'
+import { PostItem } from '../components/Items/PostItem'
 import { Post } from '../types/Post'
 import autoAnimate from '@formkit/auto-animate'
 

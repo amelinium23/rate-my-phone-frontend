@@ -2,6 +2,7 @@ import { Container, Col, Button, Form, Row } from 'react-bootstrap'
 import { ChangeEvent, FormEvent, FunctionComponent, useState } from 'react'
 import { Login } from 'tabler-icons-react'
 import { useNavigate } from 'react-router-dom'
+import { validatePassword, validateLogin } from '../utils/validators'
 
 export const LoginPage: FunctionComponent = () => {
   const navigate = useNavigate()
@@ -30,11 +31,6 @@ export const LoginPage: FunctionComponent = () => {
   const handleRegisterPasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
     setRegisterPassword(e.target.value)
   }
-
-  const validateLogin = (login: string) => /[^\s@]+@[^\s@]+.[^\s@]/.test(login)
-
-  const validatePassword = (password: string) =>
-    /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/.test(password)
 
   return (
     <Container className="mt-3">

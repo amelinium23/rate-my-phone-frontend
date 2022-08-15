@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react'
 import { Container, Image } from 'react-bootstrap'
-import { Device } from '../types/Device'
+import { Device } from '../../types/Device'
 import { Link } from 'react-router-dom'
 
 interface DeviceItemProps {
@@ -8,7 +8,7 @@ interface DeviceItemProps {
   position: number
 }
 
-export const RecommendedDevice: FunctionComponent<DeviceItemProps> = ({
+export const RecommendedDeviceItem: FunctionComponent<DeviceItemProps> = ({
   device,
   position,
 }) => {

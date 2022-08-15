@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react'
 import { Card, Container, Button } from 'react-bootstrap'
-import { Post } from '../types/Post'
+import { Post } from '../../types/Post'
 import { ArrowBigTop, ArrowBigDown } from 'tabler-icons-react'
 
 interface PostItemProps {
