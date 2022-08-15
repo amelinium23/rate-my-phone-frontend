@@ -1,28 +1,41 @@
 import axios from 'axios'
-import { FunctionComponent, useState, useEffect, useRef } from 'react'
+import { FunctionComponent, useState, useEffect, useRef, Dispatch } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import { BrandItem } from '../components/Items/BrandItem'
 import { Brand } from '../types/Brand'
 import autoAnimate from '@formkit/auto-animate'
 import { toast } from 'react-toastify'
+import { setIsLoading } from '../contexts/Actions'
+import { ActionType } from '../contexts/types/StoreTypes'
+
+interface BrandPageProps {
+  dispatch: Dispatch<ActionType>
+}
 
 const getBrands = async () => {
   const response = await axios.get('/brands')
   return response.data
 }
 
-export const BrandPage: FunctionComponent = () => {
+export const BrandPage: FunctionComponent<BrandPageProps> = ({ dispatch }) => {
   const [brands, setBrands] = useState([])
   const [errorMessage, setErrorMessage] = useState('')
   const parent = useRef(null)
 
   useEffect(() => {
-    getBrands()
-      .then(setBrands)
-      .catch((err) => setErrorMessage(err.message))
-    toast.promise(getBrands(), {
-      error: errorMessage !== '' ? errorMessage : 'Unable to fetch!',
-    })
+    const fetchBrands = async () => {
+      try {
+        setIsLoading(dispatch, true)
+        const brands = await getBrands()
+        setBrands(brands)
+      } catch (err: any) {
+        setErrorMessage(err.message)
+        toast.error(errorMessage)
+      } finally {
+        setIsLoading(dispatch, false)
+      }
+    }
+    fetchBrands()
   }, [])
 
   useEffect(() => {

@@ -7,12 +7,12 @@ import { PhonePage } from './pages/PhonePage'
 import { Store, useStore } from './contexts/Store'
 import { ToastContainer } from 'react-toastify'
 import { DetailsPage } from './pages/DetailsPage'
-import { Loader } from './components/Loader'
 import { LoginPage } from './pages/LoginPage'
 import { RegisterPage } from './pages/RegisterPage'
+import { Loader } from './components/Loader'
 
 export const App = () => {
-  const { state } = useStore()
+  const { state, dispatch } = useStore()
 
   return (
     <>
@@ -20,7 +20,7 @@ export const App = () => {
         <Header />
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/brands" element={<BrandPage />} />
+          <Route path="/brands" element={<BrandPage dispatch={dispatch} />} />
           <Route path="/phones" element={<PhonePage />}>
             <Route key="phones-key-route" path=":key" element={<PhonePage />} />
           </Route>

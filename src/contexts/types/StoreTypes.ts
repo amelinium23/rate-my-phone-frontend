@@ -1,4 +1,5 @@
-/* eslint-disable no-unused-vars */
+import { Dispatch } from 'react'
+
 export type AppStateType = {
   pageNumber: number
   pageSize: number
@@ -6,12 +7,11 @@ export type AppStateType = {
 }
 
 export type ActionType = {
-  type: AppActionType
+  type: string
   payload?: any
 }
 
-export enum AppActionType {
-  SET_PAGE_NUMBER = 'SET_PAGE_NUMBER',
-  SET_PAGE_SIZE = 'SET_PAGE_SIZE',
-  SET_IS_LOADING = 'SET_IS_LOADING',
+export interface AppContextType {
+  state: AppStateType
+  dispatch: Dispatch<ActionType>
 }
