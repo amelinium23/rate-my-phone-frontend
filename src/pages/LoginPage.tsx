@@ -1,10 +1,24 @@
 import { Container, Col, Button, Form, Row } from 'react-bootstrap'
-import { ChangeEvent, FormEvent, FunctionComponent, useState } from 'react'
+import {
+  ChangeEvent,
+  Dispatch,
+  FormEvent,
+  FunctionComponent,
+  useState,
+} from 'react'
 import { Login } from 'tabler-icons-react'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { validatePassword, validateLogin } from '../utils/validators'
+import { signInWithEmailAndPassword } from 'firebase/auth'
+import { ActionType, AppStateType } from '../contexts/types/StoreTypes'
 
-export const LoginPage: FunctionComponent = () => {
+interface LoginPageProps {
+  state: AppStateType
+  dispatch: Dispatch<ActionType>
+}
+
+export const LoginPage: FunctionComponent<LoginPageProps> = ({ state }) => {
   const navigate = useNavigate()
   const [login, setLogin] = useState<string>('')
   const [password, setPassword] = useState<string>('')
@@ -13,8 +27,18 @@ export const LoginPage: FunctionComponent = () => {
 
   const handleLogin = (e: FormEvent) => {
     e.preventDefault()
-    navigate('/', { replace: true })
+    signInWithEmailAndPassword(state.auth, login, password)
+      .then((user) => {
+        console.debug('Logged in user: ', user)
+        navigate('/', { replace: true })
+      })
+      .catch((err) => toast.error(err.message))
   }
+
+  const onRegister = () =>
+    navigate('/register', {
+      state: { login: registerLogin, password: registerPassword },
+    })
 
   const handleLoginChange = (e: ChangeEvent<HTMLInputElement>) => {
     setLogin(e.target.value)
@@ -73,7 +97,7 @@ export const LoginPage: FunctionComponent = () => {
             </Button>
           </Form>
         </Col>
-        <Col style={{ borderLeft: '1px solid lightgray' }} md={6}>
+        <Col md={6}>
           <h5>Register</h5>
           <Form>
             <Form.Group className="my-2" controlId="formRegisterEmail">
@@ -106,12 +130,7 @@ export const LoginPage: FunctionComponent = () => {
                 validatePassword(registerPassword)
               )
             }
-            variant="success"
-            onClick={() =>
-              navigate('/register', {
-                state: { login: registerLogin, password: registerPassword },
-              })
-            }
+            onClick={onRegister}
           >
             Register
           </Button>

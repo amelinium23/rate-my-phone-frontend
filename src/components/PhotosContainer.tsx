@@ -1,5 +1,4 @@
-import autoAnimate from '@formkit/auto-animate'
-import { FunctionComponent, useEffect, useRef } from 'react'
+import { FunctionComponent } from 'react'
 import { Col, Container, Row, Image } from 'react-bootstrap'
 
 interface PhotosContainerProps {
@@ -20,18 +19,13 @@ export const PhotosContainer: FunctionComponent<PhotosContainerProps> = ({
       </Col>
     )
   }
-  const parent = useRef(null)
-
-  useEffect(() => {
-    parent.current && autoAnimate(parent.current)
-  }, [parent])
 
   return (
     <Col md={4} className="photoContainer">
       <Container className="d-flex justify-content-center">
         <Image src={device_image} />
       </Container>
-      <Row ref={parent} className="mt-2">
+      <Row className="mt-2">
         {pictures &&
           pictures.map((picture) => (
             <Col md={2} key={picture} className="m-3">

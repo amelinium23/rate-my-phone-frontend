@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from 'react'
+import { useState, ChangeEvent, FunctionComponent } from 'react'
 import {
   Container,
   Image,
@@ -9,11 +9,15 @@ import {
   Button,
 } from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom'
-import { Login, User, Search } from 'tabler-icons-react'
+import { Login, User, Search, Logout } from 'tabler-icons-react'
+import { useStore } from '../contexts/Store'
+import { signOut } from 'firebase/auth'
+import { toast } from 'react-toastify'
 
-export const Header = () => {
-  const [searchString, setSearchString] = useState<string>('')
+export const Header: FunctionComponent = () => {
   const navigate = useNavigate()
+  const { state } = useStore()
+  const [searchString, setSearchString] = useState<string>('')
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchString(e.target.value)
@@ -21,6 +25,17 @@ export const Header = () => {
 
   const handleLoginNavigation = () => {
     navigate('/login', { replace: true })
+  }
+
+  const handleLogout = async () => {
+    if (state.auth.currentUser !== null) {
+      const user = state.auth.currentUser
+      signOut(state.auth)
+        .then(() => {
+          toast.success(`${user.displayName || user.email} logged out`)
+        })
+        .catch((err) => toast.error(err.message))
+    }
   }
 
   return (
@@ -64,10 +79,24 @@ export const Header = () => {
             align="end"
             title={<User size={30} color="#fff" strokeWidth={1} />}
           >
-            <NavDropdown.Item onClick={handleLoginNavigation}>
-              <Login size={28} strokeWidth={1} color="white" />
-              Log in
-            </NavDropdown.Item>
+            {state.auth?.currentUser !== null ? (
+              <>
+                <NavDropdown.Item>
+                  {`Signed as ${
+                    state.auth.currentUser?.displayName ||
+                    state.auth.currentUser?.email
+                  }`}
+                </NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item onClick={handleLogout}>
+                  <Logout size={28} strokeWidth={1} color="white" /> Logout
+                </NavDropdown.Item>
+              </>
+            ) : (
+              <NavDropdown.Item onClick={handleLoginNavigation}>
+                <Login size={28} strokeWidth={1} color="white" /> Log in
+              </NavDropdown.Item>
+            )}
           </NavDropdown>
         </Navbar.Collapse>
       </Container>

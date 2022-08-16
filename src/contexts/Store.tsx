@@ -3,16 +3,27 @@ import {
   FunctionComponent,
   ReactNode,
   useContext,
+  useEffect,
   useReducer,
 } from 'react'
 import { ActionType, AppContextType, AppStateType } from './types/StoreTypes'
 import { appReducer } from './reducers/AppReducer'
-import { FirebaseProvider } from './FirebaseContext'
+import { initializeApp } from 'firebase/app'
+import { getAuth } from 'firebase/auth'
+
+const firebaseConfig = {
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+}
+
+const app = initializeApp(firebaseConfig)
+const auth = getAuth(app)
 
 const initialState = {
   pageNumber: 1,
   pageSize: 10,
   isLoading: false,
+  auth: auth,
 }
 
 const AppContext = createContext<AppContextType>({
@@ -30,11 +41,15 @@ const Store: FunctionComponent<IProps> = ({ children }) => {
   const [state, dispatch] = useReducer(appReducer, initialState as AppStateType)
   const value = { state, dispatch }
 
-  return (
-    <FirebaseProvider>
-      <AppContext.Provider value={value}>{children}</AppContext.Provider>
-    </FirebaseProvider>
-  )
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      console.log('onAuthStateChanged', user)
+      setTimeout(() => auth.signOut(), 10800000)
+    })
+    return unsubscribe
+  }, [])
+
+  return <AppContext.Provider value={value}>{children}</AppContext.Provider>
 }
 
 export { useStore, Store }

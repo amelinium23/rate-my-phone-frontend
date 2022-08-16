@@ -19,7 +19,6 @@ const getBrands = async () => {
 
 export const BrandPage: FunctionComponent<BrandPageProps> = ({ dispatch }) => {
   const [brands, setBrands] = useState([])
-  const [errorMessage, setErrorMessage] = useState('')
   const parent = useRef(null)
 
   useEffect(() => {
@@ -29,8 +28,7 @@ export const BrandPage: FunctionComponent<BrandPageProps> = ({ dispatch }) => {
         const brands = await getBrands()
         setBrands(brands)
       } catch (err: any) {
-        setErrorMessage(err.message)
-        toast.error(errorMessage)
+        toast.error(err.message)
       } finally {
         setIsLoading(dispatch, false)
       }

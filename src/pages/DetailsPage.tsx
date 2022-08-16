@@ -2,6 +2,7 @@ import axios from 'axios'
 import { FunctionComponent, useState, useEffect } from 'react'
 import { Container, Table, Row, Col } from 'react-bootstrap'
 import { useLocation } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import {
   DeviceDetails,
   MoreSpecification,
@@ -28,13 +29,20 @@ const upperFirstLetter = (brandName: string) =>
   brandName.charAt(0).toUpperCase() + brandName.slice(1)
 
 export const DetailsPage: FunctionComponent = () => {
-  const [details, setDetails] = useState<DeviceDetails>({} as DeviceDetails)
+  const [deviceDetails, setDeviceDetails] = useState<DeviceDetails>(
+    {} as DeviceDetails
+  )
   const { state } = useLocation()
   const { deviceName, deviceKey } = state as LocationState
   const brandName = upperFirstLetter(deviceKey.split('_')[0])
 
   useEffect(() => {
-    getDetails(deviceKey).then(setDetails).catch(console.error)
+    getDetails(deviceKey)
+      .then((res) => {
+        setDeviceDetails(res)
+        toast.success(`${deviceName} found`)
+      })
+      .catch((err) => toast.error(err.message))
   }, [])
 
   return (
@@ -52,8 +60,8 @@ export const DetailsPage: FunctionComponent = () => {
               </tr>
             </thead>
             <tbody>
-              {details &&
-                Object.entries(details)
+              {deviceDetails &&
+                Object.entries(deviceDetails)
                   .filter(
                     ([key, value]) =>
                       !notUsedKeysDetailsPage.includes(key) &&
@@ -74,8 +82,8 @@ export const DetailsPage: FunctionComponent = () => {
           </Table>
         </Col>
         <PhotosContainer
-          device_image={details.device_image}
-          pictures={details.pictures}
+          device_image={deviceDetails.device_image}
+          pictures={deviceDetails.pictures}
           deviceName={deviceName}
         />
       </Row>
@@ -90,31 +98,33 @@ export const DetailsPage: FunctionComponent = () => {
               </tr>
             </thead>
             <tbody>
-              {details?.more_specification !== undefined &&
-                details?.more_specification !== null &&
-                details?.more_specification.map((spec: MoreSpecification) => (
-                  <tr key={spec.title}>
-                    <td>
-                      <strong>{spec.title}:</strong>
-                    </td>
-                    <td>
-                      {spec.data.length > 0
-                        ? spec.data.map((details: SpecificationDetails) => (
-                            <p key={details.title} className="p-0">
-                              <strong>{details.title}: </strong>
-                              {details.data.length > 0 ? details.data : '-'}
-                            </p>
-                          ))
-                        : '-'}
-                    </td>
-                  </tr>
-                ))}
+              {deviceDetails?.more_specification !== undefined &&
+                deviceDetails?.more_specification !== null &&
+                deviceDetails?.more_specification.map(
+                  (spec: MoreSpecification) => (
+                    <tr key={spec.title}>
+                      <td>
+                        <strong>{spec.title}:</strong>
+                      </td>
+                      <td>
+                        {spec.data.length > 0
+                          ? spec.data.map((details: SpecificationDetails) => (
+                              <p key={details.title} className="p-0">
+                                <strong>{details.title}: </strong>
+                                {details.data.length > 0 ? details.data : '-'}
+                              </p>
+                            ))
+                          : '-'}
+                      </td>
+                    </tr>
+                  )
+                )}
             </tbody>
           </Table>
         </Col>
         <Col md={4}>
           <h5 className="text-center">Prices</h5>
-          <PricesContainer prices={details?.prices} />
+          <PricesContainer prices={deviceDetails?.prices} />
         </Col>
       </Row>
     </Container>

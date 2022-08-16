@@ -26,7 +26,10 @@ export const App = () => {
           </Route>
           <Route path="/details" element={<DetailsPage />} />
           <Route path="/forum" element={<ForumPage />} />
-          <Route path="/login" element={<LoginPage />} />
+          <Route
+            path="/login"
+            element={<LoginPage state={state} dispatch={dispatch} />}
+          />
           <Route path="/register" element={<RegisterPage />} />
         </Routes>
         <ToastContainer

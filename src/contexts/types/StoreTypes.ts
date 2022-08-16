@@ -1,9 +1,11 @@
+import { Auth } from 'firebase/auth'
 import { Dispatch } from 'react'
 
 export type AppStateType = {
   pageNumber: number
   pageSize: number
   isLoading: boolean
+  auth: Auth
 }
 
 export type ActionType = {

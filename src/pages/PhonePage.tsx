@@ -16,19 +16,17 @@ const getPhones = async (key?: string) => {
 }
 
 export const PhonePage: FunctionComponent = () => {
-  const [phoneResponses, setPhones] = useState([])
-  const [errorMessage, setErrorMessage] = useState('')
+  const [phoneResponses, setPhoneResponses] = useState([])
   const parent = useRef(null)
   const { key } = useParams()
 
   useEffect(() => {
-    getPhones(key).then(setPhones).catch(setErrorMessage)
-    toast
-      .promise(getPhones(key), {
-        error: errorMessage !== '' ? errorMessage : 'Unable to fetch!',
+    getPhones(key)
+      .then((res) => {
+        setPhoneResponses(res)
+        toast.success(`${res.length} brands with phones found`)
       })
-      .then(() => {})
-      .catch((err) => setErrorMessage(err.message))
+      .catch((err) => toast.error(err.message))
   }, [])
 
   useEffect(() => {
