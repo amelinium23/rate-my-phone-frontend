@@ -12,6 +12,8 @@ import { notUsedKeysDetailsPage } from '../utils/constants'
 import '../css/DetailsPage.css'
 import { PricesContainer } from '../components/PricesContainer'
 import { PhotosContainer } from '../components/PhotosContainer'
+import { setIsLoading } from '../contexts/Actions'
+import { useStore } from '../contexts/Store'
 
 interface LocationState {
   deviceName: string
@@ -32,17 +34,24 @@ export const DetailsPage: FunctionComponent = () => {
   const [deviceDetails, setDeviceDetails] = useState<DeviceDetails>(
     {} as DeviceDetails
   )
+  const { dispatch } = useStore()
   const { state } = useLocation()
   const { deviceName, deviceKey } = state as LocationState
   const brandName = upperFirstLetter(deviceKey.split('_')[0])
 
   useEffect(() => {
-    getDetails(deviceKey)
-      .then((res) => {
-        setDeviceDetails(res)
-        toast.success(`${deviceName} found`)
-      })
-      .catch((err) => toast.error(err.message))
+    const fetchDetails = async () => {
+      try {
+        setIsLoading(dispatch, true)
+        const details = await getDetails(deviceKey)
+        setDeviceDetails(details)
+      } catch (err: any) {
+        toast.error(err.message)
+      } finally {
+        setIsLoading(dispatch, false)
+      }
+    }
+    fetchDetails()
   }, [])
 
   return (

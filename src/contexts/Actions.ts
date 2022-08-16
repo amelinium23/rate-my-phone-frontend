@@ -4,4 +4,10 @@ import { ActionType } from './types/StoreTypes'
 const setIsLoading = (dispatch: Dispatch<ActionType>, isLoading: boolean) =>
   dispatch({ type: 'SET_IS_LOADING', payload: isLoading })
 
-export { setIsLoading }
+const setPageSize = (dispatch: Dispatch<ActionType>, pageSize: number) =>
+  dispatch({ type: 'SET_PAGE_SIZE', payload: pageSize })
+
+const setPageNumber = (dispatch: Dispatch<ActionType>, pageNumber: number) =>
+  dispatch({ type: 'SET_PAGE_NUMBER', payload: pageNumber })
+
+export { setIsLoading, setPageSize, setPageNumber }

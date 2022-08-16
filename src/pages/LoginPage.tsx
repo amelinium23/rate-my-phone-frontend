@@ -1,25 +1,15 @@
 import { Container, Col, Button, Form, Row } from 'react-bootstrap'
-import {
-  ChangeEvent,
-  Dispatch,
-  FormEvent,
-  FunctionComponent,
-  useState,
-} from 'react'
+import { ChangeEvent, FormEvent, FunctionComponent, useState } from 'react'
 import { Login } from 'tabler-icons-react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { validatePassword, validateLogin } from '../utils/validators'
 import { signInWithEmailAndPassword } from 'firebase/auth'
-import { ActionType, AppStateType } from '../contexts/types/StoreTypes'
+import { useStore } from '../contexts/Store'
 
-interface LoginPageProps {
-  state: AppStateType
-  dispatch: Dispatch<ActionType>
-}
-
-export const LoginPage: FunctionComponent<LoginPageProps> = ({ state }) => {
+export const LoginPage: FunctionComponent = () => {
   const navigate = useNavigate()
+  const { state } = useStore()
   const [login, setLogin] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const [registerLogin, setRegisterLogin] = useState<string>('')

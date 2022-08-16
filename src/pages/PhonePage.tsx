@@ -6,6 +6,8 @@ import { toast } from 'react-toastify'
 import { PhoneItem } from '../components/Items/PhoneItem'
 import { Phone, PhoneResponse } from '../types/Device'
 import autoAnimate from '@formkit/auto-animate'
+import { useStore } from '../contexts/Store'
+import { setIsLoading } from '../contexts/Actions'
 
 const getPhones = async (key?: string) => {
   const res = await axios.get(
@@ -16,17 +18,25 @@ const getPhones = async (key?: string) => {
 }
 
 export const PhonePage: FunctionComponent = () => {
-  const [phoneResponses, setPhoneResponses] = useState([])
-  const parent = useRef(null)
+  const { dispatch } = useStore()
   const { key } = useParams()
+  const [phoneResponses, setPhoneResponses] = useState([])
+
+  const parent = useRef(null)
 
   useEffect(() => {
-    getPhones(key)
-      .then((res) => {
+    const fetchPhones = async () => {
+      try {
+        setIsLoading(dispatch, true)
+        const res = await getPhones(key)
         setPhoneResponses(res)
-        toast.success(`${res.length} brands with phones found`)
-      })
-      .catch((err) => toast.error(err.message))
+      } catch (error: any) {
+        toast.error(error.message)
+      } finally {
+        setIsLoading(dispatch, false)
+      }
+    }
+    fetchPhones()
   }, [])
 
   useEffect(() => {

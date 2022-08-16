@@ -13,7 +13,7 @@ export const PostItem: FunctionComponent<PostItemProps> = ({ post }) => {
       <h5>{post.title}</h5>
       <p>{post.description}</p>
       <Container className="p-0">
-        <p>Votes</p>
+        <p>Votes {post.votes}</p>
         <Button className="me-1" variant="outline-light">
           <ArrowBigTop size={15} stroke="black" />
         </Button>

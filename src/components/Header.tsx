@@ -9,7 +9,7 @@ import {
   Button,
 } from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom'
-import { Login, User, Search, Logout } from 'tabler-icons-react'
+import { Login, User, Search, Logout, Article } from 'tabler-icons-react'
 import { useStore } from '../contexts/Store'
 import { signOut } from 'firebase/auth'
 import { toast } from 'react-toastify'
@@ -81,15 +81,22 @@ export const Header: FunctionComponent = () => {
           >
             {state.auth?.currentUser !== null ? (
               <>
-                <NavDropdown.Item>
+                <NavDropdown.Item disabled>
                   {`Signed as ${
                     state.auth.currentUser?.displayName ||
                     state.auth.currentUser?.email
                   }`}
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
+                <NavDropdown.Item>
+                  <User size={20} color="white" strokeWidth={1} /> Profile
+                </NavDropdown.Item>
+                <NavDropdown.Item>
+                  <Article size={20} color="white" strokeWidth={1} /> Your posts
+                </NavDropdown.Item>
+                <NavDropdown.Divider />
                 <NavDropdown.Item onClick={handleLogout}>
-                  <Logout size={28} strokeWidth={1} color="white" /> Logout
+                  <Logout size={20} strokeWidth={1} color="white" /> Logout
                 </NavDropdown.Item>
               </>
             ) : (

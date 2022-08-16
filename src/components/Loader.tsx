@@ -1,15 +1,14 @@
 import { FunctionComponent } from 'react'
 import { Spinner } from 'react-bootstrap'
+import { useStore } from '../contexts/Store'
 
 import '../css/Loader.css'
 
-interface LoaderProps {
-  isLoading: boolean
-}
+export const Loader: FunctionComponent = () => {
+  const { state } = useStore()
 
-export const Loader: FunctionComponent<LoaderProps> = ({ isLoading }) => {
   const loaderStyle = {
-    display: isLoading ? 'flex' : 'none',
+    display: state.isLoading ? 'flex' : 'none',
   }
 
   return (

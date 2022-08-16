@@ -6,3 +6,6 @@ export const notUsedKeysDetailsPage = [
   'more_information',
   'device_image',
 ]
+
+
+export const pageSizes = [10, 20, 50, 100]
