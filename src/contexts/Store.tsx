@@ -53,4 +53,4 @@ const Store: FunctionComponent<IProps> = ({ children }) => {
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>
 }
 
-export { useStore, Store }  
+export { useStore, Store }

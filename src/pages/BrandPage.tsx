@@ -63,8 +63,13 @@ export const BrandPage: FunctionComponent = () => {
           )
         )}
       </Row>
-      <Row className="d-flex text-center">
-        <PaginationComponent totalPages={brandResponse.total_pages} />
+      <Row>
+        <Col className="d-flex justify-content-center" md={12}>
+          <PaginationComponent
+            currentPage={state.pageNumber}
+            totalPages={brandResponse.total_pages}
+          />
+        </Col>
       </Row>
     </Container>
   )

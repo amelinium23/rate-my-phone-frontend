@@ -4,7 +4,6 @@ export interface Brand {
   key: string
 }
 
-
 export interface BrandResponse {
   total_pages: number
   brands: Brand[]
