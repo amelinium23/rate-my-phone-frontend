@@ -10,6 +10,7 @@ import { ActionType, AppContextType, AppStateType } from './types/StoreTypes'
 import { appReducer } from './reducers/AppReducer'
 import { initializeApp } from 'firebase/app'
 import { getAuth } from 'firebase/auth'
+import { pageSizes } from '../utils/constants'
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -21,7 +22,7 @@ const auth = getAuth(app)
 
 const initialState = {
   pageNumber: 1,
-  pageSize: 10,
+  pageSize: pageSizes[0],
   isLoading: false,
   auth: auth,
 }
@@ -52,4 +53,4 @@ const Store: FunctionComponent<IProps> = ({ children }) => {
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>
 }
 
-export { useStore, Store }
+export { useStore, Store }  
