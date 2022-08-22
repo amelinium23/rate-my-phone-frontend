@@ -7,4 +7,6 @@ export const notUsedKeysDetailsPage = [
   'device_image',
 ]
 
-export const pageSizes = [20, 40, 100]
+export const phonesPageSizes = [10, 20, 50]
+
+export const brandsPageSizes = [20, 40, 100]

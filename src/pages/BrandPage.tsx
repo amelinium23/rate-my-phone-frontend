@@ -5,7 +5,12 @@ import { BrandItem } from '../components/Items/BrandItem'
 import { Brand, BrandResponse } from '../types/Brand'
 import autoAnimate from '@formkit/auto-animate'
 import { toast } from 'react-toastify'
-import { setIsLoading, setBrandsPageNumber, setBrandPageSize } from '../contexts/Actions'
+import {
+  setIsLoading,
+  setBrandsPageNumber,
+  setBrandPageSize,
+} from '../contexts/Actions'
+import { brandsPageSizes } from '../utils/constants'
 import { PageSizePicker } from '../components/PageSizePicker'
 import { useStore } from '../contexts/Store'
 import { PaginationComponent } from '../components/PaginationComponent'
@@ -57,6 +62,7 @@ export const BrandPage: FunctionComponent = () => {
         <Col md={3}>
           <p>Page size</p>
           <PageSizePicker
+            pageSizes={brandsPageSizes}
             pageSize={state.brandsPageSize}
             onPageSizeChange={setBrandPageSize}
           />

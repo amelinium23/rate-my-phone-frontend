@@ -16,6 +16,12 @@ export interface PhoneResponse {
   key: string
 }
 
+export interface ApiPhoneResponse {
+  total: number
+  totalPhones: number
+  data: PhoneResponse[]
+}
+
 export interface DeviceDetails extends Device {
   battery: string
   batteryType: string

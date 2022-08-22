@@ -7,7 +7,6 @@ interface PaginationComponentProps {
   currentPage: number
   dataLength: number
   pageSize: number
-  // eslint-disable-next-line
   onPageChange: (dispatch: Dispatch<ActionType>, pageNumber: number) => void
 }
 
