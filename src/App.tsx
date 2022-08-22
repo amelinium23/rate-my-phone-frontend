@@ -30,6 +30,7 @@ export const App = () => {
           <Route path="/profile" element={<ProfilePage />} />
         </Routes>
         <ToastContainer
+          limit={3}
           theme="dark"
           position="bottom-right"
           newestOnTop

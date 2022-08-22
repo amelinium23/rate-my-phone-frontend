@@ -27,10 +27,13 @@ export const BrandPage: FunctionComponent = () => {
       try {
         setIsLoading(dispatch, true)
         const brands: BrandResponse = await getBrands(
-          state.pageNumber,
-          state.pageSize
+          state.brandsPageNumber,
+          state.brandsPageNumber
         )
-        if (state.pageNumber > brands.total_pages / state.pageSize) {
+        if (
+          state.brandsPageNumber >
+          brands.total_pages / state.brandsPageNumber
+        ) {
           setPageNumber(dispatch, 1)
         }
         setBrandResponse(brands)
@@ -41,7 +44,7 @@ export const BrandPage: FunctionComponent = () => {
       }
     }
     fetchBrands()
-  }, [state.pageNumber, state.pageSize])
+  }, [state.brandsPageNumber, state.brandsPageNumber])
 
   useEffect(() => {
     parent.current && autoAnimate(parent.current)
@@ -59,8 +62,8 @@ export const BrandPage: FunctionComponent = () => {
           <p className="text-end">Total brands: {brandResponse?.total_pages}</p>
           <div className="float-end">
             <PaginationComponent
-              pageSize={state.pageSize}
-              currentPage={state.pageNumber}
+              pageSize={state.brandsPageNumber}
+              currentPage={state.brandsPageNumber}
               dataLength={brandResponse?.total_pages || 20}
             />
           </div>

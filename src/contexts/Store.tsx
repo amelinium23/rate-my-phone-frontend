@@ -21,8 +21,8 @@ const app = initializeApp(firebaseConfig)
 const auth = getAuth(app)
 
 const initialState = {
-  pageNumber: 1,
-  pageSize: pageSizes[0],
+  brandsPageNumber: 1,
+  brandsPageSize: pageSizes[0],
   isLoading: false,
   auth: auth,
 }
@@ -43,9 +43,8 @@ const Store: FunctionComponent<IProps> = ({ children }) => {
   const value = { state, dispatch }
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      console.log('onAuthStateChanged', user)
-      setTimeout(() => auth.signOut(), 10800000)
+    const unsubscribe = auth.onAuthStateChanged(() => {
+      return setTimeout(() => auth.signOut(), 10800000)
     })
     return unsubscribe
   }, [])

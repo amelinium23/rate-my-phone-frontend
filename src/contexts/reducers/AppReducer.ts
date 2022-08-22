@@ -8,12 +8,12 @@ export const appReducer = (
     case 'SET_PAGE_NUMBER':
       return {
         ...state,
-        pageNumber: action.payload,
+        brandsPageNumber: action.payload,
       }
     case 'SET_PAGE_SIZE':
       return {
         ...state,
-        pageSize: action.payload,
+        brandsPageNumber: action.payload,
       }
     case 'SET_IS_LOADING':
       return {

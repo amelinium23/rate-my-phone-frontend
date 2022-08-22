@@ -2,8 +2,8 @@ import { Auth } from 'firebase/auth'
 import { Dispatch } from 'react'
 
 export type AppStateType = {
-  pageNumber: number
-  pageSize: number
+  brandsPageNumber: number
+  brandsPageSize: number
   isLoading: boolean
   auth: Auth
 }

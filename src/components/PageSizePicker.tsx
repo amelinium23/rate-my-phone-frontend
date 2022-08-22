@@ -13,7 +13,11 @@ export const PageSizePicker: FunctionComponent = () => {
   }
 
   return (
-    <Form.Select size="sm" value={state.pageSize} onChange={onPageSizeChange}>
+    <Form.Select
+      size="sm"
+      value={state.brandsPageNumber}
+      onChange={onPageSizeChange}
+    >
       {pageSizes.map((pageSize: number) => (
         <option key={pageSize}>{pageSize}</option>
       ))}

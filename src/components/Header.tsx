@@ -27,7 +27,11 @@ export const Header: FunctionComponent = () => {
     navigate('/login', { replace: true })
   }
 
-  const handleLogout = async () => {
+  const handleProfileNavigation = () => {
+    navigate('/profile', { replace: true })
+  }
+
+  const handleLogout = () => {
     if (state.auth.currentUser !== null) {
       const user = state.auth.currentUser
       signOut(state.auth)
@@ -88,7 +92,7 @@ export const Header: FunctionComponent = () => {
                   }`}
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item>
+                <NavDropdown.Item onClick={handleProfileNavigation}>
                   <User size={20} color="white" strokeWidth={1} /> Profile
                 </NavDropdown.Item>
                 <NavDropdown.Item>
