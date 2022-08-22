@@ -1,17 +1,19 @@
-import { FunctionComponent } from 'react'
+import { Dispatch, FunctionComponent } from 'react'
 import { Pagination } from 'react-bootstrap'
-import { setPageNumber } from '../contexts/Actions'
 import { useStore } from '../contexts/Store'
+import { ActionType } from '../contexts/types/StoreTypes'
 
 interface PaginationComponentProps {
   currentPage: number
   dataLength: number
   pageSize: number
+  // eslint-disable-next-line
+  onPageChange: (dispatch: Dispatch<ActionType>, pageNumber: number) => void
 }
 
 export const PaginationComponent: FunctionComponent<
   PaginationComponentProps
-> = ({ currentPage, dataLength, pageSize }) => {
+> = ({ currentPage, dataLength, pageSize, onPageChange }) => {
   const { dispatch } = useStore()
   const pageNumbers = Array.from(
     { length: dataLength / pageSize },
@@ -19,15 +21,15 @@ export const PaginationComponent: FunctionComponent<
   )
 
   const onPrevPage = () => {
-    setPageNumber(dispatch, currentPage - 1)
+    onPageChange(dispatch, currentPage - 1)
   }
 
   const onNextPage = () => {
-    setPageNumber(dispatch, currentPage + 1)
+    onPageChange(dispatch, currentPage + 1)
   }
 
   const onPageClick = (pageNumber: number) => {
-    setPageNumber(dispatch, pageNumber)
+    onPageChange(dispatch, pageNumber)
   }
 
   return (

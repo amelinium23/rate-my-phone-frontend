@@ -18,7 +18,7 @@ const getPhones = async (key?: string) => {
 }
 
 export const PhonePage: FunctionComponent = () => {
-  const { dispatch } = useStore()
+  const { state, dispatch } = useStore()
   const { key } = useParams()
   const [phoneResponses, setPhoneResponses] = useState([])
 
@@ -43,11 +43,15 @@ export const PhonePage: FunctionComponent = () => {
     parent.current && autoAnimate(parent.current)
   }, [parent])
 
-  return (
+  return state.isLoading ? null : (
     <Container ref={parent} className="mt-2">
       <h5 key="header-page-phone" className="text-center">
         Phones
       </h5>
+      <Row>
+        <Col md={3}></Col>
+        <Col md={3}></Col>
+      </Row>
       {key !== '' && key !== undefined ? (
         <div>
           <h5 className="text-left">

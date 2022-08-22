@@ -1,23 +1,26 @@
-import { ChangeEvent, FunctionComponent } from 'react'
+import { ChangeEvent, FunctionComponent, Dispatch } from 'react'
 import { Form } from 'react-bootstrap'
-import { setPageSize } from '../contexts/Actions'
 import { useStore } from '../contexts/Store'
+import { ActionType } from '../contexts/types/StoreTypes'
 import { pageSizes } from '../utils/constants'
 
-export const PageSizePicker: FunctionComponent = () => {
-  const { state, dispatch } = useStore()
+interface PageSizePickerProps {
+  pageSize: number
+  onPageSizeChange: (dispatch: Dispatch<ActionType>, pageSize: number) => void
+}
 
-  const onPageSizeChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    const pageSize = parseInt(e.target.value, 10)
-    setPageSize(dispatch, pageSize)
+export const PageSizePicker: FunctionComponent<PageSizePickerProps> = ({
+  pageSize,
+  onPageSizeChange,
+}) => {
+  const { dispatch } = useStore()
+
+  const handlePageSizeChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    onPageSizeChange(dispatch, parseInt(e.target.value))
   }
 
   return (
-    <Form.Select
-      size="sm"
-      value={state.brandsPageNumber}
-      onChange={onPageSizeChange}
-    >
+    <Form.Select size="sm" value={pageSize} onChange={handlePageSizeChange}>
       {pageSizes.map((pageSize: number) => (
         <option key={pageSize}>{pageSize}</option>
       ))}

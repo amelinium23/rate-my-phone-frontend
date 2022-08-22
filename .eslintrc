@@ -35,6 +35,13 @@
     "jsx-a11y/accessible-emoji": "off",
     "react/prop-types": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
+    "no-unused-vars": [
+      "error", { 
+        "vars": "all", 
+        "args": "none", 
+        "ignoreRestSiblings": false 
+      }
+    ],
     "jsx-a11y/anchor-is-valid": [
       "error",
       {

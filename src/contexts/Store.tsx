@@ -21,6 +21,8 @@ const app = initializeApp(firebaseConfig)
 const auth = getAuth(app)
 
 const initialState = {
+  phonePageNumber: 1,
+  phonePageSize: pageSizes[0],
   brandsPageNumber: 1,
   brandsPageSize: pageSizes[0],
   isLoading: false,

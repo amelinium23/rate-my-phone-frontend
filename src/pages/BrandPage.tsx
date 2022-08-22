@@ -5,7 +5,7 @@ import { BrandItem } from '../components/Items/BrandItem'
 import { Brand, BrandResponse } from '../types/Brand'
 import autoAnimate from '@formkit/auto-animate'
 import { toast } from 'react-toastify'
-import { setIsLoading, setPageNumber } from '../contexts/Actions'
+import { setIsLoading, setBrandsPageNumber, setBrandPageSize } from '../contexts/Actions'
 import { PageSizePicker } from '../components/PageSizePicker'
 import { useStore } from '../contexts/Store'
 import { PaginationComponent } from '../components/PaginationComponent'
@@ -28,13 +28,13 @@ export const BrandPage: FunctionComponent = () => {
         setIsLoading(dispatch, true)
         const brands: BrandResponse = await getBrands(
           state.brandsPageNumber,
-          state.brandsPageNumber
+          state.brandsPageSize
         )
         if (
           state.brandsPageNumber >
-          brands.total_pages / state.brandsPageNumber
+          brands.total_pages / state.brandsPageSize
         ) {
-          setPageNumber(dispatch, 1)
+          setBrandsPageNumber(dispatch, 1)
         }
         setBrandResponse(brands)
       } catch (err: any) {
@@ -44,7 +44,7 @@ export const BrandPage: FunctionComponent = () => {
       }
     }
     fetchBrands()
-  }, [state.brandsPageNumber, state.brandsPageNumber])
+  }, [state.brandsPageNumber, state.brandsPageSize])
 
   useEffect(() => {
     parent.current && autoAnimate(parent.current)
@@ -56,15 +56,19 @@ export const BrandPage: FunctionComponent = () => {
       <Row>
         <Col md={3}>
           <p>Page size</p>
-          <PageSizePicker />
+          <PageSizePicker
+            pageSize={state.brandsPageSize}
+            onPageSizeChange={setBrandPageSize}
+          />
         </Col>
         <Col md={{ span: 3, offset: 6 }}>
           <p className="text-end">Total brands: {brandResponse?.total_pages}</p>
           <div className="float-end">
             <PaginationComponent
-              pageSize={state.brandsPageNumber}
+              onPageChange={setBrandsPageNumber}
+              pageSize={state.brandsPageSize}
               currentPage={state.brandsPageNumber}
-              dataLength={brandResponse?.total_pages || 20}
+              dataLength={brandResponse?.total_pages || 1}
             />
           </div>
         </Col>

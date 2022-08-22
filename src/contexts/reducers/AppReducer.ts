@@ -5,20 +5,30 @@ export const appReducer = (
   action: ActionType
 ): AppStateType => {
   switch (action.type) {
-    case 'SET_PAGE_NUMBER':
+    case 'SET_BRANDS_PAGE_NUMBER':
       return {
         ...state,
         brandsPageNumber: action.payload,
       }
-    case 'SET_PAGE_SIZE':
+    case 'SET_BRANDS_PAGE_SIZE':
       return {
         ...state,
-        brandsPageNumber: action.payload,
+        brandsPageSize: action.payload,
       }
     case 'SET_IS_LOADING':
       return {
         ...state,
         isLoading: action.payload,
+      }
+    case 'SET_PHONE_PAGE_SIZE':
+      return {
+        ...state,
+        phonePageSize: action.payload,
+      }
+    case 'SET_PHONE_PAGE_NUMBER':
+      return {
+        ...state,
+        phonePageNumber: action.payload,
       }
     default:
       return state
