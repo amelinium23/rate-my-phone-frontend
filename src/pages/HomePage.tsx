@@ -1,7 +1,10 @@
 import axios from 'axios'
 import { useState, useEffect, FunctionComponent } from 'react'
 import { Container, Row } from 'react-bootstrap'
+import { toast } from 'react-toastify'
 import { RecommendedDeviceList } from '../components/RecommendedDeviceList'
+import { setIsLoading } from '../contexts/Actions'
+import { useStore } from '../contexts/Store'
 import { RecommendedDevices } from '../types/RecommendedDevice'
 
 const getRecommendedDevices = async () => {
@@ -10,10 +13,22 @@ const getRecommendedDevices = async () => {
 }
 
 export const HomePage: FunctionComponent = () => {
+  const { dispatch } = useStore()
   const [recommendedDevices, setRecommendedDevices] = useState([])
 
   useEffect(() => {
-    getRecommendedDevices().then(setRecommendedDevices)
+    const fetchRecommendedDevices = async () => {
+      try {
+        setIsLoading(dispatch, true)
+        const recommendedDevices = await getRecommendedDevices()
+        setRecommendedDevices(recommendedDevices)
+      } catch (err: any) {
+        toast.error(err.message)
+      } finally {
+        setIsLoading(dispatch, false)
+      }
+    }
+    fetchRecommendedDevices()
   }, [])
 
   return (

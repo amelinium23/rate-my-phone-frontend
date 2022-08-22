@@ -10,6 +10,7 @@ import { DetailsPage } from './pages/DetailsPage'
 import { LoginPage } from './pages/LoginPage'
 import { RegisterPage } from './pages/RegisterPage'
 import { Loader } from './components/Loader'
+import { ProfilePage } from './pages/ProfilePage'
 
 export const App = () => {
   return (
@@ -26,6 +27,7 @@ export const App = () => {
           <Route path="/forum" element={<ForumPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
         </Routes>
         <ToastContainer
           theme="dark"

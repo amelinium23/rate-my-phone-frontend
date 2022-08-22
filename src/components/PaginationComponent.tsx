@@ -1,21 +1,22 @@
-import { FunctionComponent, useState } from 'react'
+import { FunctionComponent } from 'react'
 import { Pagination } from 'react-bootstrap'
 import { setPageNumber } from '../contexts/Actions'
 import { useStore } from '../contexts/Store'
 
 interface PaginationComponentProps {
   currentPage: number
-  totalPages: number
+  dataLength: number
+  pageSize: number
 }
 
 export const PaginationComponent: FunctionComponent<
   PaginationComponentProps
-> = ({ currentPage, totalPages }) => {
+> = ({ currentPage, dataLength, pageSize }) => {
   const { dispatch } = useStore()
-  const [pageNumbers] = useState(
-    Array.from({ length: totalPages }, (_, k) => k + 1)
+  const pageNumbers = Array.from(
+    { length: dataLength / pageSize },
+    (_, k) => k + 1
   )
-  console.log(pageNumbers)
 
   const onPrevPage = () => {
     setPageNumber(dispatch, currentPage - 1)
@@ -31,7 +32,10 @@ export const PaginationComponent: FunctionComponent<
 
   return (
     <Pagination size="sm">
-      <Pagination.Prev disabled={currentPage === 1} onClick={onPrevPage} />
+      <Pagination.Prev
+        disabled={currentPage === pageNumbers[0]}
+        onClick={onPrevPage}
+      />
       {pageNumbers.map((pageNumber) => (
         <Pagination.Item
           onClick={() => onPageClick(pageNumber)}
@@ -42,7 +46,7 @@ export const PaginationComponent: FunctionComponent<
         </Pagination.Item>
       ))}
       <Pagination.Next
-        disabled={currentPage === totalPages}
+        disabled={currentPage === pageNumbers[pageNumbers.length - 1]}
         onClick={onNextPage}
       />
     </Pagination>

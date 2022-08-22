@@ -5,7 +5,7 @@ import { BrandItem } from '../components/Items/BrandItem'
 import { Brand, BrandResponse } from '../types/Brand'
 import autoAnimate from '@formkit/auto-animate'
 import { toast } from 'react-toastify'
-import { setIsLoading } from '../contexts/Actions'
+import { setIsLoading, setPageNumber } from '../contexts/Actions'
 import { PageSizePicker } from '../components/PageSizePicker'
 import { useStore } from '../contexts/Store'
 import { PaginationComponent } from '../components/PaginationComponent'
@@ -19,18 +19,20 @@ const getBrands = async (pageNumber: number, pageSize: number) => {
 
 export const BrandPage: FunctionComponent = () => {
   const { state, dispatch } = useStore()
-
-  const [brandResponse, setBrandResponse] = useState<BrandResponse>({
-    brands: [],
-    total_pages: 1,
-  } as BrandResponse)
+  const [brandResponse, setBrandResponse] = useState<BrandResponse | null>(null)
   const parent = useRef(null)
 
   useEffect(() => {
     const fetchBrands = async () => {
       try {
         setIsLoading(dispatch, true)
-        const brands = await getBrands(state.pageNumber, state.pageSize)
+        const brands: BrandResponse = await getBrands(
+          state.pageNumber,
+          state.pageSize
+        )
+        if (state.pageNumber > brands.total_pages / state.pageSize) {
+          setPageNumber(dispatch, 1)
+        }
         setBrandResponse(brands)
       } catch (err: any) {
         toast.error(err.message)
@@ -53,23 +55,25 @@ export const BrandPage: FunctionComponent = () => {
           <p>Page size</p>
           <PageSizePicker />
         </Col>
+        <Col md={{ span: 3, offset: 6 }}>
+          <p className="text-end">Total brands: {brandResponse?.total_pages}</p>
+          <div className="float-end">
+            <PaginationComponent
+              pageSize={state.pageSize}
+              currentPage={state.pageNumber}
+              dataLength={brandResponse?.total_pages || 20}
+            />
+          </div>
+        </Col>
       </Row>
       <Row ref={parent}>
-        {brandResponse.brands.map((brand: Brand) =>
+        {brandResponse?.brands.map((brand: Brand) =>
           brand.brand_name === '' ? null : (
             <Col key={brand.key} md={3}>
               <BrandItem brand={brand} />
             </Col>
           )
         )}
-      </Row>
-      <Row>
-        <Col className="d-flex justify-content-center" md={12}>
-          <PaginationComponent
-            currentPage={state.pageNumber}
-            totalPages={brandResponse.total_pages}
-          />
-        </Col>
       </Row>
     </Container>
   )
