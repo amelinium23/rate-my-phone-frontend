@@ -34,7 +34,7 @@ export const DetailsPage: FunctionComponent = () => {
   const [deviceDetails, setDeviceDetails] = useState<DeviceDetails>(
     {} as DeviceDetails
   )
-  const { dispatch } = useStore()
+  const { state: storeState, dispatch } = useStore()
   const { state } = useLocation()
   const { deviceName, deviceKey } = state as LocationState
   const brandName = upperFirstLetter(deviceKey.split('_')[0])
@@ -54,7 +54,7 @@ export const DetailsPage: FunctionComponent = () => {
     fetchDetails()
   }, [])
 
-  return (
+  return storeState.isLoading ? null : (
     <Container className="mt-2">
       <h5>
         {brandName} {deviceName}
