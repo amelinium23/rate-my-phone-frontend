@@ -23,7 +23,7 @@ export const ProfilePage: FunctionComponent = () => {
     setIsEditable(!isEditable)
   }
 
-  console.log(user)
+  console.debug(user)
 
   useEffect(() => {
     const fetchUser = async () => {
