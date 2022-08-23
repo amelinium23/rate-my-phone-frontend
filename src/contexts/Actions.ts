@@ -12,7 +12,6 @@ const setBrandsPageNumber = (
   pageNumber: number
 ) => dispatch({ type: 'SET_BRANDS_PAGE_NUMBER', payload: pageNumber })
 
-
 const setPhonePageSize = (dispatch: Dispatch<ActionType>, pageSize: number) =>
   dispatch({ type: 'SET_PHONE_PAGE_SIZE', payload: pageSize })
 

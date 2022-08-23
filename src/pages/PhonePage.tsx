@@ -104,16 +104,18 @@ export const PhonePage: FunctionComponent = () => {
                 onPageSizeChange={setPhonePageSize}
               />
             </Col>
-            <Col md={3}>
-              <p className="text-right">
+            <Col md={{ span: 3, offset: 6 }}>
+              <p className="text-end">
                 Total phones {phoneResponses.totalPhones}
               </p>
-              <PaginationComponent
-                currentPage={state.phonePageNumber}
-                dataLength={phoneResponses.total}
-                onPageChange={setPhonePageNumber}
-                pageSize={state.phonePageSize}
-              />
+              <div className="float-end">
+                <PaginationComponent
+                  currentPage={state.phonePageNumber}
+                  dataLength={phoneResponses.total}
+                  onPageChange={setPhonePageNumber}
+                  pageSize={state.phonePageSize}
+                />
+              </div>
             </Col>
           </Row>
           <Row>
