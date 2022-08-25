@@ -67,7 +67,7 @@ export const ProfilePage: FunctionComponent = () => {
           ) : (
             <>
               <h5>Hello, {firebaseUser?.displayName || 'stranger!'}</h5>
-              <p>NickName: {firebaseUser?.displayName || 'not provided'}</p>
+              <p>Nickname: {firebaseUser?.displayName || 'not provided'}</p>
               <p>Email: {firebaseUser?.email || 'Not provided'}</p>
               <p>
                 Is email verified:{' '}
