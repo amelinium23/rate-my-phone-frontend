@@ -7,7 +7,7 @@ import { BrowserRouter } from 'react-router-dom'
 import 'react-toastify/dist/ReactToastify.min.css'
 
 axios.defaults.baseURL = URL
-
+  
 ReactDOM.render(
   <StrictMode>
     <BrowserRouter>

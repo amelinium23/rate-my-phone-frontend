@@ -1,4 +1,4 @@
-export const validateLogin = (login: string) =>
+export const validateEmail = (login: string) =>
   /[^\s@]+@[^\s@]+.[^\s@]/.test(login)
 
 export const validatePassword = (password: string) =>

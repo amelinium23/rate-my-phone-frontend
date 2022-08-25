@@ -3,7 +3,7 @@ import { ChangeEvent, FormEvent, FunctionComponent, useState } from 'react'
 import { Login } from 'tabler-icons-react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { validatePassword, validateLogin } from '../utils/validators'
+import { validatePassword, validateEmail } from '../utils/validators'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { useStore } from '../contexts/Store'
 
@@ -59,8 +59,8 @@ export const LoginPage: FunctionComponent = () => {
                 type="email"
                 placeholder="Enter your email"
                 value={login}
-                isValid={validateLogin(login)}
-                isInvalid={!validateLogin(login)}
+                isValid={validateEmail(login)}
+                isInvalid={!validateEmail(login)}
                 onChange={handleLoginChange}
               />
             </Form.Group>
@@ -77,7 +77,7 @@ export const LoginPage: FunctionComponent = () => {
               />
             </Form.Group>
             <Button
-              disabled={!(validateLogin(login) && validatePassword(password))}
+              disabled={!(validateEmail(login) && validatePassword(password))}
               type="submit"
               variant="success"
               onClick={handleLogin}
@@ -96,8 +96,8 @@ export const LoginPage: FunctionComponent = () => {
                 type="email"
                 placeholder="Enter your email"
                 value={registerLogin}
-                isValid={validateLogin(registerLogin)}
-                isInvalid={!validateLogin(registerLogin)}
+                isValid={validateEmail(registerLogin)}
+                isInvalid={!validateEmail(registerLogin)}
                 onChange={handleRegisterLoginChange}
               />
             </Form.Group>
@@ -116,7 +116,7 @@ export const LoginPage: FunctionComponent = () => {
           <Button
             disabled={
               !(
-                validateLogin(registerLogin) &&
+                validateEmail(registerLogin) &&
                 validatePassword(registerPassword)
               )
             }
