@@ -4,7 +4,7 @@ import { Container, Row, Col } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { PhoneItem } from '../components/Items/PhoneItem'
-import { ApiPhoneResponse, Phone, PhoneResponse } from '../types/Device'
+import { Phone, PhoneResponse } from '../types/Device'
 import autoAnimate from '@formkit/auto-animate'
 import { useStore } from '../contexts/Store'
 import {
@@ -27,8 +27,6 @@ const getPhones = async (
       ? {
           params: {
             brand_key: key,
-            page_size: pageSize,
-            page_number: pageNumber,
           },
         }
       : { params: { page_size: pageSize, page_number: pageNumber } }
@@ -40,11 +38,11 @@ export const PhonePage: FunctionComponent = () => {
   const { state, dispatch } = useStore()
   const { key } = useParams()
   const parent = useRef(null)
-  const [phoneResponses, setPhoneResponses] = useState<ApiPhoneResponse>({
+  const [phoneResponses, setPhoneResponses] = useState({
     total: 300,
     totalPhones: 1,
     data: [],
-  } as ApiPhoneResponse)
+  })
 
   useEffect(() => {
     const fetchPhones = async () => {
@@ -83,13 +81,11 @@ export const PhonePage: FunctionComponent = () => {
             <h5 className="text-center">No phones found</h5>
           ) : (
             <Row>
-              {phoneResponses?.data.map((phone: PhoneResponse) =>
-                phone.device_list.map((phone: Phone) => (
-                  <Col md={3} key={phone.key}>
-                    <PhoneItem phone={phone} />
-                  </Col>
-                ))
-              )}
+              {phoneResponses?.data.map((phone: Phone) => (
+                <Col md={3} key={phone.key}>
+                  <PhoneItem phone={phone} />
+                </Col>
+              ))}
             </Row>
           )}
         </div>
