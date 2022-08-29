@@ -1,9 +1,9 @@
 import axios from 'axios'
+import autoAnimate from '@formkit/auto-animate'
 import { FunctionComponent, useState, useEffect, useRef } from 'react'
 import { Container, Row, Col, Button } from 'react-bootstrap'
 import { PostItem } from '../components/Items/PostItem'
 import { Post } from '../types/Post'
-import autoAnimate from '@formkit/auto-animate'
 import { setIsLoading } from '../contexts/Actions'
 import { toast } from 'react-toastify'
 import { useStore } from '../contexts/Store'
@@ -57,6 +57,7 @@ export const ForumPage: FunctionComponent = () => {
           </div>
         </Col>
       </Row>
+      {posts.length === 0 && <h5 className="text-center">No post found</h5>}
       {posts &&
         posts.map((post: Post) => <PostItem key={post.id} post={post} />)}
     </Container>

@@ -1,6 +1,5 @@
 import { Container, Col, Button, Form, Row } from 'react-bootstrap'
 import { ChangeEvent, FormEvent, FunctionComponent, useState } from 'react'
-import { Login } from 'tabler-icons-react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { validatePassword, validateEmail } from '../utils/validators'
@@ -82,7 +81,6 @@ export const LoginPage: FunctionComponent = () => {
               variant="success"
               onClick={handleLogin}
             >
-              <Login size={28} strokeWidth={1} color="white" />
               Sign in
             </Button>
           </Form>

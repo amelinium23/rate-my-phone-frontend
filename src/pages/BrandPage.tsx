@@ -55,7 +55,7 @@ export const BrandPage: FunctionComponent = () => {
     parent.current && autoAnimate(parent.current)
   }, [parent])
 
-  return (
+  return state.isLoading ? null : (
     <Container className="my-2">
       <h5 className="text-center">Brands</h5>
       <Row>

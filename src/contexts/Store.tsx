@@ -27,6 +27,7 @@ const initialState = {
   brandsPageSize: brandsPageSizes[0],
   isLoading: false,
   auth: auth,
+  user: null,
 }
 
 const AppContext = createContext<AppContextType>({

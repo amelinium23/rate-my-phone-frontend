@@ -8,6 +8,7 @@ export type AppStateType = {
   brandsPageSize: number
   isLoading: boolean
   auth: Auth
+  user: any
 }
 
 export type ActionType = {
