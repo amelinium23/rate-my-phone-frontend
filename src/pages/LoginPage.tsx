@@ -1,27 +1,39 @@
+import axios from 'axios'
 import { Container, Col, Button, Form, Row } from 'react-bootstrap'
 import { ChangeEvent, FormEvent, FunctionComponent, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { validatePassword, validateEmail } from '../utils/validators'
+import {
+  validatePassword,
+  validateEmail,
+} from '../components/forms/validators/validators'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { useStore } from '../contexts/Store'
+import { setUser } from '../contexts/Actions'
+
+const getUser = async (uid: string) => {
+  const res = await axios.get(`/user`, { params: { uid: uid } })
+  return res.data
+}
 
 export const LoginPage: FunctionComponent = () => {
   const navigate = useNavigate()
-  const { state } = useStore()
+  const { state, dispatch } = useStore()
   const [login, setLogin] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const [registerLogin, setRegisterLogin] = useState<string>('')
   const [registerPassword, setRegisterPassword] = useState<string>('')
+  const user = state.auth.currentUser
 
-  const handleLogin = (e: FormEvent) => {
+  const handleLogin = async (e: FormEvent) => {
     e.preventDefault()
-    signInWithEmailAndPassword(state.auth, login, password)
-      .then((user) => {
-        console.debug('Logged in user: ', user)
-        navigate('/', { replace: true })
-      })
+    await signInWithEmailAndPassword(state.auth, login, password)
+      .then(() => navigate('/', { replace: true }))
       .catch((err) => toast.error(err.message))
+    if (user) {
+      const bUser = await getUser(user.uid)
+      setUser(dispatch, bUser)
+    }
   }
 
   const onRegister = () =>

@@ -10,8 +10,8 @@ import {
 } from '../types/Device'
 import { notUsedKeysDetailsPage } from '../utils/constants'
 import '../css/DetailsPage.css'
-import { PricesContainer } from '../components/PricesContainer'
-import { PhotosContainer } from '../components/PhotosContainer'
+import { PricesContainer } from '../components/containers/PricesContainer'
+import { PhotosContainer } from '../components/containers/PhotosContainer'
 import { setIsLoading } from '../contexts/Actions'
 import { useStore } from '../contexts/Store'
 

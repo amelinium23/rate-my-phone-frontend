@@ -20,10 +20,14 @@ const setPhonePageNumber = (
   pageNumber: number
 ) => dispatch({ type: 'SET_PHONE_PAGE_NUMBER', payload: pageNumber })
 
+const setUser = (dispatch: Dispatch<ActionType>, user: any) =>
+  dispatch({ type: 'SET_USER', payload: user })
+
 export {
   setIsLoading,
   setBrandPageSize,
   setBrandsPageNumber,
   setPhonePageSize,
   setPhonePageNumber,
+  setUser,
 }

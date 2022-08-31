@@ -9,10 +9,11 @@ import { ToastContainer } from 'react-toastify'
 import { DetailsPage } from './pages/DetailsPage'
 import { LoginPage } from './pages/LoginPage'
 import { RegisterPage } from './pages/RegisterPage'
-import { Loader } from './components/Loader'
+import { Loader } from './components/Loader/Loader'
 import { ProfilePage } from './pages/ProfilePage'
 import { NewPostPage } from './pages/NewPostPage'
 import { NotFoundPage } from './pages/NotFoundPage'
+import { SearchResultPage } from './pages/SearchResultPage'
 
 export const App = () => {
   return (
@@ -33,11 +34,12 @@ export const App = () => {
               element={<DetailsPage />}
             />
           </Route>
-          <Route path="forum" element={<ForumPage />} />
-          <Route path="new-post" element={<NewPostPage />} />
+          <Route path="/forum" element={<ForumPage />} />
+          <Route path="/new-post" element={<NewPostPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/search" element={<SearchResultPage />} />
         </Routes>
         <ToastContainer
           limit={3}

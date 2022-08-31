@@ -1,5 +1,6 @@
 import { Auth } from 'firebase/auth'
 import { Dispatch } from 'react'
+import { User } from '../../types/User'
 
 export type AppStateType = {
   phonePageNumber: number
@@ -8,7 +9,7 @@ export type AppStateType = {
   brandsPageSize: number
   isLoading: boolean
   auth: Auth
-  user: any
+  user: User | null
 }
 
 export type ActionType = {

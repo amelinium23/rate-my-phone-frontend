@@ -13,11 +13,13 @@ import { Login, User, Search, Logout, Article } from 'tabler-icons-react'
 import { useStore } from '../contexts/Store'
 import { signOut } from 'firebase/auth'
 import { toast } from 'react-toastify'
+import { setUser } from '../contexts/Actions'
 
 export const Header: FunctionComponent = () => {
   const navigate = useNavigate()
-  const { state } = useStore()
+  const { state, dispatch } = useStore()
   const [searchString, setSearchString] = useState<string>('')
+  const user = state.auth.currentUser
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchString(e.target.value)
@@ -31,15 +33,19 @@ export const Header: FunctionComponent = () => {
     navigate('/profile', { replace: true })
   }
 
-  const handleLogout = () => {
-    if (state.auth.currentUser !== null) {
-      const user = state.auth.currentUser
-      signOut(state.auth)
-        .then(() => {
+  const handleLogout = async () => {
+    if (user !== null) {
+      await signOut(state.auth)
+        .then(() =>
           toast.success(`${user.displayName || user.email} logged out`)
-        })
+        )
         .catch((err) => toast.error(err.message))
+      setUser(dispatch, null)
     }
+  }
+
+  const handleSearchNavigation = () => {
+    navigate(`/search`, { state: { searchString: searchString } })
   }
 
   return (
@@ -74,7 +80,11 @@ export const Header: FunctionComponent = () => {
               value={searchString}
               onChange={handleSearch}
             />
-            <Button variant="outline-default" onClick={() => {}}>
+            <Button
+              disabled={!searchString}
+              variant="outline-default"
+              onClick={handleSearchNavigation}
+            >
               <Search size={30} color="#fff" strokeWidth={1} />
             </Button>
           </Form>
