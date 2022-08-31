@@ -1,7 +1,8 @@
 import { FunctionComponent } from 'react'
 import { Container, Image } from 'react-bootstrap'
-import { Device } from '../../types/Device'
+import { Device } from '../../../types/Device'
 import { useNavigate } from 'react-router-dom'
+import './style.css'
 
 interface DeviceItemProps {
   device: Device
@@ -31,7 +32,7 @@ export const RecommendedDeviceItem: FunctionComponent<DeviceItemProps> = ({
 
   return (
     <Container
-      className="d-flex justify-content-between py-1"
+      className="d-flex justify-content-between py-1 recommended-item"
       style={containerStyle}
       onClick={handleNavigationToDetails}
     >
