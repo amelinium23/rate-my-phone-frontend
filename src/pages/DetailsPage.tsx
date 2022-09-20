@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { FunctionComponent, useState, useEffect } from 'react'
-import { Container, Table, Row, Col } from 'react-bootstrap'
+import { Container, Table, Row, Col, Button } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import {
@@ -14,6 +14,7 @@ import { PricesContainer } from '../components/containers/PricesContainer'
 import { PhotosContainer } from '../components/containers/PhotosContainer'
 import { setIsLoading } from '../contexts/Actions'
 import { useStore } from '../contexts/Store'
+import { Share } from 'tabler-icons-react'
 
 const getDetails = async (key?: string) => {
   const response = await axios.get('/device/details', {
@@ -47,10 +48,23 @@ export const DetailsPage: FunctionComponent = () => {
     fetchDetails()
   }, [])
 
+  const handleCopyingUrl = () => {
+    const currentURL = window.location.href
+    navigator.clipboard.writeText(currentURL)
+    toast.success('URL copied to clipboard!')
+  }
+
   return storeState.isLoading ? null : (
-    <Container className="mt-2">
-      <h5>{deviceName}</h5>
-      <Row className="mt-2">
+    <Container className="my-2">
+      <Container className="my-1 p-0">
+        <h5 className="text-center">{deviceName}</h5>
+        <Container className="justify-content-center d-flex">
+          <Button variant="light" onClick={handleCopyingUrl}>
+            <Share size={20} /> Share this phone
+          </Button>
+        </Container>
+      </Container>
+      <Row className="my-2">
         <Col md={8}>
           <Table hover bordered>
             <thead>

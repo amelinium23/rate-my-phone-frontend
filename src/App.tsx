@@ -28,7 +28,7 @@ export const App = () => {
             <Route key="phones-key-route" path=":key" element={<PhonePage />} />
           </Route>
           <Route
-            path="/details/:deviceKey/:deviceName"
+            path="/details/k/:deviceKey/d/:deviceName"
             element={<DetailsPage />}
           />
           <Route path="/forum" element={<ForumPage />} />

@@ -22,7 +22,7 @@ export const RecommendedDeviceItem: FunctionComponent<DeviceItemProps> = ({
   }
 
   const handleNavigationToDetails = () => {
-    navigate(`details/${device.key}/${device.device_name}`)
+    navigate(`details/k/${device.key}/d/${device.device_name}`)
   }
 
   return (
