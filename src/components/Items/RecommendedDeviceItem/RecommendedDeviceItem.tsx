@@ -21,13 +21,8 @@ export const RecommendedDeviceItem: FunctionComponent<DeviceItemProps> = ({
     borderRadius: '1.2vh',
   }
 
-  const navigationState = {
-    deviceName: device.device_name,
-    deviceKey: device.key,
-  }
-
   const handleNavigationToDetails = () => {
-    navigate('details', { state: navigationState })
+    navigate(`details/${device.key}/${device.device_name}`)
   }
 
   return (

@@ -27,13 +27,10 @@ export const App = () => {
           <Route path="/phones" element={<PhonePage />}>
             <Route key="phones-key-route" path=":key" element={<PhonePage />} />
           </Route>
-          <Route path="/details" element={<DetailsPage />}>
-            <Route
-              key="details-key-route"
-              path=":key"
-              element={<DetailsPage />}
-            />
-          </Route>
+          <Route
+            path="/details/:deviceKey/:deviceName"
+            element={<DetailsPage />}
+          />
           <Route path="/forum" element={<ForumPage />} />
           <Route path="/new-post" element={<NewPostPage />} />
           <Route path="/login" element={<LoginPage />} />

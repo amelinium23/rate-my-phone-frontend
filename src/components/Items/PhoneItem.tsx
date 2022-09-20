@@ -12,10 +12,7 @@ export const PhoneItem: FunctionComponent<PhoneItemProps> = ({ phone }) => {
     <Card className="d-flex container justify-content-center my-2 text-center p-1">
       <p className="pt-3">{phone.device_name}</p>
       <Container className="p-0">
-        <Link
-          to="/details"
-          state={{ deviceName: phone.device_name, deviceKey: phone.key }}
-        >
+        <Link to={`/details/${phone.key}/${phone.device_name}`}>
           <Image src={phone.device_image} width={100} />
         </Link>
       </Container>

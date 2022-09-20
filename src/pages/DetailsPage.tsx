@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { FunctionComponent, useState, useEffect } from 'react'
 import { Container, Table, Row, Col } from 'react-bootstrap'
-import { useLocation } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import {
   DeviceDetails,
@@ -14,11 +14,6 @@ import { PricesContainer } from '../components/containers/PricesContainer'
 import { PhotosContainer } from '../components/containers/PhotosContainer'
 import { setIsLoading } from '../contexts/Actions'
 import { useStore } from '../contexts/Store'
-
-interface LocationState {
-  deviceName: string
-  deviceKey: string
-}
 
 const getDetails = async (key?: string) => {
   const response = await axios.get('/device/details', {
@@ -35,9 +30,7 @@ export const DetailsPage: FunctionComponent = () => {
     {} as DeviceDetails
   )
   const { state: storeState, dispatch } = useStore()
-  const { state } = useLocation()
-  const { deviceName, deviceKey } = state as LocationState
-  const brandName = upperFirstLetter(deviceKey.split('_')[0])
+  const { deviceKey, deviceName } = useParams()
 
   useEffect(() => {
     const fetchDetails = async () => {
@@ -56,9 +49,7 @@ export const DetailsPage: FunctionComponent = () => {
 
   return storeState.isLoading ? null : (
     <Container className="mt-2">
-      <h5>
-        {brandName} {deviceName}
-      </h5>
+      <h5>{deviceName}</h5>
       <Row className="mt-2">
         <Col md={8}>
           <Table hover bordered>
@@ -93,7 +84,7 @@ export const DetailsPage: FunctionComponent = () => {
         <PhotosContainer
           device_image={deviceDetails.device_image}
           pictures={deviceDetails.pictures}
-          deviceName={deviceName}
+          deviceName={deviceName ? deviceName : ''}
         />
       </Row>
       <Row className="mt-2">
