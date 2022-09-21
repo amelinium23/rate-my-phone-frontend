@@ -45,7 +45,13 @@ export const Header: FunctionComponent = () => {
   }
 
   const handleSearchNavigation = () => {
-    navigate(`/search`, { state: { searchString: searchString } })
+    navigate(`/search/q/${searchString}`)
+  }
+
+  const handleSearchKeyPress = (e: any) => {
+    if (e.key === 'Enter') {
+      handleSearchNavigation()
+    }
   }
 
   return (
@@ -79,6 +85,7 @@ export const Header: FunctionComponent = () => {
               className="pt-0 pb-0"
               value={searchString}
               onChange={handleSearch}
+              onKeyPress={handleSearchKeyPress}
             />
             <Button
               disabled={!searchString}

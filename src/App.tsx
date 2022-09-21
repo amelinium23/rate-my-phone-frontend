@@ -36,7 +36,7 @@ export const App = () => {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/search" element={<SearchResultPage />} />
+          <Route path="/search/q/:query" element={<SearchResultPage />} />
         </Routes>
         <ToastContainer
           limit={3}
