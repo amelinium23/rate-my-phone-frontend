@@ -50,13 +50,15 @@ export const ForumPage: FunctionComponent = () => {
   return (
     <Container ref={parent} className="my-2">
       <h5 className="text-center">Latest posts</h5>
-      <Row className="my-1">
-        <Col md={{ span: 2, offset: 10 }}>
-          <div className="float-end">
-            <Button onClick={handleAddingPost}>New post</Button>
-          </div>
-        </Col>
-      </Row>
+      {state.user && (
+        <Row className="my-1">
+          <Col md={{ span: 2, offset: 10 }}>
+            <div className="float-end">
+              <Button onClick={handleAddingPost}>New post</Button>
+            </div>
+          </Col>
+        </Row>
+      )}
       {posts.length === 0 && <h5 className="text-center">No post found</h5>}
       {posts &&
         posts.map((post: Post) => <PostItem key={post.id} post={post} />)}

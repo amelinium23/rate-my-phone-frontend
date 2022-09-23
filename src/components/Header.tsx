@@ -41,6 +41,7 @@ export const Header: FunctionComponent = () => {
         )
         .catch((err) => toast.error(err.message))
       setUser(dispatch, null)
+      navigate('/login', { replace: true })
     }
   }
 

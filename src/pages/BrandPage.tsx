@@ -10,10 +10,11 @@ import {
   setBrandsPageNumber,
   setBrandPageSize,
 } from '../contexts/Actions'
-import { brandsPageSizes } from '../utils/constants'
+import { brandsPageSizes, sortingModes } from '../utils/constants'
 import { PageSizePicker } from '../components/PageSizePicker'
 import { useStore } from '../contexts/Store'
 import { PaginationComponent } from '../components/PaginationComponent'
+import { SortModeSelect } from '../components/SortModeSelect'
 
 const getBrands = async (pageNumber: number, pageSize: number) => {
   const response = await axios.get('/brands', {
@@ -67,7 +68,11 @@ export const BrandPage: FunctionComponent = () => {
             onPageSizeChange={setBrandPageSize}
           />
         </Col>
-        <Col md={{ span: 3, offset: 6 }}>
+        <Col md={3}>
+          <p>Sorting mode</p>
+          <SortModeSelect sortModes={sortingModes} />
+        </Col>
+        <Col md={6}>
           <p className="text-end">Total brands: {brandResponse?.total_pages}</p>
           <div className="float-end">
             <PaginationComponent

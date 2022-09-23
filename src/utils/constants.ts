@@ -7,6 +7,8 @@ export const notUsedKeysDetailsPage = [
   'device_image',
 ]
 
+export const sortingModes = ['ascending', 'descending']
+
 export const phonesPageSizes = [10, 20, 50]
 
 export const brandsPageSizes = [20, 40, 100]
