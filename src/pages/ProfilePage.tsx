@@ -7,9 +7,8 @@ import { setIsLoading } from '../contexts/Actions'
 import { sendEmailVerification } from 'firebase/auth'
 import { EditProfileForm } from '../components/forms/EditProfileForm'
 import { User } from '../types/User'
-
-const PHOTO_URL =
-  'https://st3.depositphotos.com/1767687/16607/v/600/depositphotos_166074422-stock-illustration-default-avatar-profile-icon-grey.jpg'
+import { PHOTO_URL } from '../utils/constants'
+import { DeviceContainer } from '../components/containers/DeviceContainer'
 
 const getUserInfo = async (uid: string) => {
   const res = await axios.get('/user', { params: { uid: uid } })
@@ -30,7 +29,7 @@ export const ProfilePage: FunctionComponent = () => {
     if (firebaseUser) {
       sendEmailVerification(firebaseUser)
         .then(() =>
-          toast.info(`Sent verification email to ${firebaseUser?.email}`)
+          toast.info(`Sent verification email to ${firebaseUser.email}`)
         )
         .catch((err) => toast.error(err.message))
     }
@@ -83,10 +82,7 @@ export const ProfilePage: FunctionComponent = () => {
               Verify email
             </Button>
           )}
-          <div className="mt-2" style={{ borderTop: '0.3px solid lightgray' }}>
-            <h5 className="mt-2">Device you using</h5>
-            {!user?.device && <Button>Edit Phone</Button>}
-          </div>
+          <DeviceContainer user={user ? user : ({} as User)} />
         </Col>
         <Col md={6}>
           <h5 className="text-center">Profile picture</h5>

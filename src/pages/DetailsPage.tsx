@@ -95,11 +95,13 @@ export const DetailsPage: FunctionComponent = () => {
             </tbody>
           </Table>
         </Col>
-        <PhotosContainer
-          device_image={deviceDetails.device_image}
-          pictures={deviceDetails.pictures}
-          deviceName={deviceName ? deviceName : ''}
-        />
+        {deviceDetails.device_image && deviceDetails.pictures && (
+          <PhotosContainer
+            device_image={deviceDetails.device_image}
+            pictures={deviceDetails.pictures}
+            deviceName={deviceName ? deviceName : ''}
+          />
+        )}
       </Row>
       <Row className="mt-2">
         <Col md={8}>
