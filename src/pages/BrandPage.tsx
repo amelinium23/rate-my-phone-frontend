@@ -61,8 +61,6 @@ export const BrandPage: FunctionComponent = () => {
     fetchBrands()
   }, [state.brandsPageNumber, state.brandsPageSize, state.brandsSortMode])
 
-  console.log(state)
-
   return state.isLoading ? null : (
     <Container className="my-2">
       <h5 className="text-center">Brands</h5>
