@@ -1,6 +1,5 @@
 import axios from 'axios'
-import autoAnimate from '@formkit/auto-animate'
-import { FunctionComponent, useState, useEffect, useRef } from 'react'
+import { FunctionComponent, useState, useEffect } from 'react'
 import { Container, Row, Col, Button } from 'react-bootstrap'
 import { PostItem } from '../components/Items/PostItem'
 import { Post } from '../types/Post'
@@ -18,7 +17,6 @@ export const ForumPage: FunctionComponent = () => {
   const { state, dispatch } = useStore()
   const [posts, setPosts] = useState<Post[]>([])
   const navigate = useNavigate()
-  const parent = useRef(null)
 
   const handleAddingPost = () => {
     if (state.auth.currentUser === null) {
@@ -44,14 +42,10 @@ export const ForumPage: FunctionComponent = () => {
     fetchPosts()
   }, [])
 
-  useEffect(() => {
-    parent.current && autoAnimate(parent.current)
-  }, [parent])
-
   return (
-    <Container ref={parent} className="my-2">
+    <Container className="my-2">
       <h5 className="text-center">Latest posts</h5>
-      {state.user && (
+      {state.auth.currentUser && (
         <Row className="my-1">
           <Col md={{ span: 2, offset: 10 }}>
             <div className="float-end">

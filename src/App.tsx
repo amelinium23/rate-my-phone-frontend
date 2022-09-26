@@ -14,6 +14,7 @@ import { ProfilePage } from './pages/ProfilePage'
 import { NewPostPage } from './pages/NewPostPage'
 import { NotFoundPage } from './pages/NotFoundPage'
 import { SearchResultPage } from './pages/SearchResultPage'
+import { PostPage } from './pages/PostPage'
 
 export const App = () => {
   return (
@@ -25,7 +26,11 @@ export const App = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="/brands" element={<BrandPage />} />
           <Route path="/phones" element={<PhonePage />}>
-            <Route key="phones-key-route" path=":key" element={<PhonePage />} />
+            <Route
+              key="phones-key-route"
+              path="b/:key"
+              element={<PhonePage />}
+            />
           </Route>
           <Route
             path="/details/k/:deviceKey/d/:deviceName"
@@ -37,6 +42,7 @@ export const App = () => {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/search/q/:query" element={<SearchResultPage />} />
+          <Route path="/post/p/:id" element={<PostPage />} />
         </Routes>
         <ToastContainer
           limit={3}

@@ -1,21 +1,28 @@
-import { ChangeEvent, FunctionComponent, useState } from 'react'
+import { Dispatch, FunctionComponent, ChangeEvent } from 'react'
 import { Form } from 'react-bootstrap'
+import { useStore } from '../contexts/Store'
+import { ActionType } from '../contexts/types/StoreTypes'
 
 interface SortModeSelectProps {
+  sortMode: string
   sortModes: string[]
+  onSortModeChange: (dispatch: Dispatch<ActionType>, sortMode: string) => void
 }
 
 export const SortModeSelect: FunctionComponent<SortModeSelectProps> = ({
+  sortMode,
   sortModes,
+  onSortModeChange,
 }) => {
-  const [sortingMode, setSortingMode] = useState(sortModes[0])
+  const { dispatch } = useStore()
 
-  const onSortModeChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setSortingMode(e.target.value)
+  const handleSortModeChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    const sortMode = e.target.value
+    onSortModeChange(dispatch, sortMode)
   }
 
   return (
-    <Form.Select size="sm" value={sortingMode} onChange={onSortModeChange}>
+    <Form.Select size="sm" value={sortMode} onChange={handleSortModeChange}>
       {sortModes.map((sortMode: string) => (
         <option key={sortMode}>
           {sortMode.charAt(0).toLocaleUpperCase() + sortMode.slice(1)}

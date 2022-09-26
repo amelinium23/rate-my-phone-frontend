@@ -1,11 +1,10 @@
 import axios from 'axios'
-import { FunctionComponent, useEffect, useState, useRef } from 'react'
+import { FunctionComponent, useEffect, useState } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { PhoneItem } from '../components/Items/PhoneItem'
 import { Phone, PhoneResponse } from '../types/Device'
-import autoAnimate from '@formkit/auto-animate'
 import { useStore } from '../contexts/Store'
 import {
   setIsLoading,
@@ -37,7 +36,6 @@ const getPhones = async (
 export const PhonePage: FunctionComponent = () => {
   const { state, dispatch } = useStore()
   const { key } = useParams()
-  const parent = useRef(null)
   const [phoneResponses, setPhoneResponses] = useState({
     total: 300,
     totalPhones: 1,
@@ -64,12 +62,8 @@ export const PhonePage: FunctionComponent = () => {
     fetchPhones()
   }, [state.phonePageSize, state.phonePageNumber])
 
-  useEffect(() => {
-    parent.current && autoAnimate(parent.current)
-  }, [parent])
-
   return state.isLoading ? null : (
-    <Container ref={parent} className="mt-2">
+    <Container className="mt-2">
       <h5 key="header-page-phone" className="text-center">
         Phones
       </h5>

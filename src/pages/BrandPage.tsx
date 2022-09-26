@@ -1,14 +1,14 @@
 import axios from 'axios'
-import { FunctionComponent, useState, useEffect, useRef } from 'react'
+import { FunctionComponent, useState, useEffect } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import { BrandItem } from '../components/Items/BrandItem'
 import { Brand, BrandResponse } from '../types/Brand'
-import autoAnimate from '@formkit/auto-animate'
 import { toast } from 'react-toastify'
 import {
   setIsLoading,
   setBrandsPageNumber,
   setBrandPageSize,
+  setBrandSortMode,
 } from '../contexts/Actions'
 import { brandsPageSizes, sortingModes } from '../utils/constants'
 import { PageSizePicker } from '../components/PageSizePicker'
@@ -16,9 +16,17 @@ import { useStore } from '../contexts/Store'
 import { PaginationComponent } from '../components/PaginationComponent'
 import { SortModeSelect } from '../components/SortModeSelect'
 
-const getBrands = async (pageNumber: number, pageSize: number) => {
+const getBrands = async (
+  pageNumber: number,
+  pageSize: number,
+  sortMode: string
+) => {
   const response = await axios.get('/brands', {
-    params: { page_number: pageNumber, page_size: pageSize },
+    params: {
+      page_number: pageNumber,
+      page_size: pageSize,
+      sort_mode: sortMode.toLowerCase(),
+    },
   })
   return response.data
 }
@@ -26,7 +34,6 @@ const getBrands = async (pageNumber: number, pageSize: number) => {
 export const BrandPage: FunctionComponent = () => {
   const { state, dispatch } = useStore()
   const [brandResponse, setBrandResponse] = useState<BrandResponse | null>(null)
-  const parent = useRef(null)
 
   useEffect(() => {
     const fetchBrands = async () => {
@@ -34,7 +41,8 @@ export const BrandPage: FunctionComponent = () => {
         setIsLoading(dispatch, true)
         const brands: BrandResponse = await getBrands(
           state.brandsPageNumber,
-          state.brandsPageSize
+          state.brandsPageSize,
+          state.brandsSortMode
         )
         if (
           state.brandsPageNumber >
@@ -51,11 +59,9 @@ export const BrandPage: FunctionComponent = () => {
       }
     }
     fetchBrands()
-  }, [state.brandsPageNumber, state.brandsPageSize])
+  }, [state.brandsPageNumber, state.brandsPageSize, state.brandsSortMode])
 
-  useEffect(() => {
-    parent.current && autoAnimate(parent.current)
-  }, [parent])
+  console.log(state)
 
   return state.isLoading ? null : (
     <Container className="my-2">
@@ -71,7 +77,11 @@ export const BrandPage: FunctionComponent = () => {
         </Col>
         <Col md={3}>
           <p>Sorting mode</p>
-          <SortModeSelect sortModes={sortingModes} />
+          <SortModeSelect
+            sortMode={state.brandsSortMode}
+            sortModes={sortingModes}
+            onSortModeChange={setBrandSortMode}
+          />
         </Col>
         <Col md={6}>
           <p className="text-end">Total brands: {brandResponse?.total_pages}</p>

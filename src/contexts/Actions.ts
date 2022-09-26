@@ -1,4 +1,5 @@
 import { Dispatch } from 'react'
+import { User } from '../types/User'
 import { ActionType } from './types/StoreTypes'
 
 const setIsLoading = (dispatch: Dispatch<ActionType>, isLoading: boolean) =>
@@ -20,8 +21,11 @@ const setPhonePageNumber = (
   pageNumber: number
 ) => dispatch({ type: 'SET_PHONE_PAGE_NUMBER', payload: pageNumber })
 
-const setUser = (dispatch: Dispatch<ActionType>, user: any) =>
+const setUser = (dispatch: Dispatch<ActionType>, user: User) =>
   dispatch({ type: 'SET_USER', payload: user })
+
+const setBrandSortMode = (dispatch: Dispatch<ActionType>, sortMode: string) =>
+  dispatch({ type: 'SET_BRANDS_SORTING_MODE', payload: sortMode })
 
 export {
   setIsLoading,
@@ -30,4 +34,5 @@ export {
   setPhonePageSize,
   setPhonePageNumber,
   setUser,
+  setBrandSortMode,
 }

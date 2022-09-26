@@ -39,13 +39,18 @@ export const PostItem: FunctionComponent<PostItemProps> = ({ post }) => {
         {state.auth.currentUser && (
           <>
             <Button
+              style={{ marginRight: '5px' }}
               onClick={() => upVotePost(post)}
-              className="me-1"
+              size="sm"
               variant="outline-light"
             >
               <ArrowBigTop size={15} stroke="black" />
             </Button>
-            <Button onClick={() => downVotePost(post)} variant="outline-light">
+            <Button
+              onClick={() => downVotePost(post)}
+              size="sm"
+              variant="outline-light"
+            >
               <ArrowBigDown size={15} stroke="black" />
             </Button>
           </>

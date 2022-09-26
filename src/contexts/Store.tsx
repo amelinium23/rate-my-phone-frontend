@@ -10,7 +10,11 @@ import { ActionType, AppContextType, AppStateType } from './types/StoreTypes'
 import { appReducer } from './reducers/AppReducer'
 import { initializeApp } from 'firebase/app'
 import { getAuth } from 'firebase/auth'
-import { brandsPageSizes, phonesPageSizes } from '../utils/constants'
+import {
+  brandsPageSizes,
+  phonesPageSizes,
+  sortingModes,
+} from '../utils/constants'
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -25,6 +29,7 @@ const initialState = {
   phonePageSize: phonesPageSizes[0],
   brandsPageNumber: 1,
   brandsPageSize: brandsPageSizes[0],
+  brandsSortMode: sortingModes[0],
   isLoading: false,
   auth: auth,
   user: null,

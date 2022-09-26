@@ -35,6 +35,11 @@ export const appReducer = (
         ...state,
         user: action.payload,
       }
+    case 'SET_BRANDS_SORTING_MODE':
+      return {
+        ...state,
+        brandsSortMode: action.payload,
+      }
     default:
       return state
   }

@@ -7,6 +7,7 @@ export type AppStateType = {
   phonePageSize: number
   brandsPageNumber: number
   brandsPageSize: number
+  brandsSortMode: string
   isLoading: boolean
   auth: Auth
   user: User | null

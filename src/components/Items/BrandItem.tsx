@@ -11,7 +11,7 @@ export const BrandItem: FunctionComponent<BrandItemProps> = ({ brand }) => {
   return (
     <Card className="d-flex justify-content-center my-2 text-center">
       <p className="pt-3">
-        <Link className="nav-link" to={`/phones/${brand.key}`}>
+        <Link className="nav-link" to={`/phones/b/${brand.key}`}>
           {brand.brand_name}
         </Link>
       </p>
