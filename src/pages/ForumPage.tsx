@@ -34,8 +34,9 @@ export const ForumPage: FunctionComponent = () => {
         setIsLoading(dispatch, true)
         const posts: Post[] = await getPosts()
         setPosts(posts)
-      } catch (err: any) {
-        toast.error(err.message)
+      } catch (err) {
+        const er = err as Error
+        toast.error(er.message)
       } finally {
         setIsLoading(dispatch, false)
       }

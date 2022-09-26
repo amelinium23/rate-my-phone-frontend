@@ -68,9 +68,13 @@ export const RegisterPage: FunctionComponent = () => {
       toast.info(`Registered ${res.display_name}`)
       signInWithEmailAndPassword(state.auth, email, registerPassword)
         .then(() => navigate('/', { replace: true }))
-        .catch((err: any) => toast.error(err.message))
-    } catch (e: any) {
-      toast.error(e.message)
+        .catch((err) => {
+          const er = err as Error
+          toast.error(er.message)
+        })
+    } catch (e) {
+      const er = e as Error
+      toast.error(er.message)
     }
   }
 

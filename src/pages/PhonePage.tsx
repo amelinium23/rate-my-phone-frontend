@@ -54,8 +54,9 @@ export const PhonePage: FunctionComponent = () => {
           key
         )
         setPhoneResponses(res)
-      } catch (error: any) {
-        toast.error(error.message)
+      } catch (error) {
+        const er = error as Error
+        toast.error(er.message)
       } finally {
         setIsLoading(dispatch, false)
       }

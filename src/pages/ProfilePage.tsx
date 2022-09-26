@@ -43,8 +43,9 @@ export const ProfilePage: FunctionComponent = () => {
           const data = await getUserInfo(firebaseUser.uid)
           setUser(data)
         }
-      } catch (error: any) {
-        toast.error(error.message)
+      } catch (error) {
+        const er = error as Error
+        toast.error(er.message)
       } finally {
         setIsLoading(dispatch, false)
       }

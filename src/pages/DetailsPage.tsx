@@ -39,8 +39,9 @@ export const DetailsPage: FunctionComponent = () => {
         setIsLoading(dispatch, true)
         const details = await getDetails(deviceKey)
         setDeviceDetails(details)
-      } catch (err: any) {
-        toast.error(err.message)
+      } catch (err) {
+        const er = err as Error
+        toast.error(er.message)
       } finally {
         setIsLoading(dispatch, false)
       }
