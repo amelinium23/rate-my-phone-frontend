@@ -41,7 +41,7 @@ export const SearchResultPage: FunctionComponent = () => {
       <h5 className="text-center">Search result</h5>
       <Row>
         {Object.entries(searchResults).map(([key, value]) => {
-          let title = key.charAt(0).toUpperCase() + key.slice(1)
+          const title = key.charAt(0).toUpperCase() + key.slice(1)
           return (
             <>
               <h5 key={title}>{title.replace('_', ' ')}</h5>
