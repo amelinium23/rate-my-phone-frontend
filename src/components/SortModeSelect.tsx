@@ -1,12 +1,12 @@
 import { Dispatch, FunctionComponent, ChangeEvent } from 'react'
 import { Form } from 'react-bootstrap'
 import { useStore } from '../contexts/Store'
-import { ActionType } from '../contexts/types/StoreTypes'
+import { Action } from '../contexts/types/StoreTypes'
 
 interface SortModeSelectProps {
   sortMode: string
   sortModes: string[]
-  onSortModeChange: (dispatch: Dispatch<ActionType>, sortMode: string) => void
+  onSortModeChange: (dispatch: Dispatch<Action>, sortMode: string) => void
 }
 
 export const SortModeSelect: FunctionComponent<SortModeSelectProps> = ({

@@ -1,9 +1,6 @@
-import { AppStateType, ActionType } from '../types/StoreTypes'
+import { State, Action } from '../types/StoreTypes'
 
-export const appReducer = (
-  state: AppStateType,
-  action: ActionType
-): AppStateType => {
+export const appReducer = (state: State, action: Action): State => {
   switch (action.type) {
     case 'SET_BRANDS_PAGE_NUMBER':
       return {

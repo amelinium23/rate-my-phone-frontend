@@ -6,7 +6,7 @@ import {
   useEffect,
   useReducer,
 } from 'react'
-import { ActionType, AppContextType, AppStateType } from './types/StoreTypes'
+import { Action, Context, State } from './types/StoreTypes'
 import { appReducer } from './reducers/AppReducer'
 import { initializeApp } from 'firebase/app'
 import { getAuth } from 'firebase/auth'
@@ -35,19 +35,25 @@ const initialState = {
   user: null,
 }
 
-const AppContext = createContext<AppContextType>({
+const AppContext = createContext<Context>({
   state: initialState,
-  dispatch: (action: ActionType) => appReducer(initialState, action),
+  dispatch: (action: Action) => appReducer(initialState, action),
 })
 
-const useStore = () => useContext(AppContext)
+const useStore = () => {
+  const { state, dispatch } = useContext(AppContext)
+  if (state === undefined || dispatch === undefined) {
+    throw new Error('useCount must be used within a CountProvider')
+  }
+  return { state, dispatch }
+}
 
 interface IProps {
   children: ReactNode
 }
 
 const Store: FunctionComponent<IProps> = ({ children }) => {
-  const [state, dispatch] = useReducer(appReducer, initialState as AppStateType)
+  const [state, dispatch] = useReducer(appReducer, initialState as State)
   const value = { state, dispatch }
 
   useEffect(() => {

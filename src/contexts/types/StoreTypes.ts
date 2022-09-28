@@ -2,7 +2,7 @@ import { Auth } from 'firebase/auth'
 import { Dispatch } from 'react'
 import { User } from '../../types/User'
 
-export type AppStateType = {
+export type State = {
   phonePageNumber: number
   phonePageSize: number
   brandsPageNumber: number
@@ -13,12 +13,12 @@ export type AppStateType = {
   user: User | null
 }
 
-export type ActionType = {
+export type Action = {
   type: string
   payload?: any
 }
 
-export interface AppContextType {
-  state: AppStateType
-  dispatch: Dispatch<ActionType>
+export interface Context {
+  state: State
+  dispatch: Dispatch<Action>
 }

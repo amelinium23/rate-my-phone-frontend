@@ -1,13 +1,13 @@
 import { Dispatch, FunctionComponent } from 'react'
 import { Pagination } from 'react-bootstrap'
 import { useStore } from '../contexts/Store'
-import { ActionType } from '../contexts/types/StoreTypes'
+import { Action } from '../contexts/types/StoreTypes'
 
 interface PaginationComponentProps {
   currentPage: number
   dataLength: number
   pageSize: number
-  onPageChange: (dispatch: Dispatch<ActionType>, pageNumber: number) => void
+  onPageChange: (dispatch: Dispatch<Action>, pageNumber: number) => void
 }
 
 export const PaginationComponent: FunctionComponent<
