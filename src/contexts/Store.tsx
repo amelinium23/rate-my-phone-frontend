@@ -1,3 +1,4 @@
+import axios from 'axios'
 import {
   createContext,
   FunctionComponent,
@@ -15,6 +16,7 @@ import {
   phonesPageSizes,
   sortingModes,
 } from '../utils/constants'
+import { setUser } from './Actions'
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -57,7 +59,19 @@ const Store: FunctionComponent<IProps> = ({ children }) => {
   const value = { state, dispatch }
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      const uid = user?.uid
+      const getUserInfo = async (uid: string) => {
+        const res = await axios.get('/user', { params: { uid: uid } })
+        return res.data
+      }
+      if (uid !== undefined) {
+        getUserInfo(uid)
+          .then((data) => {
+            setUser(dispatch, data)
+          })
+          .catch((err) => console.log(err))
+      }
       return setTimeout(() => auth.signOut(), 10800000)
     })
     return unsubscribe
