@@ -51,7 +51,7 @@ export const ProfilePage: FunctionComponent = () => {
       }
     }
     fetchUser()
-  }, [])
+  }, [state.user])
 
   return (
     <Container className="my-2">

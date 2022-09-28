@@ -12,6 +12,8 @@ import { toast } from 'react-toastify'
 import { setIsLoading } from '../contexts/Actions'
 import { useStore } from '../contexts/Store'
 import { ApiPhoneResponse, Device, PhoneResponse } from '../types/Device'
+import { setUser } from '../contexts/Actions'
+import { User } from '../types/User'
 
 const getDevices = async () => {
   const res = await axios.get('/device')
@@ -66,6 +68,7 @@ export const PhoneAutoComplete: FunctionComponent<PhoneAutoCompleteProps> = ({
       try {
         setIsLoading(dispatch, true)
         const res = await changeDevice(selectedDevice, uid)
+        setUser(dispatch, { ...state.user, device: res } as User)
         toast.success(res)
         setIsEditing(false)
       } catch (e) {
