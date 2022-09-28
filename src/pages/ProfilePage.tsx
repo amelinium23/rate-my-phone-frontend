@@ -1,6 +1,6 @@
 import axios from 'axios'
-import { FunctionComponent, useState, useEffect } from 'react'
-import { Container, Row, Col, Button, Image } from 'react-bootstrap'
+import { FunctionComponent, useEffect, useState } from 'react'
+import { Button, Col, Container, Image, Row } from 'react-bootstrap'
 import { toast } from 'react-toastify'
 import { useStore } from '../contexts/Store'
 import { setIsLoading } from '../contexts/Actions'

@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react'
-import { Col, Container, Row, Image } from 'react-bootstrap'
+import { Col, Container, Image, Row } from 'react-bootstrap'
 
 interface PhotosContainerProps {
   device_image: string

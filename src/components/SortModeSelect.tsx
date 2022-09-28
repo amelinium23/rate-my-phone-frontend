@@ -1,4 +1,4 @@
-import { Dispatch, FunctionComponent, ChangeEvent } from 'react'
+import { ChangeEvent, Dispatch, FunctionComponent } from 'react'
 import { Form } from 'react-bootstrap'
 import { useStore } from '../contexts/Store'
 import { Action } from '../contexts/types/StoreTypes'

@@ -37,7 +37,7 @@ export const DeviceContainer: FunctionComponent<DeviceContainerProps> = ({
           />
         </Container>
       )}
-      <Button onClick={handleEdit}>Edit Phone</Button>
+      {isEditing ? null : <Button onClick={handleEdit}>Edit Phone</Button>}
     </section>
   )
 }

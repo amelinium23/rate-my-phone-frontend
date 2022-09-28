@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { useState, useEffect, FunctionComponent } from 'react'
+import { FunctionComponent, useEffect, useState } from 'react'
 import { Container, Row } from 'react-bootstrap'
 import { toast } from 'react-toastify'
 import { RecommendedDeviceList } from '../components/RecommendedDeviceList'

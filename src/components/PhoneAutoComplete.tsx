@@ -1,11 +1,11 @@
 import axios from 'axios'
 import {
-  FunctionComponent,
-  useState,
-  useEffect,
   ChangeEvent,
   Dispatch,
+  FunctionComponent,
   SetStateAction,
+  useEffect,
+  useState,
 } from 'react'
 import { Form } from 'react-bootstrap'
 import { toast } from 'react-toastify'
@@ -20,7 +20,7 @@ const getDevices = async () => {
   return res.data
 }
 
-const changeDevice = async (phone: Device, uid: string) => {
+const changeUserDevice = async (phone: Device, uid: string) => {
   const res = await axios.put('/user/device', { uid: uid, device: phone })
   return res.data
 }
@@ -67,7 +67,7 @@ export const PhoneAutoComplete: FunctionComponent<PhoneAutoCompleteProps> = ({
     if (uid && selectedDevice) {
       try {
         setIsLoading(dispatch, true)
-        const res = await changeDevice(selectedDevice, uid)
+        const res = await changeUserDevice(selectedDevice, uid)
         setUser(dispatch, { ...state.user, device: res } as User)
         toast.success(res)
         setIsEditing(false)

@@ -1,11 +1,11 @@
 import axios from 'axios'
-import { Container, Col, Button, Form, Row } from 'react-bootstrap'
+import { Button, Col, Container, Form, Row } from 'react-bootstrap'
 import { ChangeEvent, FormEvent, FunctionComponent, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import {
-  validatePassword,
   validateEmail,
+  validatePassword,
 } from '../components/forms/validators/validators'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { useStore } from '../contexts/Store'

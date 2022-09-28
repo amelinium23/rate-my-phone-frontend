@@ -1,8 +1,8 @@
 import axios from 'axios'
 import { FunctionComponent } from 'react'
-import { Card, Container, Button } from 'react-bootstrap'
+import { Button, Card, Container } from 'react-bootstrap'
 import { Post } from '../../types/Post'
-import { ArrowBigTop, ArrowBigDown } from 'tabler-icons-react'
+import { ArrowBigDown, ArrowBigTop } from 'tabler-icons-react'
 import { useStore } from '../../contexts/Store'
 
 interface PostItemProps {

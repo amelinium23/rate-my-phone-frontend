@@ -1,6 +1,6 @@
 import axios from 'axios'
-import { FunctionComponent, useState, useEffect } from 'react'
-import { Container, Row, Col, Button } from 'react-bootstrap'
+import { FunctionComponent, useEffect, useState } from 'react'
+import { Button, Col, Container, Row } from 'react-bootstrap'
 import { PostItem } from '../components/Items/PostItem'
 import { Post } from '../types/Post'
 import { setIsLoading } from '../contexts/Actions'

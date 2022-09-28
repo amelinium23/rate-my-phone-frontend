@@ -1,14 +1,14 @@
 import axios from 'axios'
-import { FunctionComponent, useState, useEffect } from 'react'
-import { Container, Row, Col } from 'react-bootstrap'
+import { FunctionComponent, useEffect, useState } from 'react'
+import { Col, Container, Row } from 'react-bootstrap'
 import { BrandItem } from '../components/Items/BrandItem'
 import { Brand, BrandResponse } from '../types/Brand'
 import { toast } from 'react-toastify'
 import {
-  setIsLoading,
-  setBrandsPageNumber,
   setBrandPageSize,
   setBrandSortMode,
+  setBrandsPageNumber,
+  setIsLoading,
 } from '../contexts/Actions'
 import { brandsPageSizes, sortingModes } from '../utils/constants'
 import { PageSizePicker } from '../components/PageSizePicker'

@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { FunctionComponent, useEffect, useState } from 'react'
-import { Container, Col, Row } from 'react-bootstrap'
+import { Col, Container, Row } from 'react-bootstrap'
 import { useParams } from 'react-router'
 import { toast } from 'react-toastify'
 import { NewsItem } from '../components/Items/NewsItem'
