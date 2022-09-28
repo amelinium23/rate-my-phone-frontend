@@ -1,5 +1,6 @@
 import { FunctionComponent } from 'react'
 import { Card } from 'react-bootstrap'
+
 import { News } from '../../types/SearchResult'
 
 interface NewsItemProps {

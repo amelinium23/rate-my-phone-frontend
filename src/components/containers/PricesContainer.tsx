@@ -1,5 +1,6 @@
 import { FunctionComponent } from 'react'
 import { Row } from 'react-bootstrap'
+
 import { PriceDetails } from '../../types/Device'
 import { PriceItem } from '../Items/PriceItem'
 

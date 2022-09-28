@@ -1,20 +1,22 @@
+import '../css/DetailsPage.css'
+
 import axios from 'axios'
 import { FunctionComponent, useEffect, useState } from 'react'
 import { Button, Col, Container, Row, Table } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import { Share } from 'tabler-icons-react'
+
+import { PhotosContainer } from '../components/containers/PhotosContainer'
+import { PricesContainer } from '../components/containers/PricesContainer'
+import { setIsLoading } from '../contexts/Actions'
+import { useStore } from '../contexts/Store'
 import {
   DeviceDetails,
   MoreSpecification,
   SpecificationDetails,
 } from '../types/Device'
 import { notUsedKeysDetailsPage } from '../utils/constants'
-import '../css/DetailsPage.css'
-import { PricesContainer } from '../components/containers/PricesContainer'
-import { PhotosContainer } from '../components/containers/PhotosContainer'
-import { setIsLoading } from '../contexts/Actions'
-import { useStore } from '../contexts/Store'
-import { Share } from 'tabler-icons-react'
 
 const getDetails = async (key?: string) => {
   const response = await axios.get('/device/details', {

@@ -9,10 +9,11 @@ import {
 } from 'react'
 import { Form } from 'react-bootstrap'
 import { toast } from 'react-toastify'
+
 import { setIsLoading } from '../contexts/Actions'
+import { setUser } from '../contexts/Actions'
 import { useStore } from '../contexts/Store'
 import { ApiPhoneResponse, Device, PhoneResponse } from '../types/Device'
-import { setUser } from '../contexts/Actions'
 import { User } from '../types/User'
 
 const getDevices = async () => {

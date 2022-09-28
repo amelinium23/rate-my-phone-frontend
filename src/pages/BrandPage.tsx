@@ -1,20 +1,21 @@
 import axios from 'axios'
 import { FunctionComponent, useEffect, useState } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
-import { BrandItem } from '../components/Items/BrandItem'
-import { Brand, BrandResponse } from '../types/Brand'
 import { toast } from 'react-toastify'
+
+import { BrandItem } from '../components/Items/BrandItem'
+import { PageSizePicker } from '../components/PageSizePicker'
+import { PaginationComponent } from '../components/PaginationComponent'
+import { SortModeSelect } from '../components/SortModeSelect'
 import {
   setBrandPageSize,
   setBrandSortMode,
   setBrandsPageNumber,
   setIsLoading,
 } from '../contexts/Actions'
-import { brandsPageSizes, sortingModes } from '../utils/constants'
-import { PageSizePicker } from '../components/PageSizePicker'
 import { useStore } from '../contexts/Store'
-import { PaginationComponent } from '../components/PaginationComponent'
-import { SortModeSelect } from '../components/SortModeSelect'
+import { Brand, BrandResponse } from '../types/Brand'
+import { brandsPageSizes, sortingModes } from '../utils/constants'
 
 const getBrands = async (
   pageNumber: number,

@@ -1,12 +1,13 @@
 import axios from 'axios'
 import { FunctionComponent, useEffect, useState } from 'react'
 import { Button, Col, Container, Row } from 'react-bootstrap'
-import { PostItem } from '../components/Items/PostItem'
-import { Post } from '../types/Post'
-import { setIsLoading } from '../contexts/Actions'
-import { toast } from 'react-toastify'
-import { useStore } from '../contexts/Store'
 import { useNavigate } from 'react-router'
+import { toast } from 'react-toastify'
+
+import { PostItem } from '../components/Items/PostItem'
+import { setIsLoading } from '../contexts/Actions'
+import { useStore } from '../contexts/Store'
+import { Post } from '../types/Post'
 
 const getPosts = async () => {
   const res = await axios.get('/forum')

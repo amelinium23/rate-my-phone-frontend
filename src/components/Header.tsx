@@ -1,3 +1,4 @@
+import { signOut } from 'firebase/auth'
 import { ChangeEvent, FunctionComponent, useState } from 'react'
 import {
   Button,
@@ -5,15 +6,15 @@ import {
   Form,
   Image,
   Nav,
-  NavDropdown,
   Navbar,
+  NavDropdown,
 } from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom'
-import { Article, Login, Logout, Search, User } from 'tabler-icons-react'
-import { useStore } from '../contexts/Store'
-import { signOut } from 'firebase/auth'
 import { toast } from 'react-toastify'
+import { Article, Login, Logout, Search, User } from 'tabler-icons-react'
+
 import { setUser } from '../contexts/Actions'
+import { useStore } from '../contexts/Store'
 
 export const Header: FunctionComponent = () => {
   const navigate = useNavigate()

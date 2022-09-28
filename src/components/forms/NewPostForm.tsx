@@ -3,6 +3,7 @@ import { ChangeEvent, FunctionComponent, useState } from 'react'
 import { Button, Col, Container, Form, Row } from 'react-bootstrap'
 import { useNavigate } from 'react-router'
 import { toast } from 'react-toastify'
+
 import { useStore } from '../../contexts/Store'
 
 const createNewPost = async (

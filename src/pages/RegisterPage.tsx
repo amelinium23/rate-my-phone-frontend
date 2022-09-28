@@ -1,9 +1,10 @@
 import axios from 'axios'
-import { Button, Col, Container, Form, Image, Row } from 'react-bootstrap'
+import { signInWithEmailAndPassword } from 'firebase/auth'
 import { ChangeEvent, FunctionComponent, useState } from 'react'
+import { Button, Col, Container, Form, Image, Row } from 'react-bootstrap'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { signInWithEmailAndPassword } from 'firebase/auth'
+
 import { useStore } from '../contexts/Store'
 
 const backgroundImageUrl =

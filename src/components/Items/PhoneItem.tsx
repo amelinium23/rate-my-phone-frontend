@@ -1,7 +1,8 @@
 import { FunctionComponent } from 'react'
 import { Card, Container, Image } from 'react-bootstrap'
-import { Device } from '../../types/Device'
 import { Link } from 'react-router-dom'
+
+import { Device } from '../../types/Device'
 
 interface PhoneItemProps {
   device: Device

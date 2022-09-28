@@ -1,7 +1,8 @@
 import { FunctionComponent, useState } from 'react'
 import { Button, Container } from 'react-bootstrap'
-import { User } from '../../types/User'
+
 import { Device } from '../../types/Device'
+import { User } from '../../types/User'
 import { PhoneItem } from '../Items/PhoneItem'
 import { PhoneAutoComplete } from '../PhoneAutoComplete'
 

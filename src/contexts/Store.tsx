@@ -1,22 +1,23 @@
 import axios from 'axios'
+import { initializeApp } from 'firebase/app'
+import { getAuth } from 'firebase/auth'
 import {
+  createContext,
   FunctionComponent,
   ReactNode,
-  createContext,
   useContext,
   useEffect,
   useReducer,
 } from 'react'
-import { Action, Context, State } from './types/StoreTypes'
-import { appReducer } from './reducers/AppReducer'
-import { initializeApp } from 'firebase/app'
-import { getAuth } from 'firebase/auth'
+
 import {
   brandsPageSizes,
   phonesPageSizes,
   sortingModes,
 } from '../utils/constants'
 import { setUser } from './Actions'
+import { appReducer } from './reducers/AppReducer'
+import { Action, Context, State } from './types/StoreTypes'
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -80,4 +81,4 @@ const Store: FunctionComponent<IProps> = ({ children }) => {
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>
 }
 
-export { useStore, Store }
+export { Store, useStore }

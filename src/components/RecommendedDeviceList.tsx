@@ -1,7 +1,8 @@
 import { FunctionComponent } from 'react'
 import { Col } from 'react-bootstrap'
-import { RecommendedDevices } from '../types/RecommendedDevice'
+
 import { Device } from '../types/Device'
+import { RecommendedDevices } from '../types/RecommendedDevice'
 import { RecommendedDeviceItem } from './Items/RecommendedDeviceItem/RecommendedDeviceItem'
 
 interface RecommendedDeviceListProps {

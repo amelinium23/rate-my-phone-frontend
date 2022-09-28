@@ -2,6 +2,7 @@ import axios from 'axios'
 import { FunctionComponent, useEffect, useState } from 'react'
 import { Container, Row } from 'react-bootstrap'
 import { toast } from 'react-toastify'
+
 import { RecommendedDeviceList } from '../components/RecommendedDeviceList'
 import { setIsLoading } from '../contexts/Actions'
 import { useStore } from '../contexts/Store'

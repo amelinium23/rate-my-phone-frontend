@@ -1,5 +1,6 @@
 import { Auth } from 'firebase/auth'
 import { Dispatch } from 'react'
+
 import { User } from '../../types/User'
 
 export type State = {

@@ -1,14 +1,15 @@
 import axios from 'axios'
+import { sendEmailVerification } from 'firebase/auth'
 import { FunctionComponent, useEffect, useState } from 'react'
 import { Button, Col, Container, Image, Row } from 'react-bootstrap'
 import { toast } from 'react-toastify'
-import { useStore } from '../contexts/Store'
-import { setIsLoading } from '../contexts/Actions'
-import { sendEmailVerification } from 'firebase/auth'
+
+import { DeviceContainer } from '../components/containers/DeviceContainer'
 import { EditProfileForm } from '../components/forms/EditProfileForm'
+import { setIsLoading } from '../contexts/Actions'
+import { useStore } from '../contexts/Store'
 import { User } from '../types/User'
 import { PHOTO_URL } from '../utils/constants'
-import { DeviceContainer } from '../components/containers/DeviceContainer'
 
 const getUserInfo = async (uid: string) => {
   const res = await axios.get('/user', { params: { uid: uid } })

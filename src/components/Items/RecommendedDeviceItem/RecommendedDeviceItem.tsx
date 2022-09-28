@@ -1,8 +1,10 @@
+import './style.css'
+
 import { FunctionComponent } from 'react'
 import { Container, Image } from 'react-bootstrap'
-import { Device } from '../../../types/Device'
 import { useNavigate } from 'react-router-dom'
-import './style.css'
+
+import { Device } from '../../../types/Device'
 
 interface DeviceItemProps {
   device: Device

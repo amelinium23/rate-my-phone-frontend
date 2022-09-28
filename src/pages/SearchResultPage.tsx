@@ -3,6 +3,7 @@ import { FunctionComponent, useEffect, useState } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import { useParams } from 'react-router'
 import { toast } from 'react-toastify'
+
 import { NewsItem } from '../components/Items/NewsItem'
 import { ReviewItem } from '../components/Items/ReviewItem'
 import { setIsLoading } from '../contexts/Actions'

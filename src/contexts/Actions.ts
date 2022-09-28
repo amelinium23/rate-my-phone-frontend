@@ -1,4 +1,5 @@
 import { Dispatch } from 'react'
+
 import { User } from '../types/User'
 import { Action } from './types/StoreTypes'
 
@@ -24,11 +25,11 @@ const setBrandSortMode = (dispatch: Dispatch<Action>, sortMode: string) =>
   dispatch({ type: 'SET_BRANDS_SORTING_MODE', payload: sortMode })
 
 export {
-  setIsLoading,
   setBrandPageSize,
-  setBrandsPageNumber,
-  setPhonePageSize,
-  setPhonePageNumber,
-  setUser,
   setBrandSortMode,
+  setBrandsPageNumber,
+  setIsLoading,
+  setPhonePageNumber,
+  setPhonePageSize,
+  setUser,
 }

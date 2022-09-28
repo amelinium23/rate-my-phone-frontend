@@ -1,15 +1,16 @@
 import axios from 'axios'
-import { Button, Col, Container, Form, Row } from 'react-bootstrap'
+import { signInWithEmailAndPassword } from 'firebase/auth'
 import { ChangeEvent, FormEvent, FunctionComponent, useState } from 'react'
+import { Button, Col, Container, Form, Row } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
+
 import {
   validateEmail,
   validatePassword,
 } from '../components/forms/validators/validators'
-import { signInWithEmailAndPassword } from 'firebase/auth'
-import { useStore } from '../contexts/Store'
 import { setUser } from '../contexts/Actions'
+import { useStore } from '../contexts/Store'
 
 const getUser = async (uid: string) => {
   const res = await axios.get(`/user`, { params: { uid: uid } })
