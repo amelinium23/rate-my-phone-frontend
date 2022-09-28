@@ -93,7 +93,7 @@ export const BrandPage: FunctionComponent = () => {
           </div>
         </Col>
       </Row>
-      <Row ref={parent}>
+      <Row>
         {brandResponse?.brands.map((brand: Brand) =>
           brand.brand_name === '' ? null : (
             <Col key={brand.key} md={3}>

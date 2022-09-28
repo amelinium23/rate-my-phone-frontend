@@ -1,6 +1,9 @@
-import { FunctionComponent } from 'react'
-import { Button } from 'react-bootstrap'
+import { FunctionComponent, useState } from 'react'
+import { Button, Container } from 'react-bootstrap'
 import { User } from '../../types/User'
+import { Device } from '../../types/Device'
+import { PhoneItem } from '../Items/PhoneItem'
+import { PhoneAutoComplete } from '../PhoneAutoComplete'
 
 interface DeviceContainerProps {
   user?: User
@@ -12,11 +15,29 @@ export const DeviceContainer: FunctionComponent<DeviceContainerProps> = ({
   if (!user) {
     return null
   }
+  const [isEditing, setIsEditing] = useState(false)
+
+  const handleEdit = () => {
+    setIsEditing(!isEditing)
+  }
 
   return (
     <section className="my-2">
       <h5 className="mt-2">Device you using</h5>
-      {!user?.device && <Button>Edit Phone</Button>}
+      {user?.device && (
+        <Container className="p-0 my-2">
+          <PhoneItem device={user?.device ?? {}} />
+        </Container>
+      )}
+      {isEditing && (
+        <Container className="p-0 my-2">
+          <PhoneAutoComplete
+            setIsEditing={setIsEditing}
+            phone={user?.device ?? ({} as Device)}
+          />
+        </Container>
+      )}
+      <Button onClick={handleEdit}>Edit Phone</Button>
     </section>
   )
 }

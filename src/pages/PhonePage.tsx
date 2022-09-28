@@ -4,7 +4,7 @@ import { Container, Row, Col } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { PhoneItem } from '../components/Items/PhoneItem'
-import { Phone, PhoneResponse } from '../types/Device'
+import { Device, PhoneResponse } from '../types/Device'
 import { useStore } from '../contexts/Store'
 import {
   setIsLoading,
@@ -76,9 +76,9 @@ export const PhonePage: FunctionComponent = () => {
             <h5 className="text-center">No phones found</h5>
           ) : (
             <Row>
-              {phoneResponses?.data.map((phone: Phone) => (
+              {phoneResponses?.data.map((phone: Device) => (
                 <Col md={3} key={phone.key}>
-                  <PhoneItem phone={phone} />
+                  <PhoneItem device={phone} />
                 </Col>
               ))}
             </Row>
@@ -114,9 +114,9 @@ export const PhonePage: FunctionComponent = () => {
               <>
                 <h5>{phone.brand_name}</h5>
                 {phone.device_list.length > 0 ? (
-                  phone.device_list.map((phone: Phone) => (
+                  phone.device_list.map((phone: Device) => (
                     <Col md={3} key={phone.key}>
-                      <PhoneItem phone={phone} />
+                      <PhoneItem device={phone} />
                     </Col>
                   ))
                 ) : (
