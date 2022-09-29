@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react'
 import { Container } from 'react-bootstrap'
 
-import { NewPostForm } from '../components/forms'
+import { NewPostForm } from '../../components/forms'
 
 export const NewPostPage: FunctionComponent = () => {
   return (

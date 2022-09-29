@@ -4,17 +4,17 @@ import { Col, Container, Row } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
-import { PhoneItem } from '../components/items/PhoneItem/PhoneItem'
-import { PageSizePicker } from '../components/PageSizePicker/PageSizePicker'
-import { PaginationComponent } from '../components/Pagination/PaginationComponent'
+import { PhoneItem } from '../../components/items'
+import { PageSizePicker } from '../../components/PageSizePicker'
+import { PaginationComponent } from '../../components/Pagination'
 import {
   setIsLoading,
   setPhonePageNumber,
   setPhonePageSize,
-} from '../context/Actions'
-import { useStore } from '../context/Store'
-import { Device, PhoneResponse } from '../types/Device'
-import { phonesPageSizes } from '../utils/constants'
+  useStore,
+} from '../../context'
+import { Device, PhoneResponse } from '../../types/Device'
+import { phonesPageSizes } from '../../utils/constants'
 
 const getPhones = async (
   pageSize: number,

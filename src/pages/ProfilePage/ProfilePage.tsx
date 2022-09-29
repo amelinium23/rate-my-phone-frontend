@@ -4,12 +4,11 @@ import { FunctionComponent, useEffect, useState } from 'react'
 import { Button, Col, Container, Image, Row } from 'react-bootstrap'
 import { toast } from 'react-toastify'
 
-import { DeviceContainer } from '../components/containers/DeviceContainer/DeviceContainer'
-import { EditProfileForm } from '../components/forms/EditProfileForm/EditProfileForm'
-import { setIsLoading } from '../context/Actions'
-import { useStore } from '../context/Store'
-import { User } from '../types/User'
-import { PHOTO_URL } from '../utils/constants'
+import { DeviceContainer } from '../../components/containers/'
+import { EditProfileForm } from '../../components/forms'
+import { setIsLoading, useStore } from '../../context'
+import { User } from '../../types/User'
+import { PHOTO_URL } from '../../utils/constants'
 
 const getUserInfo = async (uid: string) => {
   const res = await axios.get('/user', { params: { uid: uid } })

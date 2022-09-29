@@ -1,7 +1,7 @@
 import { Dispatch } from 'react'
 
 import { User } from '../types/User'
-import { Action } from './types/StoreTypes'
+import { Action } from './types'
 
 const setIsLoading = (dispatch: Dispatch<Action>, isLoading: boolean) =>
   dispatch({ type: 'SET_IS_LOADING', payload: isLoading })

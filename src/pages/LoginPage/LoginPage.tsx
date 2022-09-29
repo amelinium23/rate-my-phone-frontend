@@ -8,9 +8,8 @@ import { toast } from 'react-toastify'
 import {
   validateEmail,
   validatePassword,
-} from '../components/forms/validators/validators'
-import { setUser } from '../context/Actions'
-import { useStore } from '../context/Store'
+} from '../../components/forms/validators'
+import { setUser, useStore } from '../../context'
 
 const getUser = async (uid: string) => {
   const res = await axios.get(`/user`, { params: { uid: uid } })

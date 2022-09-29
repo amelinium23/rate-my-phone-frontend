@@ -3,10 +3,9 @@ import { FunctionComponent, useEffect, useState } from 'react'
 import { Container, Row } from 'react-bootstrap'
 import { toast } from 'react-toastify'
 
-import { RecommendedDeviceList } from '../components/lists/RecommendedDeviceList/RecommendedDeviceList'
-import { setIsLoading } from '../context/Actions'
-import { useStore } from '../context/Store'
-import { RecommendedDevices } from '../types/RecommendedDevice'
+import { RecommendedDeviceList } from '../../components/lists'
+import { setIsLoading, useStore } from '../../context'
+import { RecommendedDevices } from '../../types/RecommendedDevice'
 
 const getRecommendedDevices = async () => {
   const response = await axios.get('device/recommended')

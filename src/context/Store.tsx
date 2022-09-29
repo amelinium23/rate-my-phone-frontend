@@ -17,7 +17,7 @@ import {
 } from '../utils/constants'
 import { setUser } from './Actions'
 import { appReducer } from './AppReducer'
-import { Action, Context, State } from './types/StoreTypes'
+import { Action, Context, State } from './types'
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,

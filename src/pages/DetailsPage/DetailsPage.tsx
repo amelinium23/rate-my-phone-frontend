@@ -1,4 +1,4 @@
-import './DetailsPage.css'
+import './index.css'
 
 import axios from 'axios'
 import { FunctionComponent, useEffect, useState } from 'react'
@@ -7,10 +7,8 @@ import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { Share } from 'tabler-icons-react'
 
-import { PhotosContainer } from '../../components/containers/PhotosContainer/PhotosContainer'
-import { PricesContainer } from '../../components/containers/PricesContainer/PricesContainer'
-import { setIsLoading } from '../../context/Actions'
-import { useStore } from '../../context/Store'
+import { PhotosContainer, PricesContainer } from '../../components/containers'
+import { setIsLoading, useStore } from '../../context'
 import {
   DeviceDetails,
   MoreSpecification,

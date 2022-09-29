@@ -4,16 +4,16 @@ import { Col, Container, Row } from 'react-bootstrap'
 import { toast } from 'react-toastify'
 
 import { BrandItem } from '../../components/items'
-import { PageSizePicker } from '../../components/PageSizePicker/PageSizePicker'
-import { PaginationComponent } from '../../components/Pagination/PaginationComponent'
-import { SortModeSelect } from '../../components/SortModeSelect/SortModeSelect'
+import { PageSizePicker } from '../../components/PageSizePicker'
+import { PaginationComponent } from '../../components/Pagination'
+import { SortModeSelect } from '../../components/SortModeSelect'
 import {
   setBrandPageSize,
   setBrandSortMode,
   setBrandsPageNumber,
   setIsLoading,
+  useStore,
 } from '../../context'
-import { useStore } from '../../context'
 import { Brand, BrandResponse } from '../../types/Brand'
 import { brandsPageSizes, sortingModes } from '../../utils/constants'
 
