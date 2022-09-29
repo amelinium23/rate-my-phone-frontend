@@ -1,9 +1,9 @@
-import './Loader.css'
+import './index.css'
 
 import { FunctionComponent } from 'react'
 import { Spinner } from 'react-bootstrap'
 
-import { useStore } from '../../contexts/Store'
+import { useStore } from '../../context/Store'
 
 export const Loader: FunctionComponent = () => {
   const { state } = useStore()

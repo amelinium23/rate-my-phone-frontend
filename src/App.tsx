@@ -1,21 +1,23 @@
 import { Route, Routes } from 'react-router'
 import { ToastContainer } from 'react-toastify'
 
-import { Header } from './components/Header'
-import { Loader } from './components/Loader/Loader'
-import { Store } from './contexts/Store'
-import { BrandPage } from './pages/BrandPage'
-import { DetailsPage } from './pages/DetailsPage'
-import { ForumPage } from './pages/ForumPage'
-import { HomePage } from './pages/HomePage'
-import { LoginPage } from './pages/LoginPage'
-import { NewPostPage } from './pages/NewPostPage'
-import { NotFoundPage } from './pages/NotFoundPage'
-import { PhonePage } from './pages/PhonePage'
-import { PostPage } from './pages/PostPage'
-import { ProfilePage } from './pages/ProfilePage'
-import { RegisterPage } from './pages/RegisterPage'
-import { SearchResultPage } from './pages/SearchResultPage'
+import { Header } from './components/Header/Header'
+import { Loader } from './components/Loader'
+import { Store } from './context/Store'
+import {
+  BrandPage,
+  DetailsPage,
+  ForumPage,
+  HomePage,
+  LoginPage,
+  NewPostPage,
+  NotFoundPage,
+  PhonePage,
+  PostPage,
+  ProfilePage,
+  RegisterPage,
+  SearchResultPage,
+} from './pages'
 
 export const App = () => {
   return (
