@@ -4,18 +4,21 @@ import { Button, Col, Container, Form, Row } from 'react-bootstrap'
 import { useNavigate } from 'react-router'
 import { toast } from 'react-toastify'
 
-import { useStore } from '../../../context/Store'
+import { useStore } from '../../../context'
+import { PostType } from '../../../types/Post'
 
 const createNewPost = async (
   title: string,
   description: string,
   uid: string,
-  images: File[] | null
+  type: PostType,
+  images: File[] | null = []
 ) => {
   const formData = new FormData()
   formData.append('title', title)
   formData.append('description', description)
   formData.append('uid', uid)
+  formData.append('type', type)
   if (images) {
     images.forEach((image) => formData.append('images', image))
   }
@@ -26,9 +29,12 @@ const createNewPost = async (
 export const NewPostForm: FunctionComponent = () => {
   const { state } = useStore()
   const navigate = useNavigate()
-  const [images, setImages] = useState<FileList | null>(null)
+
   const [title, setTitle] = useState<string>('')
   const [description, setDescription] = useState<string>('')
+  const [postType, setPostType] = useState<PostType>(PostType.QUESTION)
+  const [images, setImages] = useState<FileList | null>(null)
+
   const user = state.auth.currentUser
 
   const handleSubmit = async (e: ChangeEvent<HTMLFormElement>) => {
@@ -40,6 +46,7 @@ export const NewPostForm: FunctionComponent = () => {
           title,
           description,
           user.uid,
+          postType,
           images ? processedImages : null
         )
         navigate('/forum')
@@ -61,6 +68,11 @@ export const NewPostForm: FunctionComponent = () => {
 
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     setImages(e.target.files)
+  }
+
+  const handlePostTypeChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    const value = e.target.value as PostType
+    setPostType(value)
   }
 
   return (
@@ -92,18 +104,32 @@ export const NewPostForm: FunctionComponent = () => {
           </Col>
           <Col md={6}>
             <Form.Group>
-              <Form.Label>Images</Form.Label>
-              <Form.Control
-                multiple
-                name="images"
-                onChange={handleImageChange}
-                type="file"
-                accept="image/*"
-              />
+              <Form.Label>Post type</Form.Label>
+              <Form.Select
+                required
+                onChange={handlePostTypeChange}
+                value={postType}
+              >
+                {Object.values(PostType).map((type) => (
+                  <option key={type}>{type}</option>
+                ))}
+              </Form.Select>
             </Form.Group>
+            {postType === PostType.LISTING && (
+              <Form.Group>
+                <Form.Label>Images</Form.Label>
+                <Form.Control
+                  multiple
+                  name="images"
+                  onChange={handleImageChange}
+                  type="file"
+                  accept="image/*"
+                />
+              </Form.Group>
+            )}
           </Col>
         </Row>
-        <div className="mt-2 d-flex justify-content-center">
+        <div className="mt-3 d-flex justify-content-center">
           <Button type="submit" variant="primary">
             Create new post
           </Button>

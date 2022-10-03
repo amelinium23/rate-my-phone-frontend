@@ -1,3 +1,22 @@
 .post-item:hover {
   cursor: pointer;
 }
+
+.post-item {
+  font-size: 14px;
+}
+
+.post-header {
+  background: white;
+  font-size: 12px;
+  padding: 1vh;
+}
+
+.post-type {
+  font-size: small;
+  text-align: right;
+  border-radius: 10px;
+  padding-left: 0.25vw;
+  padding-right: 0.25vw;
+  border: .2vh solid #e6e6e6;
+}
