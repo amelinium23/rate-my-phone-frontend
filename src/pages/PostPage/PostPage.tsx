@@ -1,3 +1,5 @@
+import './index.css'
+
 import axios from 'axios'
 import { FunctionComponent, useEffect, useState } from 'react'
 import { Container } from 'react-bootstrap'
@@ -54,19 +56,17 @@ export const PostPage: FunctionComponent = () => {
   return (
     <Container className="mt-2">
       <h5>{post?.title}</h5>
-      <section style={{ minHeight: '30vh' }}>
+      <section className="description-section">
         <p>{post?.description}</p>
       </section>
       <section>
         <h5>Comments</h5>
-        {post?.comments ? (
+        {post?.comments && (
           <>
             {post.comments.map((comment: Comment) => (
               <>{JSON.stringify(comment)}</>
             ))}
           </>
-        ) : (
-          <p>No comments</p>
         )}
       </section>
     </Container>

@@ -19,6 +19,7 @@ import {
   ProfilePage,
   RegisterPage,
   SearchResultPage,
+  UserPostsPage,
 } from './pages'
 
 export const App = () => {
@@ -48,6 +49,7 @@ export const App = () => {
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/search/q/:query" element={<SearchResultPage />} />
           <Route path="/post/p/:id" element={<PostPage />} />
+          <Route path="/my-posts" element={<UserPostsPage />} />
         </Routes>
         <ToastContainer
           limit={3}

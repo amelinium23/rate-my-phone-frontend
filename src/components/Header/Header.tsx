@@ -55,6 +55,10 @@ export const Header: FunctionComponent = () => {
     }
   }
 
+  const handleMyPostsNavigation = () => {
+    navigate('/my-posts', { replace: true })
+  }
+
   return (
     <Navbar variant="dark" bg="dark" expand="lg">
       <Container>
@@ -113,7 +117,7 @@ export const Header: FunctionComponent = () => {
                 <NavDropdown.Item onClick={handleProfileNavigation}>
                   <User size={20} color="white" strokeWidth={1} /> Profile
                 </NavDropdown.Item>
-                <NavDropdown.Item>
+                <NavDropdown.Item onClick={handleMyPostsNavigation}>
                   <Article size={20} color="white" strokeWidth={1} /> Your posts
                 </NavDropdown.Item>
                 <NavDropdown.Divider />

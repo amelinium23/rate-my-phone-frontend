@@ -4,5 +4,8 @@
   "editor.formatOnSaveMode": "modifications",
   "files.eol": "\n",
   "files.insertFinalNewline": true,
-  "cSpell.words": ["tabler", "toastify"]
+  "cSpell.words": ["tabler", "toastify"],
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  }
 }
