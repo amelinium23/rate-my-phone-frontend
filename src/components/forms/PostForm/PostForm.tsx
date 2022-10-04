@@ -12,6 +12,7 @@ const createNewPost = async (
   description: string,
   uid: string,
   type: PostType,
+  token: string,
   images: File[] | null = []
 ) => {
   const formData = new FormData()
@@ -22,11 +23,13 @@ const createNewPost = async (
   if (images) {
     images.forEach((image) => formData.append('images', image))
   }
-  const res = await axios.post('/forum/post', formData)
+  const res = await axios.post('/forum/post', formData, {
+    headers: { Authorization: `Bearer ${token}` },
+  })
   return res.data
 }
 
-export const NewPostForm: FunctionComponent = () => {
+export const PostForm: FunctionComponent = () => {
   const { state } = useStore()
   const navigate = useNavigate()
 
@@ -42,11 +45,13 @@ export const NewPostForm: FunctionComponent = () => {
     if (user) {
       const processedImages = Array.from(images ?? [])
       try {
+        const token = await user.getIdToken()
         await createNewPost(
           title,
           description,
           user.uid,
           postType,
+          token,
           images ? processedImages : null
         )
         navigate('/forum')

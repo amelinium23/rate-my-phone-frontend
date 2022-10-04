@@ -3,11 +3,14 @@ import { FunctionComponent, useEffect, useState } from 'react'
 import { Container } from 'react-bootstrap'
 import { toast } from 'react-toastify'
 
+import { PostItem } from '../../components/items'
 import { setIsLoading, useStore } from '../../context'
 import { Post } from '../../types/Post'
 
-const getUserPosts = async (uid: string) => {
-  const res = await axios.get('/forum/post', { params: { uid } })
+const getUserPosts = async (token: string) => {
+  const res = await axios.get('/forum/post', {
+    headers: { Authorization: `Bearer ${token}` },
+  })
   return res.data
 }
 
@@ -20,7 +23,9 @@ export const UserPostsPage: FunctionComponent = () => {
     const fetchUserPosts = async () => {
       try {
         setIsLoading(dispatch, true)
-        const posts = await getUserPosts(firebaseUser?.uid ?? '')
+        const posts = await getUserPosts(
+          (await firebaseUser?.getIdToken()) ?? ''
+        )
         setPosts(posts)
       } catch (e) {
         const er = e as Error
@@ -32,7 +37,14 @@ export const UserPostsPage: FunctionComponent = () => {
     fetchUserPosts()
   }, [])
 
-  console.log(posts)
-
-  return <Container>UserPostsPage</Container>
+  return (
+    <Container className="mt-2">
+      <h5 className="text-center">
+        {firebaseUser?.displayName || 'Your'} posts
+      </h5>
+      {posts.map((post) => (
+        <PostItem key={post.id} post={post} isEditingEnable={true} />
+      ))}
+    </Container>
+  )
 }

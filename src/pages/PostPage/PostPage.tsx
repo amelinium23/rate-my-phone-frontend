@@ -2,32 +2,14 @@ import './index.css'
 
 import axios from 'axios'
 import { FunctionComponent, useEffect, useState } from 'react'
-import { Container } from 'react-bootstrap'
+import { Button, Container } from 'react-bootstrap'
 import { useParams } from 'react-router'
 import { toast } from 'react-toastify'
 
 import { setIsLoading, useStore } from '../../context'
 import { Comment, Post } from '../../types/Post'
 
-// const upVotePost = async (post: Post) => {
-//   const res = await axios.put('/forum/post', {
-//     post_id: post.id,
-//     ...post,
-//     votes: post.votes + 1,
-//   })
-//   return res.data
-// }
-
-// const downVotePost = async (post: Post) => {
-//   const res = await axios.put('/forum/post', {
-//     ...post,
-//     post_id: post.id,
-//     votes: post.votes - 1,
-//   })
-//   return res.data
-// }
-
-const getPost = async (postId: number) => {
+const getPost = async (postId: string) => {
   const res = await axios.get('/forum/find', { params: { id: postId } })
   return res.data
 }
@@ -35,14 +17,13 @@ const getPost = async (postId: number) => {
 export const PostPage: FunctionComponent = () => {
   const { dispatch } = useStore()
   const { id } = useParams()
-  const postId = parseInt(id ?? '') || 0
   const [post, setPost] = useState<Post | null>(null)
 
   useEffect(() => {
     const fetchPost = async () => {
       try {
         setIsLoading(dispatch, true)
-        const post = await getPost(postId)
+        const post = await getPost(id || '')
         setPost(post)
       } catch (e) {
         toast.error((e as Error).message)
@@ -68,6 +49,7 @@ export const PostPage: FunctionComponent = () => {
             ))}
           </>
         )}
+        <Button variant="primary">Add comment</Button>
       </section>
     </Container>
   )

@@ -9,7 +9,7 @@
 .post-header {
   background: white;
   font-size: 12px;
-  padding: 1vh;
+  padding-left: 1rem;
 }
 
 .post-type {
@@ -19,4 +19,9 @@
   padding-left: 0.25vw;
   padding-right: 0.25vw;
   border: 0.2vh solid #e6e6e6;
+}
+
+.post-footer {
+  background: white;
+  padding-left: 1rem;
 }
