@@ -1,8 +1,7 @@
 import { ChangeEvent, Dispatch, FunctionComponent } from 'react'
 import { Form } from 'react-bootstrap'
 
-import { useStore } from '../../context/Store'
-import { Action } from '../../context/types/StoreTypes'
+import { Action, useStore } from '../../context'
 
 interface PageSizePickerProps {
   pageSize: number

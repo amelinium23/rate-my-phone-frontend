@@ -6,7 +6,7 @@ import { toast } from 'react-toastify'
 
 import { PostItem } from '../../components/items'
 import { setIsLoading, useStore } from '../../context'
-import { Post } from '../../types/Post'
+import { Post } from '../../types'
 
 const getPosts = async () => {
   const res = await axios.get('/forum')
@@ -56,7 +56,9 @@ export const ForumPage: FunctionComponent = () => {
       )}
       {posts.length === 0 && <h5 className="text-center">No post found</h5>}
       {posts &&
-        posts.map((post: Post) => <PostItem key={post.id} post={post} />)}
+        posts.map((post: Post) => (
+          <PostItem key={post.id} post={post} isEditingEnable={false} />
+        ))}
     </Container>
   )
 }

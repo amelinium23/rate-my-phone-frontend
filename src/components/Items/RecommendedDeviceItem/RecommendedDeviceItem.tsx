@@ -4,7 +4,7 @@ import { FunctionComponent } from 'react'
 import { Container, Image } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 
-import { Device } from '../../../types/Device'
+import { Device } from '../../../types'
 
 interface DeviceItemProps {
   device: Device

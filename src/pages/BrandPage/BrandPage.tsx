@@ -14,7 +14,7 @@ import {
   setIsLoading,
   useStore,
 } from '../../context'
-import { Brand, BrandResponse } from '../../types/Brand'
+import { Brand, BrandResponse } from '../../types'
 import { brandsPageSizes, sortingModes } from '../../utils/constants'
 
 const getBrands = async (

@@ -7,7 +7,7 @@ import { toast } from 'react-toastify'
 import { DeviceContainer } from '../../components/containers/'
 import { EditProfileForm } from '../../components/forms'
 import { setIsLoading, useStore } from '../../context'
-import { User } from '../../types/User'
+import { User } from '../../types'
 import { PHOTO_URL } from '../../utils/constants'
 
 const getUserInfo = async (uid: string) => {

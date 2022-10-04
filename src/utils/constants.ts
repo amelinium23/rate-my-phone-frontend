@@ -23,3 +23,6 @@ export const COLORS = {
   [PostType.DISCUSSION]: { background: '#8d6a9f', color: 'white' },
   [PostType.LISTING]: { background: '#0aa18f', color: 'white' },
 }
+
+export const backgroundImageUrl =
+  'https://images.unsplash.com/photo-1523371683773-affcb4a2e39e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=765&q=80'

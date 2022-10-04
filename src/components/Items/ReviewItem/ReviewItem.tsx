@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react'
 import { Card } from 'react-bootstrap'
 
-import { Review } from '../../../types/SearchResult'
+import { Review } from '../../../types'
 
 interface ReviewItemProps {
   review: Review

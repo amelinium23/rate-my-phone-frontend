@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router'
 import { toast } from 'react-toastify'
 
 import { useStore } from '../../../context'
-import { PostType } from '../../../types/Post'
+import { PostType } from '../../../types'
 
 const createNewPost = async (
   title: string,

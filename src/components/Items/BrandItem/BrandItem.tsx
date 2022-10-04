@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react'
 import { Card } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
-import { Brand } from '../../../types/Brand'
+import { Brand } from '../../../types'
 
 interface BrandItemProps {
   brand: Brand

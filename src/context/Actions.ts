@@ -1,6 +1,6 @@
 import { Dispatch } from 'react'
 
-import { User } from '../types/User'
+import { User } from '../types'
 import { Action } from './types'
 
 const setIsLoading = (dispatch: Dispatch<Action>, isLoading: boolean) =>

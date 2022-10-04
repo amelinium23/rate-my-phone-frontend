@@ -1,7 +1,7 @@
 import { Auth } from 'firebase/auth'
 import { Dispatch } from 'react'
 
-import { User } from '../../types/User'
+import { User } from '../../types'
 
 export type State = {
   phonePageNumber: number

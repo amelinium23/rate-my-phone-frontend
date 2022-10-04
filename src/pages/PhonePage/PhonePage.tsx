@@ -13,7 +13,7 @@ import {
   setPhonePageSize,
   useStore,
 } from '../../context'
-import { Device, PhoneResponse } from '../../types/Device'
+import { Device, PhoneResponse } from '../../types'
 import { phonesPageSizes } from '../../utils/constants'
 
 const getPhones = async (

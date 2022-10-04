@@ -8,8 +8,7 @@ import { toast } from 'react-toastify'
 import { ArrowBigDown, ArrowBigTop } from 'tabler-icons-react'
 
 import { useStore } from '../../../context'
-import { Post } from '../../../types/Post'
-import { User } from '../../../types/User'
+import { Post, User } from '../../../types'
 import { COLORS } from '../../../utils/constants'
 
 interface PostItemProps {

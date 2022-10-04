@@ -5,7 +5,7 @@ import { toast } from 'react-toastify'
 
 import { PostItem } from '../../components/items'
 import { setIsLoading, useStore } from '../../context'
-import { Post } from '../../types/Post'
+import { Post } from '../../types'
 
 const getUserPosts = async (token: string) => {
   const res = await axios.get('/forum/post', {

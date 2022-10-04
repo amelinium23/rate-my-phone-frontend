@@ -7,7 +7,7 @@ import { useParams } from 'react-router'
 import { toast } from 'react-toastify'
 
 import { setIsLoading, useStore } from '../../context'
-import { Comment, Post } from '../../types/Post'
+import { Comment, Post } from '../../types'
 
 const getPost = async (postId: string) => {
   const res = await axios.get('/forum/find', { params: { id: postId } })

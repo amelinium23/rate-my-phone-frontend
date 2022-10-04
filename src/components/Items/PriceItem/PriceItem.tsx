@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react'
 import { Card } from 'react-bootstrap'
 
-import { PriceDetails } from '../../../types/Device'
+import { PriceDetails } from '../../../types'
 
 interface PriceItemProps {
   price: PriceDetails

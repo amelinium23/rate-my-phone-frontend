@@ -5,7 +5,7 @@ import { toast } from 'react-toastify'
 
 import { RecommendedDeviceList } from '../../components/lists'
 import { setIsLoading, useStore } from '../../context'
-import { RecommendedDevices } from '../../types/RecommendedDevice'
+import { RecommendedDevices } from '../../types'
 
 const getRecommendedDevices = async () => {
   const response = await axios.get('device/recommended')

@@ -10,10 +10,8 @@ import {
 import { Form } from 'react-bootstrap'
 import { toast } from 'react-toastify'
 
-import { setIsLoading, setUser } from '../../context/Actions'
-import { useStore } from '../../context/Store'
-import { ApiPhoneResponse, Device, PhoneResponse } from '../../types/Device'
-import { User } from '../../types/User'
+import { setIsLoading, setUser, useStore } from '../../context'
+import { ApiPhoneResponse, Device, PhoneResponse, User } from '../../types'
 
 const getDevices = async () => {
   const res = await axios.get('/device')

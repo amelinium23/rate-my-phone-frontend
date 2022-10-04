@@ -13,7 +13,7 @@ import {
   DeviceDetails,
   MoreSpecification,
   SpecificationDetails,
-} from '../../types/Device'
+} from '../../types'
 import { notUsedKeysDetailsPage } from '../../utils/constants'
 
 const getDetails = async (key?: string) => {

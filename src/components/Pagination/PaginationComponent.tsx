@@ -1,8 +1,7 @@
 import { Dispatch, FunctionComponent } from 'react'
 import { Pagination } from 'react-bootstrap'
 
-import { useStore } from '../../context/Store'
-import { Action } from '../../context/types/StoreTypes'
+import { Action, useStore } from '../../context'
 
 interface PaginationComponentProps {
   currentPage: number

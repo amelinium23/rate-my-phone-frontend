@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react'
 import { Card } from 'react-bootstrap'
 
-import { News } from '../../../types/SearchResult'
+import { News } from '../../../types'
 
 interface NewsItemProps {
   news: News
