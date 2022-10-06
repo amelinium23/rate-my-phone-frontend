@@ -1,64 +1,59 @@
-import axios from 'axios'
-import { ChangeEvent, FunctionComponent, useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 import { Button, Col, Container, Form, Row } from 'react-bootstrap'
 import { useNavigate } from 'react-router'
 import { toast } from 'react-toastify'
 
 import { useStore } from '../../../context'
-import { PostType } from '../../../types'
+import { Post, PostType } from '../../../types'
+import { createNewPost, updatePost } from './service'
 
-const createNewPost = async (
-  title: string,
-  description: string,
-  uid: string,
-  type: PostType,
-  token: string,
-  images: File[] | null = []
-) => {
-  const formData = new FormData()
-  formData.append('title', title)
-  formData.append('description', description)
-  formData.append('uid', uid)
-  formData.append('type', type)
-  if (images) {
-    images.forEach((image) => formData.append('images', image))
-  }
-  const res = await axios.post('/forum/post', formData, {
-    headers: { Authorization: `Bearer ${token}` },
-  })
-  return res.data
+interface PostFormProps {
+  post?: Post
+  isEditingEnable?: boolean
 }
 
-export const PostForm: FunctionComponent = () => {
+export const PostForm = ({
+  post = {} as Post,
+  isEditingEnable = false,
+}: PostFormProps) => {
   const { state } = useStore()
   const navigate = useNavigate()
-
-  const [title, setTitle] = useState<string>('')
-  const [description, setDescription] = useState<string>('')
-  const [postType, setPostType] = useState<PostType>(PostType.QUESTION)
+  const [title, setTitle] = useState<string>(post?.title || '')
+  const [description, setDescription] = useState<string>(
+    post?.description || ''
+  )
+  const [postType, setPostType] = useState<PostType>(
+    (post?.type as PostType) || PostType.QUESTION
+  )
   const [images, setImages] = useState<FileList | null>(null)
-
-  const user = state.auth.currentUser
+  const firebaseUser = state.auth.currentUser
 
   const handleSubmit = async (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (user) {
-      const processedImages = Array.from(images ?? [])
+    const processedImages = Array.from(images ?? [])
+    const token = (await firebaseUser?.getIdToken()) || ''
+    if (isEditingEnable && firebaseUser) {
       try {
-        const token = await user.getIdToken()
-        await createNewPost(
+        const updatedPost = { ...post, title, description, type: postType }
+        await updatePost(updatedPost, token, images ? processedImages : [])
+        navigate('/my-posts')
+        toast.success('Post updated successfully')
+      } catch (e) {
+        toast.error((e as Error).message)
+      }
+    } else if (firebaseUser) {
+      try {
+        const newPost = {
           title,
           description,
-          user.uid,
-          postType,
-          token,
-          images ? processedImages : null
-        )
-        navigate('/forum')
+          type: postType,
+          uid: firebaseUser.uid,
+        } as Post
+        await createNewPost(newPost, token, images ? processedImages : null)
+        navigate('/my-posts')
         toast.success(`Post created successfully!`)
       } catch (error) {
-        const err = error as Error
-        toast.error(err.message)
+        toast.error((error as Error).message)
       }
     }
   }
@@ -136,7 +131,7 @@ export const PostForm: FunctionComponent = () => {
         </Row>
         <div className="mt-3 d-flex justify-content-center">
           <Button type="submit" variant="primary">
-            Create new post
+            {isEditingEnable ? 'Update post' : 'Create new post'}
           </Button>
         </div>
       </Form>

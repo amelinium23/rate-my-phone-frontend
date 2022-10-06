@@ -1,5 +1,6 @@
 export * from './BrandPage'
 export * from './DetailsPage'
+export * from './EditPostPage'
 export * from './ForumPage'
 export * from './HomePage'
 export * from './LoginPage'

@@ -1,7 +1,6 @@
 import './index.css'
 
-import axios from 'axios'
-import { FunctionComponent, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Button, Card } from 'react-bootstrap'
 import { useNavigate } from 'react-router'
 import { toast } from 'react-toastify'
@@ -10,55 +9,14 @@ import { ArrowBigDown, ArrowBigTop } from 'tabler-icons-react'
 import { useStore } from '../../../context'
 import { Post, User } from '../../../types'
 import { COLORS } from '../../../utils/constants'
+import { deletePost, downVotePost, getUser, upVotePost } from './service'
 
 interface PostItemProps {
   post: Post
-  isEditingEnable: boolean
+  isEditingEnable?: boolean
 }
 
-const getUser = async (uid: string) => {
-  const res = await axios.get(`/user`, { params: { uid: uid } })
-  return res.data
-}
-
-const deletePost = async (postId: string, token: string) => {
-  const res = await axios.delete(`/forum/post`, {
-    data: { post_id: postId },
-    headers: { Authorization: `Bearer ${token}` },
-  })
-  return res.data
-}
-
-const upVotePost = async (post: Post, token: string) => {
-  const res = await axios.put(
-    '/forum/post',
-    {
-      post_id: post.id,
-      ...post,
-      votes: post.votes + 1,
-    },
-    { headers: { Authorization: `Bearer ${token}` } }
-  )
-  return res.data
-}
-
-const downVotePost = async (post: Post, token: string) => {
-  const res = await axios.put(
-    '/forum/post',
-    {
-      post_id: post.id,
-      ...post,
-      votes: post.votes - 1,
-    },
-    { headers: { Authorization: `Bearer ${token}` } }
-  )
-  return res.data
-}
-
-export const PostItem: FunctionComponent<PostItemProps> = ({
-  post,
-  isEditingEnable = false,
-}) => {
+export const PostItem = ({ post, isEditingEnable = false }: PostItemProps) => {
   const navigate = useNavigate()
   const { state } = useStore()
   const [user, setUser] = useState<User | null>(null)
@@ -81,16 +39,16 @@ export const PostItem: FunctionComponent<PostItemProps> = ({
   }
 
   const handleEdit = () => {
-    console.log(`haha`)
+    navigate(`/edit-post/p/${post.id}`, { state: post })
   }
 
   const handleDelete = async () => {
     try {
       const res = await deletePost(
         post.id,
-        (await state.auth.currentUser?.getIdToken()) ?? ''
+        (await firebaseUser?.getIdToken()) ?? ''
       )
-      console.log(res)
+      toast.success(res)
     } catch (e) {
       toast.error((e as Error).message)
     }
@@ -105,10 +63,10 @@ export const PostItem: FunctionComponent<PostItemProps> = ({
         </span>
       </Card.Header>
       <Card.Body onClick={handleNavigate}>
-        <p>{post.description.slice(0, 99)}</p>
+        <p>{post.description}</p>
         <p>Posted by {user?.display_name || 'stranger'}</p>
       </Card.Body>
-      <Card.Footer className="post-footer p-1">
+      <Card.Footer className="post-footer">
         {firebaseUser && (
           <>
             <span className="mx-1">Votes {post.votes}</span>
@@ -116,10 +74,7 @@ export const PostItem: FunctionComponent<PostItemProps> = ({
               className="p-0"
               variant="outline-light"
               onClick={async () =>
-                upVotePost(
-                  post,
-                  (await state.auth.currentUser?.getIdToken()) ?? ''
-                )
+                upVotePost(post, (await firebaseUser?.getIdToken()) ?? '')
               }
             >
               <ArrowBigTop size={20} strokeWidth={0.6} color={'black'} />
@@ -128,10 +83,7 @@ export const PostItem: FunctionComponent<PostItemProps> = ({
               className="mx-1 p-0"
               variant="outline-light"
               onClick={async () =>
-                downVotePost(
-                  post,
-                  (await state.auth.currentUser?.getIdToken()) ?? ''
-                )
+                downVotePost(post, (await firebaseUser?.getIdToken()) ?? '')
               }
             >
               <ArrowBigDown size={20} strokeWidth={0.6} color={'black'} />
@@ -140,7 +92,11 @@ export const PostItem: FunctionComponent<PostItemProps> = ({
         )}
         {isEditingEnable && (
           <>
-            <Button className="float-end" onClick={handleEdit}>
+            <Button
+              variant="outline-primary"
+              className="float-end"
+              onClick={handleEdit}
+            >
               Edit
             </Button>
             <Button

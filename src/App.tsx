@@ -9,6 +9,7 @@ import { Store } from './context/Store'
 import {
   BrandPage,
   DetailsPage,
+  EditPostPage,
   ForumPage,
   HomePage,
   LoginPage,
@@ -50,6 +51,7 @@ export const App = () => {
           <Route path="/search/q/:query" element={<SearchResultPage />} />
           <Route path="/post/p/:id" element={<PostPage />} />
           <Route path="/my-posts" element={<UserPostsPage />} />
+          <Route path="/edit-post/p/:id" element={<EditPostPage />} />
         </Routes>
         <ToastContainer
           limit={3}

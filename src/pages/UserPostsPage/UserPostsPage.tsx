@@ -42,6 +42,9 @@ export const UserPostsPage: FunctionComponent = () => {
       <h5 className="text-center">
         {firebaseUser?.displayName || 'Your'} posts
       </h5>
+      {posts.length === 0 && (
+        <p className="text-center">You did not create any posts yet.</p>
+      )}
       {posts.map((post) => (
         <PostItem key={post.id} post={post} isEditingEnable={true} />
       ))}
