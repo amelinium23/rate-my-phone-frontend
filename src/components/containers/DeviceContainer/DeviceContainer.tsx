@@ -1,10 +1,9 @@
 import { FunctionComponent, useState } from 'react'
 import { Button, Container } from 'react-bootstrap'
 
-import { Device } from '../../../types/Device'
-import { User } from '../../../types/User'
-import { PhoneItem } from '../../items/PhoneItem/PhoneItem'
-import { PhoneAutoComplete } from '../../PhoneAutoComplete/PhoneAutoComplete'
+import { Device, User } from '../../../types'
+import { PhoneItem } from '../../items'
+import { PhoneAutoComplete } from '../../PhoneAutoComplete'
 
 interface DeviceContainerProps {
   user?: User

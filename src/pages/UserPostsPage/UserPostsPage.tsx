@@ -3,7 +3,7 @@ import { FunctionComponent, useEffect, useState } from 'react'
 import { Container } from 'react-bootstrap'
 import { toast } from 'react-toastify'
 
-import { PostItem } from '../../components/items'
+import { PostItem } from '../../components/items/PostItem'
 import { setIsLoading, useStore } from '../../context'
 import { Post } from '../../types'
 
