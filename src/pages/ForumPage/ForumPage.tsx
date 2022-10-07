@@ -4,7 +4,7 @@ import { Button, Col, Container, Row } from 'react-bootstrap'
 import { useNavigate } from 'react-router'
 import { toast } from 'react-toastify'
 
-import { PostItem } from '../../components/items/PostItem'
+import { PostItem } from '../../components/items'
 import { setIsLoading, useStore } from '../../context'
 import { Post } from '../../types'
 

@@ -3,7 +3,7 @@ import { FunctionComponent, useEffect, useState } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import { toast } from 'react-toastify'
 
-import { BrandItem } from '../../components/items/BrandItem'
+import { BrandItem } from '../../components/items/'
 import { PageSizePicker } from '../../components/PageSizePicker'
 import { PaginationComponent } from '../../components/Pagination'
 import { SortModeSelect } from '../../components/SortModeSelect'

@@ -4,7 +4,7 @@ import { FunctionComponent, useEffect, useState } from 'react'
 import { Button, Col, Container, Image, Row } from 'react-bootstrap'
 import { toast } from 'react-toastify'
 
-import { DeviceContainer } from '../../components/containers/'
+import { DeviceContainer } from '../../components/containers'
 import { EditProfileForm } from '../../components/forms'
 import { setIsLoading, useStore } from '../../context'
 import { User } from '../../types'
