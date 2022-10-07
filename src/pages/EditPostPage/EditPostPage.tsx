@@ -1,7 +1,7 @@
 import { Container } from 'react-bootstrap'
 import { useLocation } from 'react-router'
 
-import { PostForm } from '../../components/forms'
+import { PostForm } from '../../components/forms/PostForm'
 import { Post } from '../../types'
 
 export const EditPostPage = () => {

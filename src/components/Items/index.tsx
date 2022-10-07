@@ -1,7 +1,0 @@
-export * from './BrandItem'
-export * from './NewsItem'
-export * from './PhoneItem'
-export * from './PostItem'
-export * from './PriceItem'
-export * from './RecommendedDeviceItem'
-export * from './ReviewItem'

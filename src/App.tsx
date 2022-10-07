@@ -3,7 +3,7 @@ import './css/index.css'
 import { Route, Routes } from 'react-router'
 import { ToastContainer } from 'react-toastify'
 
-import { Header } from './components/Header/Header'
+import { Header } from './components/Header'
 import { Loader } from './components/Loader'
 import { Store } from './context/Store'
 import {

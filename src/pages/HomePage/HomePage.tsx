@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { Container, Row } from 'react-bootstrap'
 import { toast } from 'react-toastify'
 
-import { RecommendedDeviceList } from '../../components/lists'
+import { RecommendedDeviceList } from '../../components/lists/RecommendedDeviceList'
 import { setIsLoading, useStore } from '../../context'
 import { RecommendedDevices } from '../../types'
 

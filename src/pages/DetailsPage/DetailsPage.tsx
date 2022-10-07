@@ -7,7 +7,8 @@ import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { Share } from 'tabler-icons-react'
 
-import { PhotosContainer, PricesContainer } from '../../components/containers'
+import { PhotosContainer } from '../../components/containers/PhotosContainer'
+import { PricesContainer } from '../../components/containers/PricesContainer'
 import { setIsLoading, useStore } from '../../context'
 import {
   DeviceDetails,

@@ -4,9 +4,9 @@ import { Col, Container, Row } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
-import { PhoneItem } from '../../components/items'
+import { PhoneItem } from '../../components/items/PhoneItem'
 import { PageSizePicker } from '../../components/PageSizePicker'
-import { PaginationComponent } from '../../components/Pagination'
+import { PaginationComponent } from '../../components/PaginationComponent'
 import {
   setIsLoading,
   setPhonePageNumber,

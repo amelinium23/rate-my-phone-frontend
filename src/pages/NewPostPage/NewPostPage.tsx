@@ -1,6 +1,6 @@
 import { Container } from 'react-bootstrap'
 
-import { PostForm } from '../../components/forms'
+import { PostForm } from '../../components/forms/PostForm'
 
 export const NewPostPage = () => {
   return (
