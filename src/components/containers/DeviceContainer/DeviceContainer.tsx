@@ -2,7 +2,7 @@ import { FunctionComponent, useState } from 'react'
 import { Button, Container } from 'react-bootstrap'
 
 import { Device, User } from '../../../types'
-import { PhoneItem } from '../../items/PhoneItem'
+import { PhoneItem } from '../../items/PhoneItem/PhoneItem'
 import { PhoneAutoComplete } from '../../PhoneAutoComplete'
 
 interface DeviceContainerProps {
