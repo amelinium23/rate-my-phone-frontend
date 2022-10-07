@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { signInWithEmailAndPassword } from 'firebase/auth'
-import { ChangeEvent, FormEvent, FunctionComponent, useState } from 'react'
+import { ChangeEvent, FormEvent, useState } from 'react'
 import { Button, Col, Container, Form, Row } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
@@ -16,7 +16,7 @@ const getUser = async (uid: string) => {
   return res.data
 }
 
-export const LoginPage: FunctionComponent = () => {
+export const LoginPage = () => {
   const navigate = useNavigate()
   const { state, dispatch } = useStore()
   const [login, setLogin] = useState<string>('')

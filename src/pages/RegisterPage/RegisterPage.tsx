@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { signInWithEmailAndPassword } from 'firebase/auth'
-import { ChangeEvent, FunctionComponent, useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 import { Button, Col, Container, Form, Image, Row } from 'react-bootstrap'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
@@ -43,7 +43,7 @@ const postRegister = async (
   return res.data
 }
 
-export const RegisterPage: FunctionComponent = () => {
+export const RegisterPage = () => {
   const { state } = useStore()
   const { state: locationState } = useLocation()
   const { login, password } = locationState as RegisterLocationState

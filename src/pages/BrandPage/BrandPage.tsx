@@ -1,9 +1,9 @@
 import axios from 'axios'
-import { FunctionComponent, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import { toast } from 'react-toastify'
 
-import { BrandItem } from '../../components/items/BrandItem/BrandItem'
+import { BrandItem } from '../../components/items'
 import { PageSizePicker } from '../../components/PageSizePicker'
 import { PaginationComponent } from '../../components/Pagination'
 import { SortModeSelect } from '../../components/SortModeSelect'
@@ -32,7 +32,7 @@ const getBrands = async (
   return response.data
 }
 
-export const BrandPage: FunctionComponent = () => {
+export const BrandPage = () => {
   const { state, dispatch } = useStore()
   const [brandResponse, setBrandResponse] = useState<BrandResponse | null>(null)
 

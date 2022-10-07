@@ -1,4 +1,3 @@
-import { FunctionComponent } from 'react'
 import { Card } from 'react-bootstrap'
 
 import { Review } from '../../../types'
@@ -7,7 +6,7 @@ interface ReviewItemProps {
   review: Review
 }
 
-export const ReviewItem: FunctionComponent<ReviewItemProps> = ({ review }) => {
+export const ReviewItem = ({ review }: ReviewItemProps) => {
   return (
     <Card className="d-flex justify-content-center my-2">
       <Card.Header>

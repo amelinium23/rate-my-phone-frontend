@@ -4,7 +4,7 @@ import { Col, Container, Row } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
-import { PhoneItem } from '../../components/items/PhoneItem'
+import { PhoneItem } from '../../components/items'
 import { PageSizePicker } from '../../components/PageSizePicker'
 import { PaginationComponent } from '../../components/Pagination'
 import {

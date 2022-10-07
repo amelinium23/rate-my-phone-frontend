@@ -1,6 +1,5 @@
 import './style.css'
 
-import { FunctionComponent } from 'react'
 import { Container, Image } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 
@@ -11,10 +10,10 @@ interface DeviceItemProps {
   position: number
 }
 
-export const RecommendedDeviceItem: FunctionComponent<DeviceItemProps> = ({
+export const RecommendedDeviceItem = ({
   device,
   position,
-}) => {
+}: DeviceItemProps) => {
   const navigate = useNavigate()
 
   const containerStyle = {

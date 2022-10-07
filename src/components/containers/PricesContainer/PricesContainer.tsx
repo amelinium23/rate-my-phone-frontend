@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react'
 import { Row } from 'react-bootstrap'
 
 import { PriceDetails } from '../../../types'
-import { PriceItem } from '../../items/PriceItem/PriceItem'
+import { PriceItem } from '../../items'
 
 interface PricesContainerProps {
   prices: object

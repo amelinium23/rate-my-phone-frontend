@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, FunctionComponent } from 'react'
+import { ChangeEvent, Dispatch } from 'react'
 import { Form } from 'react-bootstrap'
 
 import { Action, useStore } from '../../context'
@@ -9,11 +9,11 @@ interface SortModeSelectProps {
   onSortModeChange: (dispatch: Dispatch<Action>, sortMode: string) => void
 }
 
-export const SortModeSelect: FunctionComponent<SortModeSelectProps> = ({
+export const SortModeSelect = ({
   sortMode,
   sortModes,
   onSortModeChange,
-}) => {
+}: SortModeSelectProps) => {
   const { dispatch } = useStore()
 
   const handleSortModeChange = (e: ChangeEvent<HTMLSelectElement>) => {

@@ -1,17 +1,15 @@
-import { FunctionComponent, useState } from 'react'
+import { useState } from 'react'
 import { Button, Container } from 'react-bootstrap'
 
 import { Device, User } from '../../../types'
-import { PhoneItem } from '../../items/PhoneItem/PhoneItem'
+import { PhoneItem } from '../../items'
 import { PhoneAutoComplete } from '../../PhoneAutoComplete'
 
 interface DeviceContainerProps {
   user?: User
 }
 
-export const DeviceContainer: FunctionComponent<DeviceContainerProps> = ({
-  user,
-}) => {
+export const DeviceContainer = ({ user }: DeviceContainerProps) => {
   if (!user) {
     return null
   }

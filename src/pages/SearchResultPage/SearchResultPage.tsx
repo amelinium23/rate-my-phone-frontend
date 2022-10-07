@@ -4,8 +4,7 @@ import { Col, Container, Row } from 'react-bootstrap'
 import { useParams } from 'react-router'
 import { toast } from 'react-toastify'
 
-import { NewsItem } from '../../components/items/NewsItem/NewsItem'
-import { ReviewItem } from '../../components/items/ReviewItem/ReviewItem'
+import { NewsItem, ReviewItem } from '../../components/items'
 import { setIsLoading, useStore } from '../../context'
 import { SearchResult } from '../../types'
 

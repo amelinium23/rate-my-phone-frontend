@@ -1,11 +1,10 @@
-import { FunctionComponent } from 'react'
 import { Container } from 'react-bootstrap'
 import { useLocation } from 'react-router'
 
 import { PostForm } from '../../components/forms'
 import { Post } from '../../types'
 
-export const EditPostPage: FunctionComponent = () => {
+export const EditPostPage = () => {
   const { state } = useLocation()
   const post = state as Post
 

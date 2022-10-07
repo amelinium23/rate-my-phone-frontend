@@ -1,4 +1,3 @@
-import { FunctionComponent } from 'react'
 import { Card, Container, Image } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
@@ -8,7 +7,7 @@ interface PhoneItemProps {
   device: Device
 }
 
-export const PhoneItem: FunctionComponent<PhoneItemProps> = ({ device }) => {
+export const PhoneItem = ({ device }: PhoneItemProps) => {
   return (
     <Card className="d-flex container justify-content-center my-2 text-center p-1">
       <p className="pt-3">{device.device_name}</p>

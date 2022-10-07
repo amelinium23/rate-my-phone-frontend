@@ -1,4 +1,3 @@
-import { FunctionComponent } from 'react'
 import { Card } from 'react-bootstrap'
 
 import { PriceDetails } from '../../../types'
@@ -7,7 +6,7 @@ interface PriceItemProps {
   price: PriceDetails
 }
 
-export const PriceItem: FunctionComponent<PriceItemProps> = ({ price }) => {
+export const PriceItem = ({ price }: PriceItemProps) => {
   const generateId = `${price.price}-${Math.round(Math.random() * 1000)}`
 
   return (

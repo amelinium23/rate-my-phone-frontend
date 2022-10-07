@@ -1,7 +1,7 @@
 import './index.css'
 
 import axios from 'axios'
-import { FunctionComponent, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Button, Container } from 'react-bootstrap'
 import { useParams } from 'react-router'
 import { toast } from 'react-toastify'
@@ -14,7 +14,7 @@ const getPost = async (postId: string) => {
   return res.data
 }
 
-export const PostPage: FunctionComponent = () => {
+export const PostPage = () => {
   const { dispatch } = useStore()
   const { id } = useParams()
   const [post, setPost] = useState<Post | null>(null)

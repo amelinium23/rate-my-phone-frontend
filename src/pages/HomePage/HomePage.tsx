@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { FunctionComponent, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Container, Row } from 'react-bootstrap'
 import { toast } from 'react-toastify'
 
@@ -12,7 +12,7 @@ const getRecommendedDevices = async () => {
   return response.data
 }
 
-export const HomePage: FunctionComponent = () => {
+export const HomePage = () => {
   const { dispatch } = useStore()
   const [recommendedDevices, setRecommendedDevices] = useState([])
 

@@ -1,5 +1,5 @@
 import { signOut } from 'firebase/auth'
-import { ChangeEvent, FunctionComponent, useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 import {
   Button,
   Container,
@@ -15,7 +15,7 @@ import { Article, Login, Logout, Search, User } from 'tabler-icons-react'
 
 import { setUser, useStore } from '../../context'
 
-export const Header: FunctionComponent = () => {
+export const Header = () => {
   const navigate = useNavigate()
   const { state, dispatch } = useStore()
   const [searchString, setSearchString] = useState<string>('')

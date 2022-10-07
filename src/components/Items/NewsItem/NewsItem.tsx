@@ -1,4 +1,3 @@
-import { FunctionComponent } from 'react'
 import { Card } from 'react-bootstrap'
 
 import { News } from '../../../types'
@@ -7,7 +6,7 @@ interface NewsItemProps {
   news: News
 }
 
-export const NewsItem: FunctionComponent<NewsItemProps> = ({ news }) => {
+export const NewsItem = ({ news }: NewsItemProps) => {
   return (
     <Card className="d-flex justify-content-center my-2">
       <Card.Header>

@@ -1,7 +1,7 @@
 import './index.css'
 
 import axios from 'axios'
-import { FunctionComponent, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Button, Col, Container, Row, Table } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
@@ -26,7 +26,7 @@ const getDetails = async (key?: string) => {
 const upperFirstLetter = (brandName: string) =>
   brandName.charAt(0).toUpperCase() + brandName.slice(1)
 
-export const DetailsPage: FunctionComponent = () => {
+export const DetailsPage = () => {
   const [deviceDetails, setDeviceDetails] = useState<DeviceDetails>(
     {} as DeviceDetails
   )

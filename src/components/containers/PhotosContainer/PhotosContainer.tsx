@@ -1,4 +1,3 @@
-import { FunctionComponent } from 'react'
 import { Col, Container, Image, Row } from 'react-bootstrap'
 
 interface PhotosContainerProps {
@@ -7,11 +6,11 @@ interface PhotosContainerProps {
   deviceName: string
 }
 
-export const PhotosContainer: FunctionComponent<PhotosContainerProps> = ({
+export const PhotosContainer = ({
   device_image,
   pictures,
   deviceName,
-}) => {
+}: PhotosContainerProps) => {
   if (!pictures || !device_image) {
     return (
       <Col md={4} className="photoContainer">

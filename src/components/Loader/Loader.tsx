@@ -1,11 +1,10 @@
 import './index.css'
 
-import { FunctionComponent } from 'react'
 import { Spinner } from 'react-bootstrap'
 
 import { useStore } from '../../context/Store'
 
-export const Loader: FunctionComponent = () => {
+export const Loader = () => {
   const { state } = useStore()
 
   const loaderStyle = {

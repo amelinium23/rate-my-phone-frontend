@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { sendEmailVerification } from 'firebase/auth'
-import { FunctionComponent, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Button, Col, Container, Image, Row } from 'react-bootstrap'
 import { toast } from 'react-toastify'
 
@@ -15,7 +15,7 @@ const getUserInfo = async (uid: string) => {
   return res.data
 }
 
-export const ProfilePage: FunctionComponent = () => {
+export const ProfilePage = () => {
   const { state, dispatch } = useStore()
   const [user, setUser] = useState<User | null>(null)
   const [isEditable, setIsEditable] = useState<boolean>(false)

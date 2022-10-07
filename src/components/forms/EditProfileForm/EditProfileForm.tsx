@@ -4,7 +4,6 @@ import {
   ChangeEvent,
   Dispatch,
   FormEvent,
-  FunctionComponent,
   SetStateAction,
   useState,
 } from 'react'
@@ -16,10 +15,10 @@ interface EditProfileFormProps {
   setIsEditing: Dispatch<SetStateAction<boolean>>
 }
 
-export const EditProfileForm: FunctionComponent<EditProfileFormProps> = ({
+export const EditProfileForm = ({
   user,
   setIsEditing,
-}) => {
+}: EditProfileFormProps) => {
   if (!user) {
     return null
   }

@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, FunctionComponent } from 'react'
+import { ChangeEvent, Dispatch } from 'react'
 import { Form } from 'react-bootstrap'
 
 import { Action, useStore } from '../../context'
@@ -9,11 +9,11 @@ interface PageSizePickerProps {
   onPageSizeChange: (dispatch: Dispatch<Action>, pageSize: number) => void
 }
 
-export const PageSizePicker: FunctionComponent<PageSizePickerProps> = ({
+export const PageSizePicker = ({
   pageSize,
   pageSizes,
   onPageSizeChange,
-}) => {
+}: PageSizePickerProps) => {
   const { dispatch } = useStore()
 
   const handlePageSizeChange = (e: ChangeEvent<HTMLSelectElement>) => {

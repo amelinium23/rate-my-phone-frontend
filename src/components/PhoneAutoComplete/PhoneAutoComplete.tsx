@@ -2,7 +2,6 @@ import axios from 'axios'
 import {
   ChangeEvent,
   Dispatch,
-  FunctionComponent,
   SetStateAction,
   useEffect,
   useState,
@@ -28,10 +27,10 @@ interface PhoneAutoCompleteProps {
   setIsEditing: Dispatch<SetStateAction<boolean>>
 }
 
-export const PhoneAutoComplete: FunctionComponent<PhoneAutoCompleteProps> = ({
+export const PhoneAutoComplete = ({
   phone,
   setIsEditing,
-}) => {
+}: PhoneAutoCompleteProps) => {
   const { state, dispatch } = useStore()
   const [devices, setDevices] = useState<ApiPhoneResponse>({
     data: [],
