@@ -34,7 +34,12 @@ export const PostForm = ({
     const token = (await firebaseUser?.getIdToken()) || ''
     if (isEditingEnable && firebaseUser) {
       try {
-        const updatedPost = { ...post, title, description, type: postType }
+        const updatedPost = {
+          ...post,
+          title,
+          description,
+          type: postType,
+        } as Post
         await updatePost(updatedPost, token, images ? processedImages : [])
         navigate('/my-posts')
         toast.success('Post updated successfully')
