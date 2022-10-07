@@ -1,8 +1,7 @@
-import { FunctionComponent } from 'react'
 import { Button, Container } from 'react-bootstrap'
 import { useNavigate } from 'react-router'
 
-export const NotFoundPage: FunctionComponent = () => {
+export const NotFoundPage = () => {
   const navigate = useNavigate()
 
   const onHomeClick = () => {
