@@ -67,7 +67,7 @@ export const BrandPage = () => {
       <h5 className="text-center">Brands</h5>
       <Row>
         <Col md={3}>
-          <p>Page size</p>
+          <p>Brands on page</p>
           <PageSizePicker
             pageSizes={brandsPageSizes}
             pageSize={state.brandsPageSize}

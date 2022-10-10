@@ -3,7 +3,7 @@ import './style.css'
 import { Container, Image } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 
-import { Device } from '../../../types'
+import { Device } from '../../types'
 
 interface DeviceItemProps {
   device: Device

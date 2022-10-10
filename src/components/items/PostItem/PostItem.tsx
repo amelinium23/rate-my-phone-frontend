@@ -1,4 +1,4 @@
-import './index.css'
+import './postItemStyle.css'
 
 import { useEffect, useState } from 'react'
 import { Button, Card } from 'react-bootstrap'
@@ -6,10 +6,10 @@ import { useNavigate } from 'react-router'
 import { toast } from 'react-toastify'
 import { ArrowBigDown, ArrowBigTop } from 'tabler-icons-react'
 
-import { useStore } from '../../context'
-import { Post, User } from '../../types'
-import { COLORS } from '../../utils/constants'
-import { deletePost, downVotePost, getUser, upVotePost } from './service'
+import { useStore } from '../../../context'
+import { Post, User } from '../../../types'
+import { COLORS } from '../../../utils/constants'
+import { deletePost, downVotePost, getUser, upVotePost } from './postService'
 
 interface PostItemProps {
   post: Post

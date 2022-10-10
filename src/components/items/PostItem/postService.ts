@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import { Post } from '../../types'
+import { Comment, Post } from '../../../types'
 
 const getUser = async (uid: string) => {
   const res = await axios.get(`/user`, { params: { uid: uid } })
@@ -43,4 +43,9 @@ const downVotePost = async (post: Post, token: string) => {
   return res.data
 }
 
-export { deletePost, downVotePost, getUser, upVotePost }
+const addComment = async (comment: Comment, postId: string) => {
+  console.log(comment)
+  console.log(postId)
+}
+
+export { addComment, deletePost, downVotePost, getUser, upVotePost }

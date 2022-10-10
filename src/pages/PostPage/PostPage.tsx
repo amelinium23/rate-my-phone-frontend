@@ -2,10 +2,12 @@ import './index.css'
 
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-import { Button, Container } from 'react-bootstrap'
+import { Button, Col, Container, Row } from 'react-bootstrap'
 import { useParams } from 'react-router'
 import { toast } from 'react-toastify'
 
+import { AddCommentForm } from '../../components/forms/AddCommentForm'
+import CommentItem from '../../components/items/CommentItem'
 import { setIsLoading, useStore } from '../../context'
 import { Comment, Post } from '../../types'
 
@@ -18,6 +20,7 @@ export const PostPage = () => {
   const { dispatch } = useStore()
   const { id } = useParams()
   const [post, setPost] = useState<Post | null>(null)
+  const [isAddingEnable, setIsAddingEnable] = useState(false)
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -34,23 +37,52 @@ export const PostPage = () => {
     fetchPost()
   }, [])
 
+  const handleAddComment = () => {
+    setIsAddingEnable(!isAddingEnable)
+  }
+
   return (
     <Container className="mt-2">
-      <h5>{post?.title}</h5>
-      <section className="description-section">
-        <p>{post?.description}</p>
-      </section>
-      <section>
-        <h5>Comments</h5>
-        {post?.comments && (
-          <>
-            {post.comments.map((comment: Comment) => (
-              <>{JSON.stringify(comment)}</>
-            ))}
-          </>
-        )}
-        <Button variant="primary">Add comment</Button>
-      </section>
+      <Row>
+        <h5>{post?.title}</h5>
+      </Row>
+      <Row>
+        <Col sm={6}>
+          <section className="description-section">
+            <p>{post?.description}</p>
+          </section>
+        </Col>
+      </Row>
+      <Row>
+        <section>
+          <h5>Comments</h5>
+          {post?.comments?.length === 0 && <p>No comments</p>}
+          {post?.comments && (
+            <>
+              {post.comments.map((comment: Comment) => (
+                <CommentItem
+                  postId={post?.id}
+                  postAuthorId={post?.uid}
+                  comment={comment}
+                  key={comment.id}
+                />
+              ))}
+            </>
+          )}
+          {isAddingEnable && (
+            <AddCommentForm
+              postId={post?.id ?? ''}
+              postAuthorId={post?.uid ?? ''}
+              setIsAddingEnable={setIsAddingEnable}
+            />
+          )}
+          {!isAddingEnable && (
+            <Button onClick={handleAddComment} variant="primary">
+              Add comment
+            </Button>
+          )}
+        </section>
+      </Row>
     </Container>
   )
 }
