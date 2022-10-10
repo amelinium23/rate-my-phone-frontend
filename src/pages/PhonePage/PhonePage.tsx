@@ -89,7 +89,7 @@ export const PhonePage: FunctionComponent = () => {
         <div className="my-1">
           <Row>
             <Col md={3}>
-              <p>Page size</p>
+              <p>Brands per page</p>
               <PageSizePicker
                 pageSize={state.phonePageSize}
                 pageSizes={phonesPageSizes}
