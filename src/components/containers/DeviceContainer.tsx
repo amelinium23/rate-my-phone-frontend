@@ -3,7 +3,7 @@ import { Button, Container } from 'react-bootstrap'
 
 import { Device, User } from '../../types'
 import { PhoneItem } from '../items/PhoneItem'
-import { PhoneAutoComplete } from '../PhoneAutoComplete'
+import { PhoneAutoComplete } from '../PhotoAutoComplete/PhoneAutoComplete'
 
 interface DeviceContainerProps {
   user?: User

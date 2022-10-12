@@ -18,6 +18,7 @@ export interface Post {
 
 export interface Comment {
   id: string
+  uid: string
   votes: number
-  comment?: string
+  comment: string
 }

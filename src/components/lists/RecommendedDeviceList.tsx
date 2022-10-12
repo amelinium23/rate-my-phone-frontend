@@ -1,7 +1,7 @@
 import { Col } from 'react-bootstrap'
 
 import { Device, RecommendedDevices } from '../../types'
-import { RecommendedDeviceItem } from '../items/RecommendedDeviceItem'
+import { RecommendedDeviceItem } from '../items/RecommendedItem/RecommendedDeviceItem'
 
 interface RecommendedDeviceListProps {
   recommended: RecommendedDevices

@@ -1,4 +1,3 @@
-import axios from 'axios'
 import {
   ChangeEvent,
   Dispatch,
@@ -9,18 +8,9 @@ import {
 import { Form } from 'react-bootstrap'
 import { toast } from 'react-toastify'
 
-import { setIsLoading, setUser, useStore } from '../context'
-import { ApiPhoneResponse, Device, PhoneResponse, User } from '../types'
-
-const getDevices = async () => {
-  const res = await axios.get('/device')
-  return res.data
-}
-
-const changeUserDevice = async (phone: Device, uid: string) => {
-  const res = await axios.put('/user/device', { uid: uid, device: phone })
-  return res.data
-}
+import { setIsLoading, setUser, useStore } from '../../context'
+import { ApiPhoneResponse, Device, PhoneResponse, User } from '../../types'
+import { changeUserDevice, getDevices } from './service'
 
 interface PhoneAutoCompleteProps {
   phone: Device
