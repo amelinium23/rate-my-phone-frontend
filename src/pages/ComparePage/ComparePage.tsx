@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
-import { Button, Container } from 'react-bootstrap'
+import { Button, Container, Table } from 'react-bootstrap'
 import { toast } from 'react-toastify'
 
 import { AutoComplete } from '../../components/AutoComplete'
 import { setIsLoading, useStore } from '../../context'
 import { getComparison } from '../../services/ComparePageService'
 import { getDevices } from '../../services/PhoneAutoCompleteService'
-import { ApiPhoneResponse } from '../../types'
+import { ApiPhoneResponse, DeviceDetails } from '../../types'
 
 type DeviceIds = { [key: string]: string }
 
@@ -24,7 +24,9 @@ export const ComparePage = () => {
     totalPhones: 1,
   } as ApiPhoneResponse)
 
-  const [comparison, setComparison] = useState({})
+  const [comparison, setComparison] = useState<{
+    [key: string]: DeviceDetails
+  }>({})
 
   useEffect(() => {
     const fetchDevices = async () => {
@@ -72,6 +74,22 @@ export const ComparePage = () => {
       </Container>
       <Container className="d-flex p-0 my-2 justify-content-center">
         <Button onClick={handleCompare}>Compare</Button>
+      </Container>
+      <Container className="d-flex p-0 my-2 justify-content-center">
+        {Object.keys(comparison).length > 0 && (
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                {Object.values(deviceIds).map(
+                  (deviceId) =>
+                    deviceId !== '' && (
+                      <td key={deviceId}>{comparison[deviceId].device_name}</td>
+                    )
+                )}
+              </tr>
+            </thead>
+          </Table>
+        )}
       </Container>
     </Container>
   )
