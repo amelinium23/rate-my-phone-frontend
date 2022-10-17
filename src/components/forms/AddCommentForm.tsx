@@ -2,9 +2,9 @@ import { ChangeEvent, FormEvent, useState } from 'react'
 import { Button, Container, Form } from 'react-bootstrap'
 import { toast } from 'react-toastify'
 
-import { useStore } from '../../../context'
-import { Comment } from '../../../types'
-import { createNewComment } from './commentService'
+import { useStore } from '../../context'
+import { createNewComment } from '../../services/CommentService'
+import { Comment } from '../../types'
 
 interface AddCommentFormProps {
   postId: string

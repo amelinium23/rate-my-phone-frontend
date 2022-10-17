@@ -9,7 +9,12 @@ import { ArrowBigDown, ArrowBigTop } from 'tabler-icons-react'
 import { useStore } from '../../../context'
 import { Post, User } from '../../../types'
 import { COLORS } from '../../../utils/constants'
-import { deletePost, downVotePost, getUser, upVotePost } from './postService'
+import {
+  deletePost,
+  downVotePost,
+  getUser,
+  upVotePost,
+} from './PostItemService'
 
 interface PostItemProps {
   post: Post

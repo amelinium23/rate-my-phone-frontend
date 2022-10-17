@@ -1,6 +1,5 @@
 import './index.css'
 
-import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { Button, Col, Container, Row, Table } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
@@ -10,19 +9,13 @@ import { Share } from 'tabler-icons-react'
 import { PhotosContainer } from '../../components/containers/PhotosContainer'
 import { PricesContainer } from '../../components/containers/PricesContainer'
 import { setIsLoading, useStore } from '../../context'
+import { getDetails } from '../../services'
 import {
   DeviceDetails,
   MoreSpecification,
   SpecificationDetails,
 } from '../../types'
 import { notUsedKeysDetailsPage } from '../../utils/constants'
-
-const getDetails = async (key?: string) => {
-  const response = await axios.get('/device/details', {
-    params: { device_key: key },
-  })
-  return response.data
-}
 
 const upperFirstLetter = (brandName: string) =>
   brandName.charAt(0).toUpperCase() + brandName.slice(1)

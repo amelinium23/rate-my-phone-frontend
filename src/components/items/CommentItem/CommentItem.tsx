@@ -6,13 +6,13 @@ import { toast } from 'react-toastify'
 import { ArrowBigDown, ArrowBigTop } from 'tabler-icons-react'
 
 import { useStore } from '../../../context'
-import { Comment } from '../../../types'
 import {
   deleteComment,
   downVoteComment,
   editComment,
   upVoteComment,
-} from './commentItemService'
+} from '../../../services/CommentItemService'
+import { Comment } from '../../../types'
 
 interface CommentItemProps {
   comment: Comment

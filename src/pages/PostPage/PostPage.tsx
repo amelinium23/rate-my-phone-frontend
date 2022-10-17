@@ -6,7 +6,7 @@ import { Button, Col, Container, Row } from 'react-bootstrap'
 import { useParams } from 'react-router'
 import { toast } from 'react-toastify'
 
-import { AddCommentForm } from '../../components/forms/AddCommentForm/AddCommentForm'
+import { AddCommentForm } from '../../components/forms/AddCommentForm'
 import CommentItem from '../../components/items/CommentItem/CommentItem'
 import { setIsLoading, useStore } from '../../context'
 import { Comment, Post } from '../../types'

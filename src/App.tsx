@@ -8,6 +8,7 @@ import { Loader } from './components/Loader'
 import { Store } from './context/Store'
 import {
   BrandPage,
+  ComparePage,
   DetailsPage,
   EditPostPage,
   ForumPage,
@@ -52,6 +53,7 @@ export const App = () => {
           <Route path="/post/p/:id" element={<PostPage />} />
           <Route path="/my-posts" element={<UserPostsPage />} />
           <Route path="/edit-post/p/:id" element={<EditPostPage />} />
+          <Route path="/compare" element={<ComparePage />} />
         </Routes>
         <ToastContainer
           limit={3}

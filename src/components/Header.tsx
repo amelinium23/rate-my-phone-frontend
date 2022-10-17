@@ -1,5 +1,5 @@
 import { signOut } from 'firebase/auth'
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, KeyboardEvent, useState } from 'react'
 import {
   Button,
   Container,
@@ -49,7 +49,7 @@ export const Header = () => {
     navigate(`/search/q/${searchString}`)
   }
 
-  const handleSearchKeyPress = (e: any) => {
+  const handleSearchKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       handleSearchNavigation()
     }
@@ -80,6 +80,9 @@ export const Header = () => {
           </Link>
           <Link to="/forum" className="me-auto nav-link">
             Forum
+          </Link>
+          <Link to="/compare" className="me-auto nav-link">
+            Compare
           </Link>
         </Nav>
         <Navbar.Collapse className="justify-content-end">

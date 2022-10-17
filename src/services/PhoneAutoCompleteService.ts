@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import { Device } from '../../types'
+import { Device } from '../types'
 
 const getDevices = async () => {
   const res = await axios.get('/device')

@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import { Comment } from '../../../types'
+import { Comment } from '../types'
 
 const createNewComment = async (
   comment: Comment,

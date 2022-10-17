@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router'
 import { toast } from 'react-toastify'
 
 import { useStore } from '../../context'
+import { createNewPost, updatePost } from '../../services/PostFormService'
 import { Post, PostType } from '../../types'
-import { createNewPost, updatePost } from './service'
 
 interface PostFormProps {
   post?: Post

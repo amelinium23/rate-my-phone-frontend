@@ -1,16 +1,16 @@
 export interface Device {
+  key: string
   device_image: string
   device_name: string
-  key: string
   device_id: number
   device_type?: string
 }
 
 export interface PhoneResponse {
+  key: string
   brand_id: number
   brand_name: string
   device_list: Device[]
-  key: string
 }
 
 export interface ApiPhoneResponse {

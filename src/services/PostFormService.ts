@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import { Post } from '../../types'
+import { Post } from '../types'
 
 const createNewPost = async (
   post: Post,
