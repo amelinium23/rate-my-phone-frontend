@@ -8,6 +8,7 @@ interface AutoCompleteProps {
   orderKey: string
   deviceIds: { [key: string]: string }
   setDeviceIds: (deviceIds: { [key: string]: string }) => void
+  deviceId: string
 }
 
 export const AutoComplete = ({
@@ -15,8 +16,13 @@ export const AutoComplete = ({
   orderKey,
   deviceIds,
   setDeviceIds,
+  deviceId,
 }: AutoCompleteProps) => {
-  const [device, setDevice] = useState<Device | null>(null)
+  const starterDevice = devices.data
+    .map((response) => response.device_list)
+    .flat()
+    .find((device) => device?.key === deviceId)
+  const [device, setDevice] = useState<Device | null>(starterDevice ?? null)
 
   const handleSelectingDevice = (e: ChangeEvent<HTMLSelectElement>) => {
     const selectedDeviceName = e.target.value
