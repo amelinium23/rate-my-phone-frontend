@@ -92,9 +92,8 @@ export const DetailsPage = () => {
         </Col>
         {deviceDetails.device_image && deviceDetails.pictures && (
           <PhotosContainer
-            device_image={deviceDetails.device_image}
             pictures={deviceDetails.pictures}
-            deviceName={deviceName ? deviceName : ''}
+            deviceName={deviceName ?? ''}
           />
         )}
       </Row>
