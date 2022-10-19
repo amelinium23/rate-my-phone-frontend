@@ -7,13 +7,12 @@ import { setIsLoading, useStore } from '../../context'
 import { getComparison } from '../../services/ComparePageService'
 import { getDevices } from '../../services/PhoneAutoCompleteService'
 import { ApiPhoneResponse, DeviceDetails } from '../../types'
+import { notUsedKeysDetailsPage } from '../../utils/constants'
 import { upperFirstLetter } from '../../utils/helperFunctions'
-
-type DeviceIds = { [key: string]: string }
 
 export const ComparePage = () => {
   const { state, dispatch } = useStore()
-  const [deviceIds, setDeviceIds] = useState<DeviceIds>({
+  const [deviceIds, setDeviceIds] = useState<Record<string, string>>({
     first: '',
     second: '',
     third: '',
@@ -25,9 +24,10 @@ export const ComparePage = () => {
     totalPhones: 1,
   } as ApiPhoneResponse)
 
-  const [comparison, setComparison] = useState<{
-    [key: string]: DeviceDetails
-  }>({})
+  const [comparison, setComparison] = useState<Record<string, DeviceDetails>>(
+    {}
+  )
+  const [response, setResponse] = useState<Record<string, DeviceDetails>>({})
 
   useEffect(() => {
     const fetchDevices = async () => {
@@ -50,7 +50,24 @@ export const ComparePage = () => {
       try {
         setIsLoading(dispatch, true)
         const res = await getComparison(deviceIdsArray)
-        setComparison(res)
+        setResponse(res)
+        const comparison = Object.keys(res).reduce((obj, deviceId) => {
+          return {
+            ...obj,
+            [deviceId]: Object.keys(res[deviceId])
+              .filter(
+                (key) =>
+                  !notUsedKeysDetailsPage.includes(key) && key !== 'device_name'
+              )
+              .reduce((comparisonDetails, key) => {
+                return {
+                  ...comparisonDetails,
+                  [key]: res[deviceId][key as keyof DeviceDetails],
+                }
+              }, {}),
+          }
+        }, {})
+        setComparison(comparison)
       } catch (e) {
         toast.error((e as Error).message)
       } finally {
@@ -59,9 +76,6 @@ export const ComparePage = () => {
     }
     fetchComparison()
   }, [deviceIds])
-
-  console.log(deviceIds)
-  console.log(comparison)
 
   return (
     !state.isLoading && (
@@ -86,16 +100,17 @@ export const ComparePage = () => {
                 <Table bordered hover>
                   <thead>
                     <tr>
+                      <td></td>
                       {Object.values(deviceIds).map(
                         (deviceId) =>
                           deviceId !== '' && (
                             <td key={deviceId}>
                               <p className="text-center">
-                                {comparison[deviceId]?.device_name}
+                                {response[deviceId]?.device_name}
                               </p>
                               <div className="d-flex justify-content-center">
                                 <Image
-                                  src={comparison[deviceId]?.device_image}
+                                  src={response[deviceId]?.device_image}
                                   height="30%"
                                 />
                               </div>
@@ -105,24 +120,20 @@ export const ComparePage = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      {Object.values(deviceIds)
-                        .filter((deviceKey) => deviceKey !== '')
-                        .map((deviceKey) => (
-                          <td className="text-center" key={deviceKey}>
-                            {comparison[deviceKey]?.device_name}
-                          </td>
-                        ))}
-                    </tr>
-                    {Object.keys(comparison).length > 0 &&
-                      Object.values(comparison).map((deviceDetails) =>
-                        Object.entries(deviceDetails).map(([key, value]) => (
-                          <tr key={key}>
-                            <td>{upperFirstLetter(key.replace(/_/g, ' '))}</td>
-                            <td>{JSON.stringify(value)}</td>
-                          </tr>
-                        ))
-                      )}
+                    {Object.keys(comparison[Object.keys(comparison)[0]]).map(
+                      (key) => (
+                        <tr key={key}>
+                          <td>{upperFirstLetter(key.replace(/_/g, ' '))}</td>
+                          {Object.keys(comparison).map((deviceKey) => (
+                            <td key={deviceKey}>
+                              {comparison[deviceKey][
+                                key as keyof DeviceDetails
+                              ] || 'N/A'}
+                            </td>
+                          ))}
+                        </tr>
+                      )
+                    )}
                   </tbody>
                 </Table>
               )}
