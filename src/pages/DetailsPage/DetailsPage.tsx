@@ -49,6 +49,8 @@ export const DetailsPage = () => {
     toast.success('URL copied to clipboard!')
   }
 
+  console.log(deviceDetails)
+
   return storeState.isLoading ? null : (
     <Container className="my-2">
       <Container className="my-1 p-0">
@@ -90,7 +92,7 @@ export const DetailsPage = () => {
             </tbody>
           </Table>
         </Col>
-        {deviceDetails.device_image && deviceDetails.pictures && (
+        {deviceDetails?.pictures && (
           <PhotosContainer
             pictures={deviceDetails.pictures}
             deviceName={deviceName ?? ''}
@@ -134,7 +136,7 @@ export const DetailsPage = () => {
         </Col>
         <Col md={4}>
           <h5 className="text-center">Prices</h5>
-          <PricesContainer prices={deviceDetails?.prices} />
+          <PricesContainer prices={deviceDetails.prices} />
         </Col>
       </Row>
     </Container>

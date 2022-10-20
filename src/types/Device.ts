@@ -30,7 +30,7 @@ export interface DeviceDetails extends Device {
   more_information: object[]
   more_specification: MoreSpecification[]
   os_type: string
-  prices: object
+  prices: Record<string, PriceDetails[]>
   pictures: string[]
   release_date: string
   storage: string

@@ -5,7 +5,7 @@ import { PriceDetails } from '../../types'
 import { PriceItem } from '../items/PriceItem'
 
 interface PricesContainerProps {
-  prices: object
+  prices: Record<string, PriceDetails[]>
 }
 
 export const PricesContainer: FunctionComponent<PricesContainerProps> = ({
@@ -21,7 +21,7 @@ export const PricesContainer: FunctionComponent<PricesContainerProps> = ({
 
   return (
     <>
-      {!Object.entries(prices) ? (
+      {Object.entries(prices) ? (
         Object.entries(prices).map(([key, value]: [string, PriceDetails[]]) => (
           <Row className="d-flex justify-content-center text-center" key={key}>
             <p className="text-left">{key}</p>
