@@ -10,12 +10,14 @@ interface AddCommentFormProps {
   postId: string
   postAuthorId: string
   setIsAddingEnable: (isAddingEnable: boolean) => void
+  setPost: (comment: Comment) => void
 }
 
 export const AddCommentForm = ({
   postId,
   postAuthorId,
   setIsAddingEnable,
+  setPost,
 }: AddCommentFormProps) => {
   const { state } = useStore()
   const [commentBody, setCommentBody] = useState('')
@@ -31,6 +33,7 @@ export const AddCommentForm = ({
         postAuthorId,
         token || ''
       )
+      setPost(res)
       toast.success(`Successfully created comment ${res.id}`)
     } catch (e) {
       toast.error((e as Error).message)

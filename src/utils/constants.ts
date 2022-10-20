@@ -22,6 +22,7 @@ export const COLORS = {
   [PostType.QUESTION]: { background: '#f8f9fa', color: 'black' },
   [PostType.DISCUSSION]: { background: '#8d6a9f', color: 'white' },
   [PostType.LISTING]: { background: '#0aa18f', color: 'white' },
+  '': { background: '#ffffff', color: 'white' },
 }
 
 export const backgroundImageUrl =

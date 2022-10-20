@@ -18,12 +18,16 @@ interface CommentItemProps {
   comment: Comment
   postAuthorId: string
   postId: string
+  handleEditComment: (comment: Comment) => void
+  handleDeleteComment: (comment: Comment) => void
 }
 
 export default function CommentItem({
   comment,
   postAuthorId,
   postId,
+  handleEditComment,
+  handleDeleteComment,
 }: CommentItemProps) {
   const [isEditing, setIsEditing] = useState<boolean>(false)
   const [commentBody, setCommentBody] = useState<string>(comment.comment || '')
@@ -39,6 +43,7 @@ export default function CommentItem({
         postAuthorId,
         token || ''
       )
+      handleEditComment({ ...comment, votes: comment?.votes + 1 } as Comment)
       toast.success(res)
     } catch (e) {
       toast.error((e as Error).message)
@@ -62,6 +67,7 @@ export default function CommentItem({
         postAuthorId,
         token || ''
       )
+      handleDeleteComment(comment)
       toast.success(res)
     } catch (e) {
       toast.error((e as Error).message)
@@ -77,6 +83,7 @@ export default function CommentItem({
         postAuthorId,
         token || ''
       )
+      handleEditComment({ ...comment, votes: comment?.votes - 1 } as Comment)
       toast.success(res)
     } catch (e) {
       toast.error((e as Error).message)
@@ -93,6 +100,8 @@ export default function CommentItem({
         postAuthorId,
         token || ''
       )
+      handleEditComment({ ...comment, comment: commentBody } as Comment)
+      handleEdit()
       toast.success(res)
     } catch (e) {
       toast.error((e as Error).message)

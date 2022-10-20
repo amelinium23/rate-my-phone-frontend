@@ -21,7 +21,7 @@ export const PricesContainer: FunctionComponent<PricesContainerProps> = ({
 
   return (
     <>
-      {Object.entries(prices) ? (
+      {Object.entries(prices).length > 0 ? (
         Object.entries(prices).map(([key, value]: [string, PriceDetails[]]) => (
           <Row className="d-flex justify-content-center text-center" key={key}>
             <p className="text-left">{key}</p>
