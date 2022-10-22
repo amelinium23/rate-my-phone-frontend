@@ -1,12 +1,13 @@
 import axios from 'axios'
-import { FunctionComponent, useEffect, useState } from 'react'
-import { Button, Col, Container, Row } from 'react-bootstrap'
+import { ChangeEvent, FunctionComponent, useEffect, useState } from 'react'
+import { Button, Col, Container, Form, Row } from 'react-bootstrap'
 import { useNavigate } from 'react-router'
 import { toast } from 'react-toastify'
 
 import { PostItem } from '../../components/items/PostItem/PostItem'
 import { setIsLoading, useStore } from '../../context'
 import { Post } from '../../types'
+import { postSortingKeys, sortingModes } from '../../utils/constants'
 
 const getPosts = async () => {
   const res = await axios.get('/forum')
@@ -16,6 +17,8 @@ const getPosts = async () => {
 export const ForumPage: FunctionComponent = () => {
   const { state, dispatch } = useStore()
   const [posts, setPosts] = useState<Post[]>([])
+  const [sortingKey, setSortingKey] = useState<string>(postSortingKeys[0])
+  const [sortingMode, setSortingMode] = useState<string>(sortingModes[0])
   const navigate = useNavigate()
 
   const handleAddingPost = () => {
@@ -28,6 +31,14 @@ export const ForumPage: FunctionComponent = () => {
 
   const handleDeletePost = (post: Post) => {
     setPosts((prevPosts) => prevPosts.filter((p) => p.id !== post.id))
+  }
+
+  const handleChangeOfSortingKey = (e: ChangeEvent<HTMLSelectElement>) => {
+    setSortingKey(e.target.value)
+  }
+
+  const handleChangeOfSortingMode = (e: ChangeEvent<HTMLSelectElement>) => {
+    setSortingMode(e.target.value)
   }
 
   const handleEditPost = (post: Post) => {
@@ -59,10 +70,36 @@ export const ForumPage: FunctionComponent = () => {
     <Container className="my-2">
       <h5 className="text-center">Latest posts</h5>
       {state.auth.currentUser && (
-        <Row className="my-1">
-          <Col md={{ span: 2, offset: 10 }}>
+        <Row className="my-2">
+          <Col sm={2}>
+            <Form.Label>Sort by</Form.Label>
+            <Form.Select
+              size="sm"
+              onChange={handleChangeOfSortingKey}
+              value={sortingKey}
+            >
+              {postSortingKeys.sort().map((option) => (
+                <option key={option}>{option}</option>
+              ))}
+            </Form.Select>
+          </Col>
+          <Col sm={2}>
+            <Form.Label>Sorting mode</Form.Label>
+            <Form.Select
+              size="sm"
+              onChange={handleChangeOfSortingMode}
+              value={sortingMode}
+            >
+              {sortingModes.sort().map((option) => (
+                <option key={option}>{option}</option>
+              ))}
+            </Form.Select>
+          </Col>
+          <Col sm={{ span: 2, offset: 6 }}>
             <div className="float-end">
-              <Button onClick={handleAddingPost}>New post</Button>
+              <Button variant="outline-primary" onClick={handleAddingPost}>
+                New post
+              </Button>
             </div>
           </Col>
         </Row>

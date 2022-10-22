@@ -14,12 +14,13 @@ import { toast } from 'react-toastify'
 import { Article, Login, Logout, Search, User } from 'tabler-icons-react'
 
 import { setUser, useStore } from '../context'
+import { PHOTO_URL } from '../utils/constants'
 
 export const Header = () => {
   const navigate = useNavigate()
   const { state, dispatch } = useStore()
   const [searchString, setSearchString] = useState<string>('')
-  const user = state.auth.currentUser
+  const firebaseUser = state.auth.currentUser
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchString(e.target.value)
@@ -34,10 +35,12 @@ export const Header = () => {
   }
 
   const handleLogout = async () => {
-    if (user !== null) {
+    if (firebaseUser !== null) {
       await signOut(state.auth)
         .then(() =>
-          toast.success(`${user.displayName || user.email} logged out`)
+          toast.success(
+            `${firebaseUser.displayName || firebaseUser.email} logged out`
+          )
         )
         .catch((err) => toast.error(err.message))
       setUser(dispatch, null)
@@ -106,9 +109,16 @@ export const Header = () => {
           <NavDropdown
             menuVariant="dark"
             align="end"
-            title={<User size={30} color="#fff" strokeWidth={1} />}
+            title={
+              <Image
+                src={firebaseUser?.photoURL ?? PHOTO_URL}
+                height={40}
+                style={{ backgroundColor: 'transparent' }}
+                roundedCircle
+              />
+            }
           >
-            {state.auth?.currentUser !== null ? (
+            {firebaseUser !== null ? (
               <>
                 <NavDropdown.Item disabled>
                   {`Signed as ${
