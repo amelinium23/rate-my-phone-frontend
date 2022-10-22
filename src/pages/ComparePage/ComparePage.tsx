@@ -77,70 +77,68 @@ export const ComparePage = () => {
     fetchComparison()
   }, [deviceIds])
 
-  return (
-    !state.isLoading && (
-      <Container className="p-0 my-2">
-        <h5 className="text-center">Compare devices</h5>
-        <Container className="d-flex p-0 justify-content-center">
-          {Object.entries(deviceIds).map(([orderKey, deviceId]) => (
-            <AutoComplete
-              key={orderKey}
-              deviceIds={deviceIds}
-              setDeviceIds={setDeviceIds}
-              orderKey={orderKey}
-              devices={devices}
-              deviceId={deviceId}
-            />
-          ))}
-        </Container>
-        {state.isLoading ? null : (
-          <>
-            <Container className="d-flex my-2 justify-content-center">
-              {Object.keys(comparison).length > 0 && (
-                <Table bordered hover>
-                  <thead>
-                    <tr>
-                      <td></td>
-                      {Object.values(deviceIds).map(
-                        (deviceId) =>
-                          deviceId !== '' && (
-                            <td key={deviceId}>
-                              <p className="text-center">
-                                {response[deviceId]?.device_name}
-                              </p>
-                              <div className="d-flex justify-content-center">
-                                <Image
-                                  src={response[deviceId]?.device_image}
-                                  height="30%"
-                                />
-                              </div>
-                            </td>
-                          )
-                      )}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {Object.keys(comparison[Object.keys(comparison)[0]]).map(
-                      (key) => (
-                        <tr key={key}>
-                          <td>{upperFirstLetter(key.replace(/_/g, ' '))}</td>
-                          {Object.keys(comparison).map((deviceKey) => (
-                            <td key={deviceKey}>
-                              {comparison[deviceKey][
-                                key as keyof DeviceDetails
-                              ] || 'N/A'}
-                            </td>
-                          ))}
-                        </tr>
-                      )
-                    )}
-                  </tbody>
-                </Table>
-              )}
-            </Container>
-          </>
-        )}
+  return !state.isLoading ? (
+    <Container className="p-0 my-2">
+      <h5 className="text-center">Compare devices</h5>
+      <Container className="d-flex p-0 justify-content-center">
+        {Object.entries(deviceIds).map(([orderKey, deviceId]) => (
+          <AutoComplete
+            key={orderKey}
+            deviceIds={deviceIds}
+            setDeviceIds={setDeviceIds}
+            orderKey={orderKey}
+            devices={devices}
+            deviceId={deviceId}
+          />
+        ))}
       </Container>
-    )
-  )
+      {state.isLoading ? null : (
+        <>
+          <Container className="d-flex my-2 justify-content-center">
+            {Object.keys(comparison).length > 0 && (
+              <Table bordered hover>
+                <thead>
+                  <tr>
+                    <td></td>
+                    {Object.values(deviceIds).map(
+                      (deviceId) =>
+                        deviceId !== '' && (
+                          <td key={deviceId}>
+                            <p className="text-center">
+                              {response[deviceId]?.device_name}
+                            </p>
+                            <div className="d-flex justify-content-center">
+                              <Image
+                                src={response[deviceId]?.device_image}
+                                height="30%"
+                              />
+                            </div>
+                          </td>
+                        )
+                    )}
+                  </tr>
+                </thead>
+                <tbody>
+                  {Object.keys(comparison[Object.keys(comparison)[0]]).map(
+                    (key) => (
+                      <tr key={key}>
+                        <td>{upperFirstLetter(key.replace(/_/g, ' '))}</td>
+                        {Object.keys(comparison).map((deviceKey) => (
+                          <td key={deviceKey}>
+                            {comparison[deviceKey][
+                              key as keyof DeviceDetails
+                            ] || 'N/A'}
+                          </td>
+                        ))}
+                      </tr>
+                    )
+                  )}
+                </tbody>
+              </Table>
+            )}
+          </Container>
+        </>
+      )}
+    </Container>
+  ) : null
 }

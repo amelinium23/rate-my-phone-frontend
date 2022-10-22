@@ -16,30 +16,24 @@ const deletePost = async (postId: string, token: string) => {
 }
 
 const upVotePost = async (post: Post, token: string) => {
-  const formData = new FormData()
-  formData.append('title', post.title)
-  formData.append('description', post.description)
-  formData.append('uid', post.uid)
-  formData.append('type', post.type)
-  formData.append('post_id', post.id)
-  formData.append('votes', (post.votes + 1).toString())
-  const res = await axios.put('/forum/post', formData, {
-    headers: { Authorization: `Bearer ${token}` },
-  })
+  const res = await axios.put(
+    '/forum/post',
+    { ...post, votes: post.votes + 1 },
+    {
+      headers: { Authorization: `Bearer ${token}` },
+    }
+  )
   return res.data
 }
 
 const downVotePost = async (post: Post, token: string) => {
-  const formData = new FormData()
-  formData.append('title', post.title)
-  formData.append('description', post.description)
-  formData.append('uid', post.uid)
-  formData.append('type', post.type)
-  formData.append('post_id', post.id)
-  formData.append('votes', (post.votes - 1).toString())
-  const res = await axios.put('/forum/post', formData, {
-    headers: { Authorization: `Bearer ${token}` },
-  })
+  const res = await axios.put(
+    '/forum/post',
+    { ...post, votes: post.votes - 1 },
+    {
+      headers: { Authorization: `Bearer ${token}` },
+    }
+  )
   return res.data
 }
 

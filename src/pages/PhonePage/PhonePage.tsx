@@ -1,6 +1,6 @@
 import axios from 'axios'
-import { FunctionComponent, useEffect, useState } from 'react'
-import { Col, Container, Row } from 'react-bootstrap'
+import { ChangeEvent, useEffect, useState } from 'react'
+import { Col, Container, Form, Row } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
@@ -15,10 +15,13 @@ import {
 } from '../../context'
 import { Device, PhoneResponse } from '../../types'
 import { phonesPageSizes } from '../../utils/constants'
+import { sortingModes } from '../../utils/constants'
+import { upperFirstLetter } from '../../utils/helperFunctions'
 
 const getPhones = async (
   pageSize: number,
   pageNumber: number,
+  sortMode: string,
   key?: string
 ) => {
   const res = await axios.get(
@@ -29,13 +32,22 @@ const getPhones = async (
             brand_key: key,
           },
         }
-      : { params: { page_size: pageSize, page_number: pageNumber } }
+      : {
+          params: {
+            page_size: pageSize,
+            page_number: pageNumber,
+            sort_mode: sortMode.toLowerCase(),
+          },
+        }
   )
   return res.data
 }
 
-export const PhonePage: FunctionComponent = () => {
+export const PhonePage = () => {
   const { state, dispatch } = useStore()
+  const [phoneSortingMode, setPhoneSortingMode] = useState(
+    sortingModes[0] || ''
+  )
   const { key } = useParams()
   const [phoneResponses, setPhoneResponses] = useState({
     total: 300,
@@ -50,6 +62,7 @@ export const PhonePage: FunctionComponent = () => {
         const res = await getPhones(
           state.phonePageSize,
           state.phonePageNumber,
+          phoneSortingMode,
           key
         )
         setPhoneResponses(res)
@@ -61,7 +74,11 @@ export const PhonePage: FunctionComponent = () => {
       }
     }
     fetchPhones()
-  }, [state.phonePageSize, state.phonePageNumber])
+  }, [state.phonePageSize, state.phonePageNumber, phoneSortingMode])
+
+  const handleSortingModeChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    setPhoneSortingMode(e.target.value)
+  }
 
   return state.isLoading ? null : (
     <Container className="mt-2">
@@ -96,7 +113,19 @@ export const PhonePage: FunctionComponent = () => {
                 onPageSizeChange={setPhonePageSize}
               />
             </Col>
-            <Col md={{ span: 3, offset: 6 }}>
+            <Col md={3}>
+              <p>Sorting mode</p>
+              <Form.Select
+                size="sm"
+                value={phoneSortingMode}
+                onChange={handleSortingModeChange}
+              >
+                {sortingModes.map((mode) => (
+                  <option key={mode}>{upperFirstLetter(mode)}</option>
+                ))}
+              </Form.Select>
+            </Col>
+            <Col md={{ span: 3, offset: 3 }}>
               <p className="text-end">
                 Total phones {phoneResponses.totalPhones}
               </p>

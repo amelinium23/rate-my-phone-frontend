@@ -37,6 +37,19 @@ export const UserPostsPage: FunctionComponent = () => {
     fetchUserPosts()
   }, [])
 
+  const handleDeletePost = (post: Post) => {
+    setPosts((prevPosts) => prevPosts.filter((p) => p.id !== post.id))
+  }
+
+  const handleEditPost = (post: Post) => {
+    setPosts((prevPosts) => {
+      const foundPostIndex = prevPosts.findIndex((p) => p.id === post.id)
+      const newPosts = [...prevPosts]
+      newPosts[foundPostIndex] = post
+      return newPosts
+    })
+  }
+
   return (
     <Container className="mt-2">
       <h5 className="text-center">
@@ -46,7 +59,13 @@ export const UserPostsPage: FunctionComponent = () => {
         <p className="text-center">You did not create any posts yet.</p>
       )}
       {posts.map((post) => (
-        <PostItem key={post.id} post={post} isEditingEnable={true} />
+        <PostItem
+          key={post.id}
+          post={post}
+          handleDeletePost={handleDeletePost}
+          handleEditPost={handleEditPost}
+          isEditingEnable={true}
+        />
       ))}
     </Container>
   )

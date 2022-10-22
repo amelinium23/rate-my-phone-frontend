@@ -48,4 +48,11 @@ const updatePost = async (
   return res.data
 }
 
-export { createNewPost, updatePost }
+const getPricesOfDevice = async (deviceKey: string) => {
+  const res = await axios.get(`/device/price`, {
+    params: { device_key: deviceKey },
+  })
+  return res.data
+}
+
+export { createNewPost, getPricesOfDevice, updatePost }

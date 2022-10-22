@@ -18,10 +18,17 @@ import {
 
 interface PostItemProps {
   post: Post
+  handleEditPost: (post: Post) => void
+  handleDeletePost: (post: Post) => void
   isEditingEnable?: boolean
 }
 
-export const PostItem = ({ post, isEditingEnable = false }: PostItemProps) => {
+export const PostItem = ({
+  post,
+  handleDeletePost,
+  handleEditPost,
+  isEditingEnable = false,
+}: PostItemProps) => {
   const navigate = useNavigate()
   const { state } = useStore()
   const [user, setUser] = useState<User | null>(null)
@@ -47,12 +54,25 @@ export const PostItem = ({ post, isEditingEnable = false }: PostItemProps) => {
     navigate(`/edit-post/p/${post.id}`, { state: post })
   }
 
+  const handleUpVote = async () => {
+    upVotePost(post, (await firebaseUser?.getIdToken()) ?? '')
+    handleEditPost({ ...post, votes: post.votes + 1 } as Post)
+  }
+
+  const handleDownVote = async () => {
+    downVotePost(post, (await firebaseUser?.getIdToken()) ?? '')
+    if (post.votes > 0) {
+      handleEditPost({ ...post, votes: post.votes - 1 } as Post)
+    }
+  }
+
   const handleDelete = async () => {
     try {
       const res = await deletePost(
         post.id,
         (await firebaseUser?.getIdToken()) ?? ''
       )
+      handleDeletePost(post)
       toast.success(res)
     } catch (e) {
       toast.error((e as Error).message)
@@ -62,14 +82,16 @@ export const PostItem = ({ post, isEditingEnable = false }: PostItemProps) => {
   return (
     <Card className="my-1 post-item">
       <Card.Header className="post-header">
-        <h5>{post.title} </h5>
-        <span style={COLORS[post.type]} className="post-type">
-          {post.type}
-        </span>
+        <h5>
+          {post.title}{' '}
+          <span style={COLORS[post.type]} className="post-type">
+            {post.type}
+          </span>
+        </h5>
       </Card.Header>
       <Card.Body onClick={handleNavigate}>
         <p>{post.description}</p>
-        <p>Posted by {user?.display_name || 'stranger'}</p>
+        {user && <p>Posted by {user?.display_name || 'stranger'}</p>}
       </Card.Body>
       <Card.Footer className="post-footer">
         {firebaseUser && (
@@ -78,18 +100,14 @@ export const PostItem = ({ post, isEditingEnable = false }: PostItemProps) => {
             <Button
               className="p-0"
               variant="outline-light"
-              onClick={async () =>
-                upVotePost(post, (await firebaseUser?.getIdToken()) ?? '')
-              }
+              onClick={handleUpVote}
             >
               <ArrowBigTop size={20} strokeWidth={0.6} color={'black'} />
             </Button>
             <Button
               className="mx-1 p-0"
               variant="outline-light"
-              onClick={async () =>
-                downVotePost(post, (await firebaseUser?.getIdToken()) ?? '')
-              }
+              onClick={handleDownVote}
             >
               <ArrowBigDown size={20} strokeWidth={0.6} color={'black'} />
             </Button>

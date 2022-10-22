@@ -91,9 +91,9 @@ export const PostPage = () => {
             <p>{post?.description}</p>
           </section>
         </Col>
-        {post?.images && (
+        {post?.images && post?.images?.length > 0 && (
           <Col sm={4} className="d-flex justify-content-end">
-            <PhotosContainer pictures={post?.images} />
+            <PhotosContainer pictures={post?.images ?? []} />
           </Col>
         )}
       </Row>

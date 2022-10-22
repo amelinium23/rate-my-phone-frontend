@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { FunctionComponent, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import { useParams } from 'react-router'
 import { toast } from 'react-toastify'
@@ -16,7 +16,7 @@ const getSearchResults = async (searchString: string) => {
   return res.data
 }
 
-export const SearchResultPage: FunctionComponent = () => {
+export const SearchResultPage = () => {
   const { dispatch } = useStore()
   const { query } = useParams()
   const [searchResults, setSearchResults] = useState<SearchResult>({})

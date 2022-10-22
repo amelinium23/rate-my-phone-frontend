@@ -26,6 +26,19 @@ export const ForumPage: FunctionComponent = () => {
     }
   }
 
+  const handleDeletePost = (post: Post) => {
+    setPosts((prevPosts) => prevPosts.filter((p) => p.id !== post.id))
+  }
+
+  const handleEditPost = (post: Post) => {
+    setPosts((prevPosts) => {
+      const foundPostIndex = prevPosts.findIndex((p) => p.id === post.id)
+      const newPosts = [...prevPosts]
+      newPosts[foundPostIndex] = post
+      return newPosts
+    })
+  }
+
   useEffect(() => {
     const fetchPosts = async () => {
       try {
@@ -57,7 +70,13 @@ export const ForumPage: FunctionComponent = () => {
       {posts.length === 0 && <h5 className="text-center">No post found</h5>}
       {posts &&
         posts.map((post: Post) => (
-          <PostItem key={post.id} post={post} isEditingEnable={false} />
+          <PostItem
+            key={post.id}
+            post={post}
+            handleDeletePost={handleDeletePost}
+            handleEditPost={handleEditPost}
+            isEditingEnable={false}
+          />
         ))}
     </Container>
   )

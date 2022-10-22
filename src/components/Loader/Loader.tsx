@@ -2,7 +2,7 @@ import './index.css'
 
 import { Spinner } from 'react-bootstrap'
 
-import { useStore } from '../context/Store'
+import { useStore } from '../../context/Store'
 
 export const Loader = () => {
   const { state } = useStore()
