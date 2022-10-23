@@ -9,8 +9,10 @@ import { setIsLoading, useStore } from '../../context'
 import { Post } from '../../types'
 import { postSortingKeys, sortingModes } from '../../utils/constants'
 
-const getPosts = async () => {
-  const res = await axios.get('/forum')
+const getPosts = async (sortMode: string, sortBy: string) => {
+  const res = await axios.get('/forum', {
+    params: { sort_mode: sortMode, sort_by: sortBy },
+  })
   return res.data
 }
 
@@ -54,7 +56,7 @@ export const ForumPage: FunctionComponent = () => {
     const fetchPosts = async () => {
       try {
         setIsLoading(dispatch, true)
-        const posts: Post[] = await getPosts()
+        const posts: Post[] = await getPosts(sortingMode, sortingKey)
         setPosts(posts)
       } catch (err) {
         const er = err as Error
@@ -64,7 +66,7 @@ export const ForumPage: FunctionComponent = () => {
       }
     }
     fetchPosts()
-  }, [])
+  }, [sortingKey, sortingMode])
 
   return (
     <Container className="my-2">

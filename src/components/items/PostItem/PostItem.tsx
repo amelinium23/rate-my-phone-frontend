@@ -93,45 +93,43 @@ export const PostItem = ({
         <p>{post.description}</p>
         {user && <p>Posted by {user?.display_name || 'stranger'}</p>}
       </Card.Body>
-      <Card.Footer className="post-footer">
-        {firebaseUser && (
-          <>
-            <span className="mx-1">Votes {post.votes}</span>
-            <Button
-              className="p-0"
-              variant="outline-light"
-              onClick={handleUpVote}
-            >
-              <ArrowBigTop size={20} strokeWidth={0.6} color={'black'} />
-            </Button>
-            <Button
-              className="mx-1 p-0"
-              variant="outline-light"
-              onClick={handleDownVote}
-            >
-              <ArrowBigDown size={20} strokeWidth={0.6} color={'black'} />
-            </Button>
-          </>
-        )}
-        {isEditingEnable && (
-          <>
-            <Button
-              variant="outline-primary"
-              className="float-end"
-              onClick={handleEdit}
-            >
-              Edit
-            </Button>
-            <Button
-              className="mx-1 float-end"
-              variant="outline-danger"
-              onClick={handleDelete}
-            >
-              Delete
-            </Button>
-          </>
-        )}
-      </Card.Footer>
+      {firebaseUser && (
+        <Card.Footer className="post-footer">
+          <span className="mx-1">Votes {post.votes}</span>
+          <Button
+            className="p-0"
+            variant="outline-light"
+            onClick={handleUpVote}
+          >
+            <ArrowBigTop size={20} strokeWidth={0.6} color={'black'} />
+          </Button>
+          <Button
+            className="mx-1 p-0"
+            variant="outline-light"
+            onClick={handleDownVote}
+          >
+            <ArrowBigDown size={20} strokeWidth={0.6} color={'black'} />
+          </Button>
+          {isEditingEnable && (
+            <>
+              <Button
+                variant="outline-primary"
+                className="float-end"
+                onClick={handleEdit}
+              >
+                Edit
+              </Button>
+              <Button
+                className="mx-1 float-end"
+                variant="outline-danger"
+                onClick={handleDelete}
+              >
+                Delete
+              </Button>
+            </>
+          )}
+        </Card.Footer>
+      )}
     </Card>
   )
 }
