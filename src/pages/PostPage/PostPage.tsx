@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import { Button, Col, Container, Row } from 'react-bootstrap'
 import { useParams } from 'react-router'
 import { toast } from 'react-toastify'
+import { Share } from 'tabler-icons-react'
 
 import { PhotosContainer } from '../../components/containers/PhotosContainer'
 import { AddCommentForm } from '../../components/forms/AddCommentForm'
@@ -75,15 +76,30 @@ export const PostPage = () => {
     )
   }
 
+  const handleCopyingLink = () => {
+    const currentURL = window.location.href
+    navigator.clipboard.writeText(currentURL)
+    toast.success('URL copied to clipboard!')
+  }
+
   return (
-    <Container className="mt-2">
+    <Container className="my-2">
       <Row>
-        <h5>
-          {post?.title}{' '}
-          <span style={COLORS[post?.type || '']} className="post-type">
-            {upperFirstLetter((post?.type as string) || '')}
-          </span>
-        </h5>
+        <Col sm={8}>
+          <h5>
+            {post?.title}{' '}
+            <span style={COLORS[post?.type || '']} className="post-type">
+              {upperFirstLetter((post?.type as string) || '')}
+            </span>
+          </h5>
+        </Col>
+        <Col sm={4}>
+          <div className="float-end">
+            <Button onClick={handleCopyingLink} variant="light">
+              <Share size={20} /> Share this post
+            </Button>
+          </div>
+        </Col>
       </Row>
       <Row>
         <Col sm={8}>
