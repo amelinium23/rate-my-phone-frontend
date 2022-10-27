@@ -3,6 +3,8 @@ export interface Device {
   device_image: string
   device_name: string
   device_id: number
+  no?: number
+  daily_hits: string
   device_type?: string
 }
 

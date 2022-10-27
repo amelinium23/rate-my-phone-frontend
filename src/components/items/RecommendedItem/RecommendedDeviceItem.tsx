@@ -33,9 +33,14 @@ export const RecommendedDeviceItem = ({
       onClick={handleNavigationToDetails}
     >
       <p className="float-start text-start mt-2 ">
-        {position + 1}. {device.device_name}
+        {device?.no || position + 1}. {device.device_name}
       </p>
-      <Image src={device.device_image} width={55} height={55} />
+      {device.device_image && (
+        <Image src={device.device_image} width={60} height="50%" />
+      )}
+      {device?.daily_hits && (
+        <p className="mt-2">Daily hits: {device?.daily_hits}</p>
+      )}
     </Container>
   )
 }

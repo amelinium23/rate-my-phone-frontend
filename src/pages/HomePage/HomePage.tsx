@@ -35,7 +35,7 @@ export const HomePage = () => {
   return (
     <Container className="mt-2">
       <h3 className="text-center">Hello, there! 👋</h3>
-      <h5 className="text-center">Our recommendation for today!</h5>
+      <h5 className="text-center">Here are some rankings based on GSM Arena</h5>
       <Row>
         {recommendedDevices.map((device: RecommendedDevices) => (
           <RecommendedDeviceList key={device.title} recommended={device} />

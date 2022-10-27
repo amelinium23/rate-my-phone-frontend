@@ -11,7 +11,7 @@ export const RecommendedDeviceList = ({
   recommended,
 }: RecommendedDeviceListProps) => {
   return (
-    <Col md={6} className="mt-2">
+    <Col sm={3} className="mt-2">
       <h5 className="text-center mt-2">{recommended.title}</h5>
       {recommended.data.map((device: Device, index: number) => (
         <RecommendedDeviceItem
