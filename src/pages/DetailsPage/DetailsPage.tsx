@@ -131,7 +131,9 @@ export const DetailsPage = () => {
         </Col>
         <Col md={4}>
           <h5 className="text-center">Prices</h5>
-          <PricesContainer prices={deviceDetails.prices} />
+          {deviceDetails?.prices && (
+            <PricesContainer prices={deviceDetails.prices} />
+          )}
         </Col>
       </Row>
     </Container>
