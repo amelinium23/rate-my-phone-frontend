@@ -5,6 +5,7 @@ dist-ssr
 *.local
 node_modules/*
 .vercel
+.vscode
 .env
 
 .vercel
