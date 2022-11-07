@@ -1,5 +1,6 @@
 export * from './Brand'
 export * from './Device'
+export * from './Opinion'
 export * from './Post'
 export * from './Price'
 export * from './RecommendedDevice'

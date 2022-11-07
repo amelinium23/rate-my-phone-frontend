@@ -8,12 +8,12 @@ import {
 import { Form } from 'react-bootstrap'
 import { toast } from 'react-toastify'
 
-import { setIsLoading, setUser, useStore } from '../../context'
+import { setIsLoading, setUser, useStore } from '../context'
 import {
   changeUserDevice,
   getDevices,
-} from '../../services/PhoneAutoCompleteService'
-import { ApiPhoneResponse, Device, PhoneResponse, User } from '../../types'
+} from '../services/PhoneAutoCompleteService'
+import { ApiPhoneResponse, Device, PhoneResponse, User } from '../types'
 
 interface PhoneAutoCompleteProps {
   phone: Device

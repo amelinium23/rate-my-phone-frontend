@@ -13,7 +13,7 @@ const getRecommendedDevices = async () => {
 }
 
 export const HomePage = () => {
-  const { dispatch } = useStore()
+  const { state, dispatch } = useStore()
   const [recommendedDevices, setRecommendedDevices] = useState([])
 
   useEffect(() => {
@@ -32,7 +32,7 @@ export const HomePage = () => {
     fetchRecommendedDevices()
   }, [])
 
-  return (
+  return state.isLoading ? null : (
     <Container className="mt-2">
       <h3 className="text-center">Hello, there! 👋</h3>
       <h5 className="text-center">Here are some rankings based on GSM Arena</h5>

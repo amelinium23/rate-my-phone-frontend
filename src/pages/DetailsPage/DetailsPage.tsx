@@ -6,15 +6,19 @@ import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { Share } from 'tabler-icons-react'
 
+import OpinionContainer from '../../components/containers/OpinionContainer'
 import { PhotosContainer } from '../../components/containers/PhotosContainer'
 import { PricesContainer } from '../../components/containers/PricesContainer'
+import AddOpinionForm from '../../components/forms/AddOpinionForm'
 import { setIsLoading, useStore } from '../../context'
 import { getDetails } from '../../services'
+import { getOpinions } from '../../services/OpinionService'
 import {
   DeviceDetails,
   MoreSpecification,
   SpecificationDetails,
 } from '../../types'
+import { Opinion } from '../../types/Opinion'
 import { notUsedKeysDetailsPage } from '../../utils/constants'
 
 const upperFirstLetter = (brandName: string) =>
@@ -24,6 +28,8 @@ export const DetailsPage = () => {
   const [deviceDetails, setDeviceDetails] = useState<DeviceDetails>(
     {} as DeviceDetails
   )
+  const [opinions, setOpinions] = useState<Opinion[]>([])
+  const [isAddingEnable, setIsAddingEnable] = useState<boolean>(false)
   const { state: storeState, dispatch } = useStore()
   const { deviceKey, deviceName } = useParams()
 
@@ -43,10 +49,29 @@ export const DetailsPage = () => {
     fetchDetails()
   }, [])
 
+  useEffect(() => {
+    const fetchOpinions = async () => {
+      try {
+        setIsLoading(dispatch, true)
+        const res = await getOpinions(deviceKey ?? '')
+        setOpinions(res)
+      } catch (e) {
+        toast.error((e as Error).message)
+      } finally {
+        setIsLoading(dispatch, false)
+      }
+    }
+    fetchOpinions()
+  }, [setIsAddingEnable])
+
   const handleCopyingUrl = () => {
     const currentURL = window.location.href
     navigator.clipboard.writeText(currentURL)
     toast.success('URL copied to clipboard!')
+  }
+
+  const handleAddingOpinion = () => {
+    setIsAddingEnable((prev) => !prev)
   }
 
   return storeState.isLoading ? null : (
@@ -135,6 +160,29 @@ export const DetailsPage = () => {
             <PricesContainer prices={deviceDetails.prices} />
           )}
         </Col>
+      </Row>
+      <Row className="mt-2">
+        <Col md={8}>
+          <h5>Opinions</h5>
+        </Col>
+        <Col md={4}>
+          {storeState.auth?.currentUser && !isAddingEnable ? (
+            <div className="d-flex justify-content-end">
+              <Button onClick={handleAddingOpinion}>Add opinion</Button>
+            </div>
+          ) : null}
+        </Col>
+      </Row>
+      {isAddingEnable ? (
+        <Row>
+          <AddOpinionForm
+            setIsAddingEnable={setIsAddingEnable}
+            deviceKey={deviceKey ?? ''}
+          />
+        </Row>
+      ) : null}
+      <Row className="mt-2">
+        <OpinionContainer opinions={opinions} />
       </Row>
     </Container>
   )

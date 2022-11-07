@@ -65,7 +65,6 @@ export const App = () => {
           theme="dark"
           position="bottom-right"
           newestOnTop
-          draggable
         />
         <Loader />
       </Store>
