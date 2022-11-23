@@ -1,3 +1,5 @@
+import { User } from './User'
+
 export enum PostType {
   DISCUSSION = 'discussion',
   QUESTION = 'question',
@@ -14,6 +16,7 @@ export interface Post {
   device_key: string
   images: string[]
   comments?: Comment[]
+  user: User
 }
 
 export interface Comment {

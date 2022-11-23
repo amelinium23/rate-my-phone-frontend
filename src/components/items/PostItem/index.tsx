@@ -1,20 +1,14 @@
 import './postItemStyle.css'
 
-import { useEffect, useState } from 'react'
-import { Button, Card } from 'react-bootstrap'
+import { Button, Card, Col, Image, Row } from 'react-bootstrap'
 import { useNavigate } from 'react-router'
 import { toast } from 'react-toastify'
 import { ArrowBigDown, ArrowBigTop } from 'tabler-icons-react'
 
 import { useStore } from '../../../context'
-import { Post, User } from '../../../types'
+import { Post } from '../../../types'
 import { COLORS } from '../../../utils/constants'
-import {
-  deletePost,
-  downVotePost,
-  getUser,
-  upVotePost,
-} from './PostItemService'
+import { deletePost, downVotePost, upVotePost } from './PostItemService'
 
 interface PostItemProps {
   post: Post
@@ -31,20 +25,7 @@ export const PostItem = ({
 }: PostItemProps) => {
   const navigate = useNavigate()
   const { state } = useStore()
-  const [user, setUser] = useState<User | null>(null)
   const firebaseUser = state.auth.currentUser
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const user = await getUser(post.uid)
-        setUser(user)
-      } catch (e) {
-        toast.error((e as Error).message)
-      }
-    }
-    fetchUser()
-  }, [])
 
   const handleNavigate = () => {
     navigate(`/post/p/${post.id}`)
@@ -90,8 +71,17 @@ export const PostItem = ({
         </h5>
       </Card.Header>
       <Card.Body onClick={handleNavigate}>
-        <p>{post.description}</p>
-        {user && <p>Posted by {user?.display_name || 'stranger'}</p>}
+        <Row>
+          <Col sm={2}>
+            <div className="d-flex justify-content-center">
+              <Image roundedCircle height={100} src={post.user.photo_url} />
+            </div>
+            <p className="text-center">Posted by {post.user.display_name}</p>
+          </Col>
+          <Col sm={9}>
+            <p>{post.description}</p>
+          </Col>
+        </Row>
       </Card.Body>
       {firebaseUser && (
         <Card.Footer className="post-footer">

@@ -4,7 +4,7 @@ export interface User {
   uid: string
   email: string
   password: string
-  photoUrl: string
+  photo_url: string
   display_name: string
   device?: Device
 }

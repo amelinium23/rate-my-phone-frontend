@@ -79,9 +79,9 @@ export const PostPage = () => {
   }
 
   return (
-    <Container className="my-2">
+    <Container className="my-3">
       <Row>
-        <Col sm={8}>
+        <Col sm={10}>
           <h5>
             {post?.title}{' '}
             <span style={COLORS[post?.type || '']} className="post-type">
@@ -89,7 +89,7 @@ export const PostPage = () => {
             </span>
           </h5>
         </Col>
-        <Col sm={4}>
+        <Col sm={2}>
           <div className="float-end">
             <Button onClick={handleCopyingLink} variant="light">
               <Share size={20} /> Share this post
@@ -111,6 +111,9 @@ export const PostPage = () => {
       </Row>
       <Row>
         <section>
+          <p className="mt-2 text-muted" style={{ fontSize: '12.5px' }}>
+            Posted by {post?.user.display_name || 'stranger'}
+          </p>
           <h5>Comments</h5>
           {post?.comments?.length === 0 && <p>No comments</p>}
           {post?.comments && (
