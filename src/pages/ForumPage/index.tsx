@@ -31,8 +31,6 @@ export const ForumPage: FunctionComponent = () => {
     }
   }
 
-  console.log('posts', posts)
-
   const handleDeletePost = (post: Post) => {
     setPosts((prevPosts) => prevPosts.filter((p) => p.id !== post.id))
   }
