@@ -71,9 +71,8 @@ export const RegisterPage = () => {
           const er = err as Error
           toast.error(er.message)
         })
-    } catch (e) {
-      const er = e as Error
-      toast.error(er.message)
+    } catch (_) {
+      toast.error(`Unable to register!`)
     }
   }
 
